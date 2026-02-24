@@ -1,12 +1,14 @@
 # yo.dart - Flutter Code Generator for AI Vibe Coding
 
+[![GitHub](https://img.shields.io/badge/GitHub-cahyo40/yodev--flutter-181717?logo=github)](https://github.com/cahyo40/yodev-flutter)
 [![Dart](https://img.shields.io/badge/Dart-3.5+-blue.svg)](https://dart.dev)
-[![Flutter](https://img.shields.io/badge/Flutter-3.0+-blue.svg)](https://flutter.dev)
+[![Flutter](https://img.shields.io/badge/Flutter-3.19+-blue.svg)](https://flutter.dev)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Tests](https://img.shields.io/badge/Tests-70%20passing-brightgreen.svg)](#)
 [![AI Powered](https://img.shields.io/badge/AI-Vibe%20Coding-purple.svg)](#-vibe-coding-dengan-ai)
 
 > **🤖 Built for AI Pair Programming**  
-> Generator kode Flutter yang dirancang khusus untuk membantu AI (Claude, GPT, Gemini) dalam sesi **Vibe Coding** - membuat aplikasi Flutter dengan arsitektur production-ready secara cepat.
+> Generator kode Flutter yang dirancang khusus untuk membantu AI (Claude, GPT, Gemini) dalam sesi **Vibe Coding** — membuat aplikasi Flutter dengan arsitektur production-ready secara cepat.
 
 ## 🎯 Apa itu Vibe Coding?
 
@@ -17,7 +19,7 @@ User: "Buatkan halaman login dengan email dan password"
   ↓
 AI: dart run yo.dart page:auth.login
   ↓
-✅ 12 files generated with Clean Architecture!
+✅ 12 files generated with Clean Architecture + YoUI components!
   ↓
 AI: *implements login logic in generated files*
 ```
@@ -31,13 +33,29 @@ AI: *implements login logic in generated files*
 | AI tidak tahu context proyek | ✅ `yo.yaml` menyimpan state management & features |
 | Boilerplate code berulang | ✅ Templates production-ready siap pakai |
 | State management berbeda tiap file | ✅ Satu state management konsisten per proyek |
+| UI components tidak konsisten | ✅ Otomatis menggunakan [YoUI](../yo_ui/) components |
+
+## 🔗 YoUI Integration
+
+Semua kode yang di-generate **otomatis menggunakan komponen YoUI**:
+
+```dart
+// Generated page sudah menggunakan:
+YoScaffold(...)           // bukan Scaffold
+YoText.heading('Title')   // bukan Text
+YoLoading()               // bukan CircularProgressIndicator
+YoErrorState(...)         // bukan manual error widget
+YoConfirmDialog(...)      // bukan AlertDialog
+YoTheme.light()           // bukan manual ThemeData
+```
 
 ## 🚀 Quick Start
 
-### 1. Setup Generator
+### 1. Setup (dari Monorepo)
 
 ```bash
-cd packages/yo_generator
+git clone https://github.com/cahyo40/yodev-flutter.git
+cd yodev-flutter/packages/yo_generator
 dart pub get
 ```
 
@@ -46,16 +64,12 @@ dart pub get
 ```bash
 flutter create my_app
 cd my_app
-# Copy yo_generator ke proyek, atau jalankan dari monorepo
 
-# ✨ Opsi 1: Mode Interaktif (Recommended)
-dart run yo.dart --interactive
+# Tambah yo_ui dependency
+# pubspec.yaml → dependencies → yo_ui: path: /path/to/yodev/packages/yo_ui
 
-# ✨ Opsi 2: Command Line
-# Pilih state management (AI akan mengikuti pilihan ini)
-dart run yo.dart init --state=riverpod
-dart run yo.dart init --state=getx
-dart run yo.dart init --state=bloc
+# Pilih state management
+dart run yo.dart init --state=riverpod   # atau getx / bloc
 ```
 
 ### 3. Generate Features
@@ -64,10 +78,10 @@ dart run yo.dart init --state=bloc
 dart run yo.dart page:home                    # Full clean architecture
 dart run yo.dart page:auth.login              # Sub-feature dengan dot notation
 dart run yo.dart page:splash --presentation-only  # UI only
-dart run yo.dart page:cart --dry-run          # 🔍 Preview file tanpa menulis
+dart run yo.dart page:cart --dry-run           # Preview tanpa menulis
 ```
 
-## 📋 Commands untuk AI
+## 📋 Commands Reference
 
 ### Core Commands
 
@@ -105,13 +119,12 @@ dart run yo.dart test:<name> [--feature=<name>]  # Generate all tests
 dart run yo.dart test:<name> --unit              # Unit tests only
 dart run yo.dart test:<name> --widget            # Widget tests only
 dart run yo.dart test:<name> --provider          # Provider/controller tests
-dart run yo.dart test:<name> --force             # Overwrite existing tests
 ```
 
 ### Utilities
 
 ```bash
-dart run yo.dart barrel [feature:<feature>] # 🧱 Generate barrel/export files
+dart run yo.dart barrel [feature:<feature>]
 dart run yo.dart translation --key=<key> --en="txt" --id="teks"
 dart run yo.dart package-name:com.company.app
 dart run yo.dart app-name:"My App"
@@ -120,11 +133,13 @@ dart run yo.dart delete:<name> [--delete-feature]
 
 ### 🌍 Global Flags
 
-Semua command mendukung flag berikut:
-
-- `--dry-run` : Preview perubahan tanpa menulis file (Aman untuk cek!)
-- `--force` : Overwrite file yang sudah ada
-- `--interactive` / `-i` : Jalankan mode interaktif (Wizard)
+| Flag | Description |
+|------|-------------|
+| `--dry-run` | Preview perubahan tanpa menulis file |
+| `--force` | Overwrite file yang sudah ada |
+| `--interactive` / `-i` | Jalankan mode interaktif (Wizard) |
+| `--presentation-only` | Generate UI layer saja |
+| `--freezed` | Gunakan freezed untuk model |
 
 ## 📁 Clean Architecture Output
 
@@ -134,8 +149,8 @@ lib/
 │   ├── config/          # Router
 │   ├── di/              # Dependency injection
 │   ├── network/         # Dio + Interceptors
-│   ├── themes/          # Material 3 Theme
-│   └── widgets/         # Global widgets
+│   ├── themes/          # YoTheme (light/dark)
+│   └── widgets/         # Global YoUI widgets
 ├── features/
 │   └── <feature>/
 │       ├── data/
@@ -147,10 +162,10 @@ lib/
 │       │   ├── repositories/
 │       │   └── usecases/
 │       └── presentation/
-│           ├── pages/
-│           ├── providers/     # Riverpod
-│           ├── controllers/   # GetX
-│           └── bloc/          # Bloc
+│           ├── pages/        # YoScaffold + YoText + YoLoading
+│           ├── providers/    # Riverpod
+│           ├── controllers/  # GetX
+│           └── bloc/         # Bloc
 └── l10n/
 ```
 
@@ -165,8 +180,6 @@ lib/
 ## 🤖 Vibe Coding dengan AI
 
 ### Instruksi untuk AI Agent
-
-Saat bekerja dengan proyek yang memiliki `yo.yaml`:
 
 1. **Baca `yo.yaml`** untuk mengetahui state management aktif
 2. **Gunakan generator** sebelum menulis kode manual
@@ -195,18 +208,14 @@ Lalu mengimplementasi logic di file yang sudah ter-generate.
 
 ## 📖 Dokumentasi Lengkap
 
-Lihat [YO_GENERATOR.md](YO_GENERATOR.md) untuk panduan lengkap termasuk:
-
-- State management patterns (Riverpod, GetX, Bloc)
-- Architecture flow diagrams
-- Post-generation tasks
-- AI workflow guidelines
-- Dependencies reference
+- [YO_GENERATOR.md](YO_GENERATOR.md) — Full documentation (state management, architecture flow, AI workflow)
+- [YoUI README](../yo_ui/README.md) — UI Component Library reference
+- [Root README](../../README.md) — Monorepo overview
 
 ## 📄 License
 
-MIT License - see [LICENSE](LICENSE)
+MIT License — see [LICENSE](LICENSE)
 
 ## 👨‍💻 Author
 
-Created with ❤️ for Flutter developers and AI assistants.
+Created with ❤️ by **Cahyo** — for Flutter developers and AI assistants.

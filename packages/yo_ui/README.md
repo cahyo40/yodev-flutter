@@ -1,8 +1,10 @@
 # 🎨 YoUI - Flutter UI Component Library
 
+[![GitHub](https://img.shields.io/badge/GitHub-cahyo40/yodev--flutter-181717?logo=github)](https://github.com/cahyo40/yodev-flutter)
 [![Flutter](https://img.shields.io/badge/Flutter-3.19+-02569B?logo=flutter)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-3.5+-0175C2?logo=dart)](https://dart.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A comprehensive, production-ready Flutter UI library with **90+ components**, **36 color schemes**, **51 fonts**, and a complete design system for building beautiful, consistent applications.
 
 ## ✨ Features
@@ -16,22 +18,25 @@ A comprehensive, production-ready Flutter UI library with **90+ components**, **
 | 📱 **Responsive** | Adaptive layouts for mobile, tablet, desktop |
 | 🎭 **26+ Shadows** | Comprehensive shadow system with elevation levels |
 | 📊 **Charts** | Line, Bar, Pie/Donut charts with fl_chart |
+| 🤖 **Generator Ready** | Auto-used by [yo_generator](../yo_generator/) |
 | 🚀 **Production Ready** | Battle-tested components with zero errors |
 
-## 🆕 What's New in v0.0.3 (Latest)
+## 🆕 What's New in v0.0.4 (Latest)
 
-### 📅 Month Picker Improvements
-- **YoMonthPicker** - Now shows custom dialog with month/year only (no date picker)
-  - Returns `DateTimeRange` (first to last day of selected month)
-  - 3x4 month grid with year navigation
-- **YoDialogPicker.monthRange()** - New method for month selection dialog
+### 🤖 Generator Integration
+- YoUI components are now **automatically used** by `yo_generator` templates
+- All generated pages use `YoScaffold`, `YoText`, `YoLoading`, `YoErrorState`
+- Theme setup uses `YoTheme.light()` / `YoTheme.dark()` with `YoColorScheme` and `YoFonts`
 
-### 🎨 Styling Consistency
-- **YoIconPicker** & **YoColorPicker** now use `YoTextFormField` for consistent styling
+### 🎨 Avatar Improvements
+- **YoAvatar** - New `customSize` parameter for custom pixel sizes
 
-> ⚠️ **Breaking Change**: `YoMonthPicker` now uses `DateTimeRange` instead of `DateTime`
+### 📖 Documentation Rewrite
+- **COMPONENTS.md** (3,691 lines) — 80+ widgets with full parameter tables
+- **THEMES.md** (1,132 lines) — Color system, schemes, fonts, shadows
+- **HELPERS.md** (1,221 lines) — Formatters, generators, input formatters
 
-> See [CHANGELOG.md](CHANGELOG.md) for full details
+> See [CHANGELOG.md](CHANGELOG.md) for full version history
 
 ## 📦 Installation
 

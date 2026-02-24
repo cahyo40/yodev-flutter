@@ -81,13 +81,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.1.0] - 2026-02-24
+
+### Added
+
+#### YoUI Integration
+- All generated templates now automatically use YoUI components
+- Page templates: `YoScaffold` + `YoText.heading()` + `YoLoading()` + `YoErrorState()`
+- Dialog templates: `YoConfirmDialog`
+- Widget templates: `YoCard` + `YoText`
+- Theme templates: `YoTheme.light()` / `YoTheme.dark()` with `YoColorScheme` and `YoFonts`
+- `yo_ui` added as default dependency in generated projects
+
+#### Monorepo
+- Restructured as part of YoDev monorepo (`packages/yo_generator/`)
+- Path dependency to `yo_ui` for development
+
+### Fixed
+- `bloc_test` dependency leak — moved from common `dev_dependencies` to bloc-specific section
+- Dependency isolation verified: Riverpod, GetX, and Bloc dependencies no longer cross-contaminate
+
+### Completed (from Planned)
+- [x] Test file generation (`dart run yo.dart test:<name>`)
+- [x] Interactive mode (`dart run yo.dart --interactive`)
+
+---
+
 ## [Unreleased]
 
 ### Planned
 - [ ] Support for more languages in translations
 - [ ] Custom template support
-- [ ] Interactive mode
 - [ ] Watch mode for continuous generation
-- [ ] Test file generation
 - [ ] Documentation generation
 - [ ] Migration helpers between state managements
