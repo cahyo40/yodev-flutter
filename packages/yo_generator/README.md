@@ -1,221 +1,225 @@
-# yo.dart - Flutter Code Generator for AI Vibe Coding
+# yo.dart - Flutter Code Generator CLI
 
-[![GitHub](https://img.shields.io/badge/GitHub-cahyo40/yodev--flutter-181717?logo=github)](https://github.com/cahyo40/yodev-flutter)
 [![Dart](https://img.shields.io/badge/Dart-3.5+-blue.svg)](https://dart.dev)
-[![Flutter](https://img.shields.io/badge/Flutter-3.19+-blue.svg)](https://flutter.dev)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Tests](https://img.shields.io/badge/Tests-70%20passing-brightgreen.svg)](#)
-[![AI Powered](https://img.shields.io/badge/AI-Vibe%20Coding-purple.svg)](#-vibe-coding-dengan-ai)
+[![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)](CHANGELOG.md)
 
-> **🤖 Built for AI Pair Programming**  
-> Generator kode Flutter yang dirancang khusus untuk membantu AI (Claude, GPT, Gemini) dalam sesi **Vibe Coding** — membuat aplikasi Flutter dengan arsitektur production-ready secara cepat.
+> **🤖 Built for AI Vibe Coding**  
+> Generator kode Flutter dengan Clean Architecture — support **Riverpod**, **GetX**, dan **Bloc** dalam satu CLI tool.
 
-## 🎯 Apa itu Vibe Coding?
+## 🎯 Apa itu yo.dart?
 
-**Vibe Coding** adalah paradigma baru di mana developer berkolaborasi dengan AI untuk menulis kode. Anda mendeskripsikan apa yang diinginkan, AI membantu implementasinya. `yo.dart` menjadi **jembatan** antara perintah natural language dan struktur kode Flutter yang konsisten.
+CLI tool yang menghasilkan kode Flutter berstruktur Clean Architecture secara konsisten. Cocok untuk AI pair programming (Vibe Coding) maupun pengembangan manual.
 
 ```
-User: "Buatkan halaman login dengan email dan password"
+User: "Buatkan halaman login"
   ↓
 AI: dart run yo.dart page:auth.login
   ↓
-✅ 12 files generated with Clean Architecture + YoUI components!
+✅ 12 files generated (presentation + domain + data layers)
   ↓
-AI: *implements login logic in generated files*
-```
-
-## ✨ Mengapa yo.dart untuk Vibe Coding?
-
-| Masalah | Solusi yo.dart |
-|---------|----------------|
-| AI generate struktur berbeda setiap kali | ✅ Struktur konsisten dengan Clean Architecture |
-| Sulit maintain kode hasil AI | ✅ Separation of concerns yang jelas |
-| AI tidak tahu context proyek | ✅ `yo.yaml` menyimpan state management & features |
-| Boilerplate code berulang | ✅ Templates production-ready siap pakai |
-| State management berbeda tiap file | ✅ Satu state management konsisten per proyek |
-| UI components tidak konsisten | ✅ Otomatis menggunakan [YoUI](../yo_ui/) components |
-
-## 🔗 YoUI Integration
-
-Semua kode yang di-generate **otomatis menggunakan komponen YoUI**:
-
-```dart
-// Generated page sudah menggunakan:
-YoScaffold(...)           // bukan Scaffold
-YoText.heading('Title')   // bukan Text
-YoLoading()               // bukan CircularProgressIndicator
-YoErrorState(...)         // bukan manual error widget
-YoConfirmDialog(...)      // bukan AlertDialog
-YoTheme.light()           // bukan manual ThemeData
+AI: implements logic di file // TODO markers
 ```
 
 ## 🚀 Quick Start
 
-### 1. Setup (dari Monorepo)
+### 1. Setup
 
 ```bash
-git clone https://github.com/cahyo40/yodev-flutter.git
-cd yodev-flutter/packages/yo_generator
 dart pub get
 ```
 
-### 2. Inisialisasi Proyek Flutter
+### 2. Init Project
 
 ```bash
-flutter create my_app
-cd my_app
-
-# Tambah yo_ui dependency
-# pubspec.yaml → dependencies → yo_ui: path: /path/to/yodev/packages/yo_ui
-
-# Pilih state management
+# Di project Flutter target
 dart run yo.dart init --state=riverpod   # atau getx / bloc
+
+# Mode interaktif (wizard)
+dart run yo.dart --interactive
 ```
 
-### 3. Generate Features
+### 3. Generate
 
 ```bash
-dart run yo.dart page:home                    # Full clean architecture
-dart run yo.dart page:auth.login              # Sub-feature dengan dot notation
-dart run yo.dart page:splash --presentation-only  # UI only
-dart run yo.dart page:cart --dry-run           # Preview tanpa menulis
+dart run yo.dart page:home                        # Full clean architecture
+dart run yo.dart page:auth.login                  # Sub-feature (dot notation)
+dart run yo.dart page:splash --presentation-only  # UI layer saja
+dart run yo.dart page:cart --dry-run               # Preview tanpa menulis
 ```
 
-## 📋 Commands Reference
+---
 
-### Core Commands
+## 📋 Semua Commands
+
+### Project Init
 
 ```bash
 dart run yo.dart init --state=<riverpod|getx|bloc>
-dart run yo.dart page:<name> [--presentation-only] [--force]
-dart run yo.dart model:<name> [--freezed] [--feature=<name>] [--force]
-dart run yo.dart entity:<name> [--feature=<name>] [--force]
-dart run yo.dart controller:<name> [--cubit] [--feature=<name>] [--force]
-dart run yo.dart datasource:<name> [--remote|--local|--both] [--force]
-dart run yo.dart usecase:<name> [--feature=<name>] [--force]
-dart run yo.dart repository:<name> [--feature=<name>] [--force]
 ```
 
-### Infrastructure Commands
+### Page & Feature
 
 ```bash
-dart run yo.dart network [--force]    # Dio client + interceptors
-dart run yo.dart di [--force]         # Dependency injection setup
+dart run yo.dart page:<name>                     # Full clean architecture
+dart run yo.dart page:<name> --presentation-only  # UI saja
+dart run yo.dart page:<name> --dry-run            # Preview
+dart run yo.dart page:<name> --force              # Overwrite
+```
+
+### Model & Entity
+
+```bash
+dart run yo.dart model:<name> [--freezed] [--feature=<name>]
+dart run yo.dart entity:<name> [--feature=<name>]
+```
+
+### Controller / Provider / BLoC
+
+```bash
+dart run yo.dart controller:<name> [--feature=<name>]
+dart run yo.dart controller:<name> --cubit  # khusus Bloc
+```
+
+### Data Layer
+
+```bash
+dart run yo.dart datasource:<name> --remote [--feature=<name>]
+dart run yo.dart datasource:<name> --local  [--feature=<name>]
+dart run yo.dart datasource:<name> --both   [--feature=<name>]
+dart run yo.dart repository:<name> [--feature=<name>]
+dart run yo.dart usecase:<name> [--feature=<name>]
+```
+
+### Infrastructure
+
+```bash
+dart run yo.dart network   # Dio client + interceptors
+dart run yo.dart di         # Dependency injection setup
 ```
 
 ### UI Components
 
 ```bash
-dart run yo.dart screen:<name> [--feature=<name>] [--force]
-dart run yo.dart dialog:<name> [--feature=<name>] [--force]
-dart run yo.dart widget:<name> [--feature=<name>|--global] [--force]
-dart run yo.dart service:<name> [--force]
+dart run yo.dart screen:<name> [--feature=<name>]
+dart run yo.dart dialog:<name> [--feature=<name>]
+dart run yo.dart widget:<name> [--feature=<name>|--global]
+dart run yo.dart service:<name>
 ```
 
-### Testing Commands
+### Testing
 
 ```bash
-dart run yo.dart test:<name> [--feature=<name>]  # Generate all tests
-dart run yo.dart test:<name> --unit              # Unit tests only
-dart run yo.dart test:<name> --widget            # Widget tests only
-dart run yo.dart test:<name> --provider          # Provider/controller tests
+dart run yo.dart test:<name> [--feature=<name>]  # Semua test
+dart run yo.dart test:<name> --unit              # Unit saja
+dart run yo.dart test:<name> --widget            # Widget saja
+dart run yo.dart test:<name> --provider          # Provider/controller
 ```
 
 ### Utilities
 
 ```bash
-dart run yo.dart barrel [feature:<feature>]
-dart run yo.dart translation --key=<key> --en="txt" --id="teks"
+dart run yo.dart barrel [feature:<name>]                            # Export files
+dart run yo.dart translation --key=welcome --en="Hello" --id="Halo"
 dart run yo.dart package-name:com.company.app
 dart run yo.dart app-name:"My App"
 dart run yo.dart delete:<name> [--delete-feature]
 ```
 
-### 🌍 Global Flags
+### Global Flags
 
-| Flag | Description |
-|------|-------------|
-| `--dry-run` | Preview perubahan tanpa menulis file |
+| Flag | Keterangan |
+|------|------------|
+| `--dry-run` | Preview tanpa menulis file |
 | `--force` | Overwrite file yang sudah ada |
-| `--interactive` / `-i` | Jalankan mode interaktif (Wizard) |
+| `--interactive` / `-i` | Mode wizard interaktif |
 | `--presentation-only` | Generate UI layer saja |
 | `--freezed` | Gunakan freezed untuk model |
 
-## 📁 Clean Architecture Output
+---
+
+## 📁 Output: Clean Architecture
 
 ```
 lib/
 ├── core/
-│   ├── config/          # Router
+│   ├── config/          # Router (go_router / GetX routes)
 │   ├── di/              # Dependency injection
 │   ├── network/         # Dio + Interceptors
-│   ├── themes/          # YoTheme (light/dark)
-│   └── widgets/         # Global YoUI widgets
+│   ├── themes/          # AppTheme (light/dark)
+│   └── widgets/         # Global widgets
 ├── features/
 │   └── <feature>/
 │       ├── data/
-│       │   ├── datasources/
-│       │   ├── models/
-│       │   └── repositories/
+│       │   ├── datasources/     # API calls, local storage
+│       │   ├── models/          # JSON serialization
+│       │   └── repositories/    # Repository implementations
 │       ├── domain/
-│       │   ├── entities/
-│       │   ├── repositories/
-│       │   └── usecases/
+│       │   ├── entities/        # Business objects (pure Dart)
+│       │   ├── repositories/    # Abstract interfaces
+│       │   └── usecases/        # Business logic
 │       └── presentation/
-│           ├── pages/        # YoScaffold + YoText + YoLoading
-│           ├── providers/    # Riverpod
-│           ├── controllers/  # GetX
-│           └── bloc/         # Bloc
-└── l10n/
+│           ├── pages/           # UI pages
+│           ├── providers/       # Riverpod
+│           ├── controllers/     # GetX
+│           └── bloc/            # BLoC/Cubit
+└── l10n/                        # Localization (en, id)
 ```
 
 ## 🏷️ Naming Convention
 
-| Input | Class | File | Feature Folder |
-|-------|-------|------|----------------|
+Gunakan **dot notation** untuk sub-feature:
+
+| Input | Class | File | Feature |
+|-------|-------|------|---------|
 | `home` | `Home` | `home.dart` | `features/home/` |
 | `setting.profile` | `SettingProfile` | `setting_profile.dart` | `features/setting/` |
 | `user.auth.login` | `UserAuthLogin` | `user_auth_login.dart` | `features/user/` |
 
-## 🤖 Vibe Coding dengan AI
+## ⚙️ yo.yaml
 
-### Instruksi untuk AI Agent
+File konfigurasi yang dibuat otomatis saat `init`:
 
-1. **Baca `yo.yaml`** untuk mengetahui state management aktif
-2. **Gunakan generator** sebelum menulis kode manual
-3. **Implementasi logic** di file yang sudah di-generate
-4. **Cari marker `// TODO`** sebagai panduan implementasi
-
-### Contoh Prompt ke AI
-
-```
-"Buatkan fitur shopping cart dengan:
-- List produk yang bisa di-add/remove
-- Total harga otomatis
-- Checkout dengan form alamat"
+```yaml
+project_name: my_app
+state_management: riverpod   # riverpod | bloc | getx
+use_freezed: true
+use_go_router: true
+localization:
+  - en
+  - id
 ```
 
-AI akan menjalankan:
+> **⚠️ Penting:** Selalu baca `yo.yaml` sebelum generate. Jangan mix state management!
+
+## 🤖 Panduan AI Agent
+
+1. **Baca `yo.yaml`** → tahu state management aktif
+2. **Gunakan generator** → jangan tulis struktur manual
+3. **Cari `// TODO`** → marker di file yang di-generate
+4. **Implementasi logic** → di tempat yang tepat
+
+### Contoh Workflow
 
 ```bash
-dart run yo.dart page:cart
-dart run yo.dart page:cart.checkout
-dart run yo.dart model:product --feature=cart
-dart run yo.dart model:cart.item --feature=cart
+# Fitur authentication
+dart run yo.dart page:auth.login
+dart run yo.dart page:auth.register
+dart run yo.dart model:user --feature=auth --freezed
+dart run yo.dart datasource:auth --remote --feature=auth
+dart run yo.dart usecase:login --feature=auth
+dart run yo.dart test:auth --feature=auth
 ```
-
-Lalu mengimplementasi logic di file yang sudah ter-generate.
 
 ## 📖 Dokumentasi Lengkap
 
-- [YO_GENERATOR.md](YO_GENERATOR.md) — Full documentation (state management, architecture flow, AI workflow)
-- [YoUI README](../yo_ui/README.md) — UI Component Library reference
-- [Root README](../../README.md) — Monorepo overview
+| File | Isi |
+|------|-----|
+| [YO_GENERATOR.md](YO_GENERATOR.md) | Full docs: architecture flow, state management patterns, AI guidelines |
+| [CHANGELOG.md](CHANGELOG.md) | Version history v1.0.0 → v1.1.0 |
+| [dependencies.yaml](dependencies.yaml) | Daftar dependencies per state management |
 
 ## 📄 License
 
 MIT License — see [LICENSE](LICENSE)
-
-## 👨‍💻 Author
-
-Created with ❤️ by **Cahyo** — for Flutter developers and AI assistants.
