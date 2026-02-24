@@ -17,7 +17,7 @@
 ///
 /// For more information, run:
 ///   dart run yo.dart --help
-library yo;
+library;
 
 import 'dart:io';
 
@@ -235,7 +235,8 @@ void _processCommand(String commandArg, ArgResults results, YoConfig config) {
     final stateManagement = results['state'] != null
         ? StateManagement.fromString(results['state'] as String)
         : StateManagement.riverpod;
-    InitGenerator(config).generate(stateManagement);
+    final force = results['force'] as bool;
+    InitGenerator(config).generate(stateManagement, force: force);
     return;
   }
 

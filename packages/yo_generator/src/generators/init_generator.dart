@@ -13,7 +13,7 @@ class InitGenerator {
   final CommonTemplates _common;
 
   /// Initialize project with given state management
-  void generate(StateManagement stateManagement) {
+  void generate(StateManagement stateManagement, {bool force = false}) {
     Console.header(
       'Initializing Project with ${stateManagement.name.toUpperCase()}',
     );
@@ -43,7 +43,7 @@ class InitGenerator {
     _createDefaultPage(stateManagement);
 
     // Create main.dart
-    _createMain(stateManagement);
+    _createMain(stateManagement, force: force);
 
     // Create tasks.json
     _createTasksJson();
@@ -264,24 +264,37 @@ class InitGenerator {
     YoUtils.writeFile(l10nPath, _common.l10nYaml());
   }
 
-  void _createMain(StateManagement stateManagement) {
+  void _createMain(StateManagement stateManagement, {bool force = false}) {
     Console.info('Updating main.dart...');
 
     final mainPath = path.join(config.libPath, 'main.dart');
 
     // Check if main.dart exists
     if (YoUtils.fileExists(mainPath)) {
+      if (force) {
+        Console.info('Force overwriting main.dart...');
+        _writeMainFile(mainPath, stateManagement);
+        return;
+      }
+
       final existingContent = YoUtils.readFile(mainPath);
 
-      // Only update if it's a default Flutter main.dart
-      if (existingContent.contains('MyHomePage') ||
+      // Update if it's a default Flutter main.dart OR a previous yo init main.dart
+      final isDefault = existingContent.contains('MyHomePage') ||
           existingContent.contains('flutter create') ||
-          existingContent.contains('incrementCounter')) {
-        Console.info('Replacing default main.dart with configured version...');
+          existingContent.contains('incrementCounter');
+
+      final isYoGenerated = existingContent.contains('AppTheme') ||
+          existingContent.contains('yo_ui') ||
+          existingContent.contains('yo.dart');
+
+      if (isDefault || isYoGenerated) {
+        Console.info('Replacing main.dart with configured version...');
         _writeMainFile(mainPath, stateManagement);
       } else {
-        Console.warning('main.dart already customized. Skipping update.');
-        Console.info('You may need to manually configure state management.');
+        Console.warning(
+          'main.dart already customized. Use --force to overwrite.',
+        );
       }
     } else {
       _writeMainFile(mainPath, stateManagement);
