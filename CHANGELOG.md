@@ -8,11 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.1.1] - 2026-02-24
 
 ### Fixed
-- Root README: fixed `YoTheme` API (was `YoTheme.light()`, correct is `YoTheme.lightTheme(context, scheme)`)
+- **AppTheme template**: changed from non-existent `YoTheme.light()` to correct `YoTheme.lightTheme(context, scheme)`
+- **AppTheme template**: added `init()` method for `YoTextTheme.setFont()` — called in `main()`
+- **main.dart templates** (Riverpod, GetX, Bloc): now call `AppTheme.init()` and `AppTheme.light(context)`
+- Root README: fixed YoTheme API examples to match actual code
 - Root README: replaced confusing placeholder path with GitHub git dependency
-- Root README: fixed font setup to use `YoTextTheme.setFont()` before `runApp()`
-- yo_ui README: fixed same `YoTheme` API errors
-- yo_translate workflow: added retrofit translation for existing features (Section B & C)
+- yo_ui README: fixed same YoTheme API errors
+- yo_translate workflow: added retrofit translation for existing features
 
 ---
 

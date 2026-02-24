@@ -42,21 +42,30 @@ import 'package:yo_ui/yo_ui.dart';
 
 /// App theme configuration using YoTheme from yo_ui.
 /// Customize the color scheme and font to match your brand.
+///
+/// Color schemes: YoColorScheme.blue, .techPurple, .amoledBlack, dll (36 pilihan)
+/// Fonts: YoFonts.inter, .poppins, .montserrat, dll (51 pilihan)
 class AppTheme {
-  // Light theme - using YoTheme from yo_ui
-  static ThemeData get light {
-    return YoTheme.light(
-      colorScheme: YoColorScheme.blue,
-      fontFamily: YoFonts.inter,
+  /// Color scheme yang digunakan di seluruh app.
+  /// Ganti sesuai kebutuhan brand/project.
+  static const colorScheme = YoColorScheme.defaultScheme;
+
+  /// Setup font — panggil di main() sebelum runApp()
+  static void init() {
+    YoTextTheme.setFont(
+      primary: YoFonts.poppins,
+      secondary: YoFonts.inter,
     );
   }
 
-  // Dark theme - using YoTheme from yo_ui
-  static ThemeData get dark {
-    return YoTheme.dark(
-      colorScheme: YoColorScheme.blue,
-      fontFamily: YoFonts.inter,
-    );
+  /// Light theme
+  static ThemeData light(BuildContext context) {
+    return YoTheme.lightTheme(context, colorScheme);
+  }
+
+  /// Dark theme
+  static ThemeData dark(BuildContext context) {
+    return YoTheme.darkTheme(context, colorScheme);
   }
 }
 ''';
@@ -164,7 +173,7 @@ class ${className}LocalDataSourceImpl implements ${className}LocalDataSource {
   }
 
   /// Generate main.dart with Bloc
-  String mainBloc(String appName) => '''
+  String mainBloc(String appName) => r'''
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -174,6 +183,7 @@ import 'core/config/app_router.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  AppTheme.init(); // Setup font
   runApp(const MyApp());
 }
 
@@ -189,8 +199,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp.router(
         title: '$appName',
         debugShowCheckedModeBanner: false,
-        theme: AppTheme.light,
-        darkTheme: AppTheme.dark,
+        theme: AppTheme.light(context),
+        darkTheme: AppTheme.dark(context),
         themeMode: ThemeMode.system,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
@@ -202,7 +212,7 @@ class MyApp extends StatelessWidget {
 ''';
 
   /// Generate main.dart with GetX
-  String mainGetX(String appName) => '''
+  String mainGetX(String appName) => r'''
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -212,6 +222,7 @@ import 'core/config/app_pages.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  AppTheme.init(); // Setup font
   runApp(const MyApp());
 }
 
@@ -223,8 +234,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: '$appName',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.light,
-      darkTheme: AppTheme.dark,
+      theme: AppTheme.light(context),
+      darkTheme: AppTheme.dark(context),
       themeMode: ThemeMode.system,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
@@ -236,7 +247,7 @@ class MyApp extends StatelessWidget {
 ''';
 
   /// Generate main.dart with Riverpod
-  String mainRiverpod(String appName) => '''
+  String mainRiverpod(String appName) => r'''
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -246,6 +257,7 @@ import 'core/config/app_router.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  AppTheme.init(); // Setup font
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -257,8 +269,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: '$appName',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.light,
-      darkTheme: AppTheme.dark,
+      theme: AppTheme.light(context),
+      darkTheme: AppTheme.dark(context),
       themeMode: ThemeMode.system,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,

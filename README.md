@@ -76,15 +76,19 @@ flutter pub get
 
 ### Step 5: Pasang Theme di `main.dart`
 
+Kalau kamu pakai **yo-init** (generator), ini otomatis dibuatkan. Kalau manual, begini caranya:
+
 ```dart
 import 'package:flutter/material.dart';
 import 'package:yo_ui/yo_ui.dart';
 
 void main() {
-  // (Opsional) Ganti font — panggil sebelum runApp
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Setup font (opsional — default: Poppins + Inter)
   YoTextTheme.setFont(
-    primary: YoFonts.poppins,    // font untuk judul (ada 51 pilihan)
-    secondary: YoFonts.inter,    // font untuk isi teks
+    primary: YoFonts.poppins,    // font judul (51 pilihan)
+    secondary: YoFonts.inter,    // font isi teks
   );
 
   runApp(const MyApp());
@@ -97,9 +101,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My App',
-      // ✨ Pakai YoTheme — otomatis dapat warna, font, shadow yang konsisten
-      // Parameter: (context, colorScheme)
-      // Color scheme ada 36 pilihan, lihat daftar lengkap di yo_ui README
+      // ✨ Pasang YoTheme — pilih color scheme (ada 36 pilihan)
       theme: YoTheme.lightTheme(context, YoColorScheme.techPurple),
       darkTheme: YoTheme.darkTheme(context, YoColorScheme.techPurple),
       themeMode: ThemeMode.system,  // otomatis ikut pengaturan HP
@@ -108,6 +110,8 @@ class MyApp extends StatelessWidget {
   }
 }
 ```
+
+> 💡 **Kalau pakai generator**, kamu cukup jalankan `dart run yo.dart init --state=riverpod` dan `main.dart` + `AppTheme` sudah otomatis dibuatkan. Tinggal ganti `colorScheme` dan `YoFonts` di `app_theme.dart`.
 
 ### Step 6: Mulai Pakai Komponen
 
