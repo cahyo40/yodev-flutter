@@ -39,6 +39,9 @@ class InitGenerator {
     // Create l10n.yaml
     _createL10nConfig();
 
+    // Enable flutter generate in pubspec.yaml
+    _enableFlutterGenerate();
+
     // Create default home page
     _createDefaultPage(stateManagement);
 
@@ -111,7 +114,7 @@ class InitGenerator {
       // Image / Media
       // ─────────────────────────────────────────────────────────────────────
       'image_picker': '^1.0.7',
-      'photo_view': '^0.14.0',
+      'photo_view': '^0.15.0',
 
       // ─────────────────────────────────────────────────────────────────────
       // Forms / Validation
@@ -228,6 +231,30 @@ class InitGenerator {
     Console.info('Adding ${devDeps.length} dev dependencies...');
     for (final entry in devDeps.entries) {
       YoUtils.addDevDependency(config.projectPath, entry.key, entry.value);
+    }
+  }
+
+  /// Add `flutter: generate: true` to pubspec.yaml for l10n
+  void _enableFlutterGenerate() {
+    Console.info('Enabling flutter generate for l10n...');
+
+    final pubspecPath = path.join(config.projectPath, 'pubspec.yaml');
+    var content = YoUtils.readFile(pubspecPath);
+
+    if (content.contains('generate: true')) {
+      Console.info('flutter: generate already enabled.');
+      return;
+    }
+
+    // Find `flutter:` section and add `generate: true` after it
+    final flutterIndex =
+        content.indexOf(RegExp(r'^flutter:\s*$', multiLine: true));
+    if (flutterIndex != -1) {
+      final insertIndex = content.indexOf('\n', flutterIndex) + 1;
+      content =
+          '${content.substring(0, insertIndex)}  generate: true\n${content.substring(insertIndex)}';
+      YoUtils.writeFile(pubspecPath, content);
+      Console.success('Added flutter: generate: true to pubspec.yaml');
     }
   }
 
