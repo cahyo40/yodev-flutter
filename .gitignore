@@ -1,0 +1,29 @@
+# Dart/Flutter
+.dart_tool/
+.packages
+build/
+*.g.dart
+*.freezed.dart
+pubspec.lock
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Generated
+*.js
+*.js_
+*.js.deps
+*.js.map
+
+# Melos
+.melos/
+
+# Misc
+*.log
+firebase-debug.log

@@ -1,0 +1,10 @@
+name: yodev
+description: "YoDev - Flutter Development Toolkit (UI Kit + Code Generator)"
+version: 1.0.0
+
+environment:
+  sdk: ^3.5.0
+
+workspace:
+  - packages/yo_ui
+  - packages/yo_generator

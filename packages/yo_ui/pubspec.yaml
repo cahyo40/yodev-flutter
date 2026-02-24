@@ -1,0 +1,30 @@
+name: yo_ui
+description: "A comprehensive Flutter UI library with 90+ components, 36 color schemes, 51 fonts, and a complete design system for building beautiful, consistent applications."
+version: 0.0.4
+resolution: workspace
+
+environment:
+  sdk: ^3.5.0
+  flutter: ">=3.19.0"
+
+dependencies:
+  cached_network_image: ^3.4.1
+  connectivity_plus: ^7.0.0
+  crypto: ^3.0.6
+  device_info_plus: ^12.1.0
+  file_picker: ^8.1.7
+  fl_chart: ^0.69.2
+  flutter:
+    sdk: flutter
+  google_fonts: ^6.3.2
+  image_picker: ^1.1.2
+  intl: ^0.20.2
+  photo_view: ^0.15.0
+  font_awesome_flutter: ^10.4.0
+
+dev_dependencies:
+  flutter_lints: ^5.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:

@@ -1,0 +1,36 @@
+name: yodev
+packages:
+  - packages/**
+
+command:
+  bootstrap:
+    usePubspecOverrides: true
+
+scripts:
+  analyze:
+    run: melos exec -- dart analyze .
+    description: Run dart analyze in all packages
+
+  test:all:
+    run: melos exec -- dart test
+    description: Run tests in all packages
+
+  test:generator:
+    run: dart test
+    exec:
+      scope: yo_generator
+    description: Run generator tests only
+
+  test:ui:
+    run: flutter test
+    exec:
+      scope: yo_ui
+    description: Run UI tests only
+
+  format:
+    run: melos exec -- dart format .
+    description: Format all packages
+
+  clean:
+    run: melos exec -- flutter clean
+    description: Clean all packages

@@ -1,0 +1,8 @@
+include: package:flutter_lints/flutter.yaml
+analyzer:
+  errors:
+    # Ignore deprecation for Radio/RadioListTile which requires breaking API change in Flutter 3.32+
+    deprecated_member_use: ignore
+
+# Additional information about this file can be found at
+# https://dart.dev/guides/language/analysis-options

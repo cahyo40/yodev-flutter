@@ -1,0 +1,27 @@
+name: yo_generator
+description: >-
+  A comprehensive Flutter code generator CLI with support for Riverpod, GetX, 
+  and Bloc state management using Clean Architecture patterns. Generate pages, 
+  models, repositories, usecases, and more with a single command.
+version: 1.0.0
+resolution: workspace
+
+topics:
+  - flutter
+  - code-generator
+  - cli
+  - clean-architecture
+  - riverpod
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  args: ^2.4.2
+  yaml: ^3.1.2
+  path: ^1.8.3
+  recase: ^4.1.0
+
+dev_dependencies:
+  lints: ^5.0.0
+  test: ^1.25.0

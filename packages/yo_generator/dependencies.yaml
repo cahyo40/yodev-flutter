@@ -1,0 +1,95 @@
+# yo_generator - Dependency Versions
+# This file contains all dependency versions used during project initialization.
+# Update these versions to use the latest packages.
+# 
+# Last Updated: 2026-02-02
+
+# ============================================================
+# COMMON DEPENDENCIES (All state managements)
+# ============================================================
+common:
+  # YoUI Component Library
+  yo_ui:
+    path: packages/yo_ui
+  
+  # Networking
+  dio: ^5.4.0
+  connectivity_plus: ^5.0.2
+  
+  # Storage
+  shared_preferences: ^2.2.2
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  
+  # Navigation
+  go_router: ^14.0.0
+  
+  # UI & Utilities
+  intl: ^0.19.0
+  equatable: ^2.0.5
+  uuid: ^4.3.3
+  cached_network_image: ^3.3.1
+  flutter_svg: ^2.0.9
+  
+  # Forms & Validation
+  flutter_form_builder: ^9.2.1
+  form_builder_validators: ^9.1.0
+  
+  # Image Handling
+  image_picker: ^1.0.7
+  image_cropper: ^5.0.1
+  
+  # Permissions
+  permission_handler: ^11.3.0
+
+# ============================================================
+# RIVERPOD DEPENDENCIES
+# ============================================================
+riverpod:
+  flutter_riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
+
+# ============================================================
+# GETX DEPENDENCIES
+# ============================================================
+getx:
+  get: ^4.6.6
+  get_storage: ^2.1.1
+
+# ============================================================
+# BLOC DEPENDENCIES
+# ============================================================
+bloc:
+  flutter_bloc: ^8.1.5
+  bloc: ^8.1.4
+  get_it: ^7.6.7
+  injectable: ^2.3.5
+
+# ============================================================
+# DEV DEPENDENCIES (All state managements)
+# ============================================================
+dev_dependencies:
+  # Testing
+  mockito: ^5.4.4
+  
+  # Code Generation
+  build_runner: ^2.4.8
+  json_serializable: ^6.7.1
+  freezed: ^2.4.7
+  freezed_annotation: ^2.4.1
+  
+  # Linting
+  very_good_analysis: ^5.1.0
+
+# ============================================================
+# RIVERPOD DEV DEPENDENCIES
+# ============================================================
+riverpod_dev:
+  riverpod_generator: ^2.6.2
+
+# ============================================================
+# BLOC DEV DEPENDENCIES
+# ============================================================
+bloc_dev:
+  injectable_generator: ^2.4.1
+  bloc_test: ^9.1.6
