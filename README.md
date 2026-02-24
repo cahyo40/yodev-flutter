@@ -22,61 +22,39 @@ YoDev punya 2 package:
 
 ## 🚀 Mulai dari Nol
 
-### Step 1: Clone Project
+Ada **2 cara** pakai YoDev, tergantung kebutuhan:
 
-```bash
-git clone https://github.com/cahyo40/yodev-flutter.git
-cd yodev-flutter
-```
+| | **Cara A: YoUI Saja** | **Cara B: YoUI + Generator** |
+|---|---|---|
+| Cocok untuk | Pakai komponen UI saja | Generate kode otomatis + komponen UI |
+| Install | Tambah git dependency | Clone repo + copy file generator |
+| Perlu clone? | ❌ Tidak | ✅ Ya |
 
-### Step 2: Install Dependencies
+---
 
-```bash
-# Install Melos (alat untuk kelola multi-package)
-dart pub global activate melos
+### Cara A: Pakai YoUI Saja (Tanpa Generator)
 
-# Install semua dependencies
-melos bootstrap
-```
+Kalau kamu hanya butuh komponen UI, cukup tambahkan sebagai dependency:
 
-### Step 3: Buat Project Flutter Baru
-
-```bash
-flutter create my_app
-cd my_app
-```
-
-### Step 4: Tambahkan YoUI ke Project Kamu
-
-Edit `pubspec.yaml` di project Flutter kamu, pilih salah satu cara:
+**1. Tambahkan ke `pubspec.yaml`:**
 
 ```yaml
 dependencies:
   flutter:
     sdk: flutter
-
-  # Cara 1: Dari GitHub (recommended, bisa dari mana saja)
   yo_ui:
     git:
       url: https://github.com/cahyo40/yodev-flutter.git
       path: packages/yo_ui
-
-  # Cara 2: Path lokal (kalau sudah clone yodev-flutter di komputer)
-  # yo_ui:
-  #   path: ../yodev-flutter/packages/yo_ui
 ```
 
-> 💡 **Pilih Cara 1** kalau baru mulai. Cara 2 hanya kalau kamu sudah clone repo ini ke komputer.
-
-Lalu jalankan:
+**2. Install:**
 
 ```bash
 flutter pub get
 ```
 
-### Step 5: Pasang Theme di `main.dart`
-
-Kalau kamu pakai **yo-init** (generator), ini otomatis dibuatkan. Kalau manual, begini caranya:
+**3. Pasang theme di `main.dart`:**
 
 ```dart
 import 'package:flutter/material.dart';
@@ -84,13 +62,8 @@ import 'package:yo_ui/yo_ui.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // Setup font (opsional — default: Poppins + Inter)
-  YoTextTheme.setFont(
-    primary: YoFonts.poppins,    // font judul (51 pilihan)
-    secondary: YoFonts.inter,    // font isi teks
-  );
-
+  // Pilih font (opsional)
+  YoTextTheme.setFont(primary: YoFonts.poppins, secondary: YoFonts.inter);
   runApp(const MyApp());
 }
 
@@ -101,17 +74,91 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My App',
-      // ✨ Pasang YoTheme — pilih color scheme (ada 36 pilihan)
       theme: YoTheme.lightTheme(context, YoColorScheme.techPurple),
       darkTheme: YoTheme.darkTheme(context, YoColorScheme.techPurple),
-      themeMode: ThemeMode.system,  // otomatis ikut pengaturan HP
+      themeMode: ThemeMode.system,
       home: const HomePage(),
     );
   }
 }
 ```
 
-> 💡 **Kalau pakai generator**, kamu cukup jalankan `dart run yo.dart init --state=riverpod` dan `main.dart` + `AppTheme` sudah otomatis dibuatkan. Tinggal ganti `colorScheme` dan `YoFonts` di `app_theme.dart`.
+**Selesai!** Langsung pakai komponen seperti `YoButton`, `YoCard`, `YoText`, dll.
+
+---
+
+### Cara B: Pakai YoUI + Generator (Full Toolkit)
+
+Generator (`yo.dart`) butuh **source code** karena dijalankan dengan `dart run yo.dart`, bukan library biasa. Jadi harus copy file-nya ke project kamu.
+
+**1. Clone repo:**
+
+```bash
+git clone https://github.com/cahyo40/yodev-flutter.git
+```
+
+**2. Buat project Flutter & copy generator:**
+
+```bash
+flutter create my_app
+cd my_app
+
+# Copy file generator ke project kamu
+cp ../yodev-flutter/packages/yo_generator/yo.dart .
+cp -r ../yodev-flutter/packages/yo_generator/src .
+```
+
+**3. Tambahkan YoUI + dependencies generator ke `pubspec.yaml`:**
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  yo_ui:
+    git:
+      url: https://github.com/cahyo40/yodev-flutter.git
+      path: packages/yo_ui
+  # Dependencies yang dibutuhkan generator
+  args: ^2.4.2
+  yaml: ^3.1.2
+  path: ^1.8.3
+  recase: ^4.1.0
+```
+
+```bash
+flutter pub get
+```
+
+**4. Init project:**
+
+```bash
+dart run yo.dart init --state=riverpod   # atau getx / bloc
+```
+
+Ini otomatis membuat:
+- `lib/core/themes/app_theme.dart` — tema dengan YoUI
+- `main.dart` — sudah setup `AppTheme.init()` + routing
+- `yo.yaml` — konfigurasi generator
+
+**5. Generate fitur:**
+
+```bash
+dart run yo.dart page:home                  # full clean architecture
+dart run yo.dart page:auth.login            # sub-feature
+dart run yo.dart model:user --feature=auth  # model
+```
+
+> 💡 **Struktur file setelah copy:**
+> ```
+> my_app/
+> ├── yo.dart          # ← CLI entry point
+> ├── src/             # ← generator source code
+> ├── yo.yaml          # ← dibuat oleh init
+> ├── lib/
+> │   ├── core/        # ← dibuat oleh init
+> │   └── features/    # ← dibuat per generate
+> └── pubspec.yaml
+> ```
 
 ### Step 6: Mulai Pakai Komponen
 

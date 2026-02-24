@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - yo_ui README: fixed same YoTheme API errors
 - yo_translate workflow: added retrofit translation for existing features
 
+### Changed
+- Root README: split quick start into **Cara A** (YoUI saja, git dependency) and **Cara B** (YoUI + Generator, clone + copy `yo.dart` + `src/`). Explains why generator needs source files.
+- Updated `yo-flutter-dev` skill: corrected `theme-colors.md`, `SKILL.md`, `clean-architecture.md`
+
 ---
 
 ## [1.1.0] - 2026-02-24
