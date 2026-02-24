@@ -16,8 +16,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - yo_ui README: fixed same YoTheme API errors
 - yo_translate workflow: added retrofit translation for existing features
 
+### Added
+- **`setup.sh`**: One-command setup script — copies generator + adds dependencies automatically
+
 ### Changed
-- Root README: split quick start into **Cara A** (YoUI saja, git dependency) and **Cara B** (YoUI + Generator, clone + copy `yo.dart` + `src/`). Explains why generator needs source files.
+- Root README: unified quick start into **single path** (clone → `bash setup.sh .` → init → generate). No more two separate installation paths.
 - Updated `yo-flutter-dev` skill: corrected `theme-colors.md`, `SKILL.md`, `clean-architecture.md`
 
 ---
