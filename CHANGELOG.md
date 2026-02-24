@@ -5,6 +5,17 @@ All notable changes to **YoDev Monorepo** will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2026-02-24
+
+### Fixed
+- Root README: fixed `YoTheme` API (was `YoTheme.light()`, correct is `YoTheme.lightTheme(context, scheme)`)
+- Root README: replaced confusing placeholder path with GitHub git dependency
+- Root README: fixed font setup to use `YoTextTheme.setFont()` before `runApp()`
+- yo_ui README: fixed same `YoTheme` API errors
+- yo_translate workflow: added retrofit translation for existing features (Section B & C)
+
+---
+
 ## [1.1.0] - 2026-02-24
 
 ### Added

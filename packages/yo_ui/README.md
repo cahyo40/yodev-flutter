@@ -42,15 +42,20 @@ flutter pub get
 ```dart
 import 'package:yo_ui/yo_ui.dart';
 
+void main() {
+  // Setup font (opsional, panggil sebelum runApp)
+  YoTextTheme.setFont(
+    primary: YoFonts.poppins,
+    secondary: YoFonts.inter,
+  );
+  runApp(const MyApp());
+}
+
+// Di MaterialApp:
 MaterialApp(
-  theme: YoTheme.light(
-    colorScheme: YoColorScheme.blue,
-    fontFamily: YoFonts.inter,
-  ),
-  darkTheme: YoTheme.dark(
-    colorScheme: YoColorScheme.blue,
-    fontFamily: YoFonts.inter,
-  ),
+  // Parameter: (BuildContext context, [YoColorScheme scheme])
+  theme: YoTheme.lightTheme(context, YoColorScheme.techPurple),
+  darkTheme: YoTheme.darkTheme(context, YoColorScheme.techPurple),
   themeMode: ThemeMode.system,
 )
 ```
@@ -215,8 +220,8 @@ YoPadding.page(child: widget)
 | **Dark** | `amoledBlack`, `midnightBlue`, `carbonDark`, `minimalMono` |
 
 ```dart
-YoTheme.light(colorScheme: YoColorScheme.techPurple)
-YoTheme.dark(colorScheme: YoColorScheme.amoledBlack)
+YoTheme.lightTheme(context, YoColorScheme.techPurple)
+YoTheme.darkTheme(context, YoColorScheme.amoledBlack)
 ```
 
 ### Custom Color Scheme
@@ -243,10 +248,11 @@ setCustomPalette(
 ## 🔤 Fonts (51)
 
 ```dart
-YoTheme.light(fontFamily: YoFonts.inter)      // Default, clean
-YoTheme.light(fontFamily: YoFonts.poppins)     // Modern
-YoTheme.light(fontFamily: YoFonts.montserrat)  // Elegant
-YoTheme.light(fontFamily: YoFonts.firaCode)    // Code/mono
+// Font diset sebelum runApp(), bukan di YoTheme
+YoTextTheme.setFont(primary: YoFonts.inter)       // Default, clean
+YoTextTheme.setFont(primary: YoFonts.poppins)      // Modern
+YoTextTheme.setFont(primary: YoFonts.montserrat)   // Elegant
+YoTextTheme.setFont(primary: YoFonts.nunito, mono: YoFonts.firaCode)
 ```
 
 | Kategori | Contoh |

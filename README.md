@@ -48,15 +48,25 @@ cd my_app
 
 ### Step 4: Tambahkan YoUI ke Project Kamu
 
-Edit `pubspec.yaml` di project Flutter kamu:
+Edit `pubspec.yaml` di project Flutter kamu, pilih salah satu cara:
 
 ```yaml
 dependencies:
   flutter:
     sdk: flutter
+
+  # Cara 1: Dari GitHub (recommended, bisa dari mana saja)
   yo_ui:
-    path: /path/ke/yodev-flutter/packages/yo_ui  # sesuaikan path
+    git:
+      url: https://github.com/cahyo40/yodev-flutter.git
+      path: packages/yo_ui
+
+  # Cara 2: Path lokal (kalau sudah clone yodev-flutter di komputer)
+  # yo_ui:
+  #   path: ../yodev-flutter/packages/yo_ui
 ```
+
+> 💡 **Pilih Cara 1** kalau baru mulai. Cara 2 hanya kalau kamu sudah clone repo ini ke komputer.
 
 Lalu jalankan:
 
@@ -70,7 +80,15 @@ flutter pub get
 import 'package:flutter/material.dart';
 import 'package:yo_ui/yo_ui.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  // (Opsional) Ganti font — panggil sebelum runApp
+  YoTextTheme.setFont(
+    primary: YoFonts.poppins,    // font untuk judul (ada 51 pilihan)
+    secondary: YoFonts.inter,    // font untuk isi teks
+  );
+
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -80,15 +98,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'My App',
       // ✨ Pakai YoTheme — otomatis dapat warna, font, shadow yang konsisten
-      theme: YoTheme.light(
-        colorScheme: YoColorScheme.blue,     // pilih warna (ada 36 pilihan)
-        fontFamily: YoFonts.inter,           // pilih font (ada 51 pilihan)
-      ),
-      darkTheme: YoTheme.dark(
-        colorScheme: YoColorScheme.blue,
-        fontFamily: YoFonts.inter,
-      ),
-      themeMode: ThemeMode.system,           // otomatis ikut pengaturan HP
+      // Parameter: (context, colorScheme)
+      // Color scheme ada 36 pilihan, lihat daftar lengkap di yo_ui README
+      theme: YoTheme.lightTheme(context, YoColorScheme.techPurple),
+      darkTheme: YoTheme.darkTheme(context, YoColorScheme.techPurple),
+      themeMode: ThemeMode.system,  // otomatis ikut pengaturan HP
       home: const HomePage(),
     );
   }
