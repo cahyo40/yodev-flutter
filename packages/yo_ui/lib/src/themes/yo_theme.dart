@@ -39,7 +39,8 @@ class YoTheme {
       cardTheme: CardThemeData(
         elevation: 2,
         color: YoColors.lightGray50,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(ctx.yoRadiusLg)),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -50,7 +51,8 @@ class YoTheme {
             fontWeight: FontWeight.w500,
           ),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(ctx.yoRadiusMd)),
           elevation: 0,
         ),
       ),
@@ -64,7 +66,8 @@ class YoTheme {
             fontWeight: FontWeight.w500,
           ),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(ctx.yoRadiusMd)),
         ),
       ),
       extensions: [YoScheme(scheme)],
@@ -73,23 +76,23 @@ class YoTheme {
         filled: true,
         fillColor: YoColors.lightGray50,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(ctx.yoRadiusMd),
           borderSide: BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(ctx.yoRadiusMd),
           borderSide: BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(ctx.yoRadiusMd),
           borderSide: BorderSide(color: pal.primary, width: 2),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(ctx.yoRadiusMd),
           borderSide: const BorderSide(color: YoColors.lightError),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(ctx.yoRadiusMd),
           borderSide: const BorderSide(color: YoColors.lightError, width: 2),
         ),
         contentPadding: const EdgeInsets.symmetric(
@@ -149,7 +152,8 @@ class YoTheme {
       cardTheme: CardThemeData(
         elevation: 2,
         color: YoColors.darkGray50,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(ctx.yoRadiusLg)),
       ),
       bottomNavigationBarTheme: YoBottomNavTheme.dark(ctx),
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -161,7 +165,8 @@ class YoTheme {
             fontWeight: FontWeight.w500,
           ),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(ctx.yoRadiusMd)),
           elevation: 0,
         ),
       ),
@@ -174,7 +179,8 @@ class YoTheme {
             fontWeight: FontWeight.w500,
           ),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(ctx.yoRadiusMd)),
         ),
       ),
       textTheme: YoTextTheme.textTheme(ctx),
@@ -182,23 +188,23 @@ class YoTheme {
         filled: true,
         fillColor: YoColors.darkGray50,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(ctx.yoRadiusMd),
           borderSide: BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(ctx.yoRadiusMd),
           borderSide: BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(ctx.yoRadiusMd),
           borderSide: BorderSide(color: pal.primary, width: 2),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(ctx.yoRadiusMd),
           borderSide: const BorderSide(color: YoColors.darkError),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(ctx.yoRadiusMd),
           borderSide: const BorderSide(color: YoColors.darkError, width: 2),
         ),
         contentPadding: const EdgeInsets.symmetric(

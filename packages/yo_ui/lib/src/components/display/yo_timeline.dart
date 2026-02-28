@@ -78,8 +78,8 @@ class YoTimeline extends StatelessWidget {
         icon: e.key < currentStep
             ? Icons.check
             : e.key == currentStep
-            ? Icons.circle
-            : null,
+                ? Icons.circle
+                : null,
         isCompleted: e.key < currentStep,
         isActive: e.key == currentStep,
       );
@@ -112,7 +112,7 @@ class YoTimeline extends StatelessWidget {
   }
 
   Widget _buildHorizontal(BuildContext context) {
-    return SizedBox(
+    return YoBox(
       height: 140,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -141,7 +141,7 @@ class YoTimeline extends StatelessWidget {
             Expanded(child: _buildContent(context, event)),
 
           // Timeline indicator
-          SizedBox(
+          YoBox(
             width: dotSize + 16,
             child: Column(
               children: [
@@ -172,7 +172,7 @@ class YoTimeline extends StatelessWidget {
     final isLast = index == events.length - 1;
     final dotColor = _getDotColor(context, event);
 
-    return SizedBox(
+    return YoBox(
       width: 160,
       child: Column(
         children: [
@@ -189,7 +189,7 @@ class YoTimeline extends StatelessWidget {
                 ),
             ],
           ),
-          const SizedBox(height: 8),
+          const YoSpace.height(8),
 
           // Content
           Expanded(
@@ -198,31 +198,25 @@ class YoTimeline extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  YoText.bodyMedium(
                     event.title,
-                    style: context.yoBodyMedium.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+                    fontWeight: FontWeight.w600,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   if (event.date != null) ...[
-                    const SizedBox(height: 2),
-                    Text(
+                    const YoSpace.height(2),
+                    YoText.bodySmall(
                       YoDateFormatter.formatDate(event.date!),
-                      style: context.yoBodySmall.copyWith(
-                        color: context.gray500,
-                      ),
+                      color: context.gray500,
                     ),
                   ],
                   if (event.description != null) ...[
-                    const SizedBox(height: 4),
+                    const YoSpace.height(4),
                     Expanded(
-                      child: Text(
+                      child: YoText.bodySmall(
                         event.description!,
-                        style: context.yoBodySmall.copyWith(
-                          color: context.gray600,
-                        ),
+                        color: context.gray600,
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -269,7 +263,7 @@ class YoTimeline extends StatelessWidget {
         elevation: event.isActive ? 2 : 1,
         margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(context.yoRadiusMd),
           side: event.isActive
               ? BorderSide(color: _getDotColor(context, event).withAlpha(128))
               : BorderSide.none,
@@ -286,40 +280,34 @@ class YoTimeline extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        YoText.bodyLarge(
                           event.title,
-                          style: context.yoBodyLarge.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
+                          fontWeight: FontWeight.w600,
                         ),
                         if (event.subtitle != null)
-                          Text(
+                          YoText.bodySmall(
                             event.subtitle!,
-                            style: context.yoBodySmall.copyWith(
-                              color: context.gray500,
-                            ),
+                            color: context.gray500,
                           ),
                       ],
                     ),
                   ),
                   if (event.date != null)
-                    Text(
+                    YoText.bodySmall(
                       YoDateFormatter.formatDate(event.date!),
-                      style: context.yoBodySmall.copyWith(
-                        color: context.gray500,
-                      ),
+                      color: context.gray500,
                     ),
                 ],
               ),
               if (event.description != null) ...[
-                const SizedBox(height: 8),
-                Text(
+                const YoSpace.height(8),
+                YoText.bodyMedium(
                   event.description!,
-                  style: context.yoBodyMedium.copyWith(color: context.gray600),
+                  color: context.gray600,
                 ),
               ],
               if (event.actions != null && event.actions!.isNotEmpty) ...[
-                const SizedBox(height: 12),
+                const YoSpace.height(12),
                 Wrap(spacing: 8, runSpacing: 8, children: event.actions!),
               ],
             ],

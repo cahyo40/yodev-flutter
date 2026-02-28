@@ -16,9 +16,10 @@ class YoImageBottomSheet {
       builder: (context) {
         return Container(
           height: MediaQuery.of(context).size.height * 0.8,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+            borderRadius:
+                BorderRadius.vertical(top: Radius.circular(context.yoRadiusXl)),
           ),
           child: Column(
             children: [

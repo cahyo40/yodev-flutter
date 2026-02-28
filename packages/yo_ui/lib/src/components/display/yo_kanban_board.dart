@@ -91,7 +91,7 @@ class YoKanbanColumn {
 class YoKanbanBoard extends StatefulWidget {
   final List<YoKanbanColumn> columns;
   final Function(YoKanbanItem, String fromColumnId, String toColumnId)?
-  onItemMoved;
+      onItemMoved;
   final Function(YoKanbanItem, String columnId)? onItemTap;
   final Function(YoKanbanColumn)? onColumnTap;
   final double columnWidth;
@@ -167,15 +167,14 @@ class _YoKanbanBoardState extends State<YoKanbanBoard> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return YoBox(
       height: widget.height,
       child: widget.scrollable
           ? ListView.separated(
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.all(widget.columnSpacing),
               itemCount: _columns.length,
-              separatorBuilder: (_, __) =>
-                  SizedBox(width: widget.columnSpacing),
+              separatorBuilder: (_, __) => YoBox(width: widget.columnSpacing),
               itemBuilder: (_, i) => _buildColumn(context, _columns[i]),
             )
           : Padding(
@@ -186,7 +185,7 @@ class _YoKanbanBoardState extends State<YoKanbanBoard> {
                   for (int i = 0; i < _columns.length; i++) ...[
                     Expanded(child: _buildColumn(context, _columns[i])),
                     if (i < _columns.length - 1)
-                      SizedBox(width: widget.columnSpacing),
+                      YoBox(width: widget.columnSpacing),
                   ],
                 ],
               ),
@@ -199,10 +198,10 @@ class _YoKanbanBoardState extends State<YoKanbanBoard> {
         _buildColumnContent(context, column, isActive);
 
     if (!widget.dragEnabled) {
-      return SizedBox(width: widget.columnWidth, child: content(false));
+      return YoBox(width: widget.columnWidth, child: content(false));
     }
 
-    return SizedBox(
+    return YoBox(
       width: widget.scrollable ? widget.columnWidth : null,
       child: DragTarget<Map<String, dynamic>>(
         onWillAcceptWithDetails: (data) {
@@ -229,7 +228,7 @@ class _YoKanbanBoardState extends State<YoKanbanBoard> {
     return Container(
       decoration: BoxDecoration(
         color: context.backgroundColor,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(context.yoRadiusLg),
         border: Border.all(
           color: isDragActive
               ? context.primaryColor.withAlpha(128)
@@ -253,7 +252,7 @@ class _YoKanbanBoardState extends State<YoKanbanBoard> {
                       color: column.color ?? context.primaryColor,
                       size: 16,
                     ),
-                    SizedBox(width: context.yoSpacingSm),
+                    YoBox(width: context.yoSpacingSm),
                   ],
                   Expanded(
                     child: YoText.bodyLarge(
@@ -294,7 +293,7 @@ class _YoKanbanBoardState extends State<YoKanbanBoard> {
       data: {'itemId': item.id, 'fromColumnId': columnId},
       feedback: Material(
         type: MaterialType.transparency,
-        child: SizedBox(
+        child: YoBox(
           width: widget.columnWidth - 32,
           child: Card(
             elevation: 8,
@@ -333,7 +332,7 @@ class _YoKanbanBoardState extends State<YoKanbanBoard> {
         color: isDragging ? context.primaryColor.withAlpha(26) : null,
         child: InkWell(
           onTap: () => widget.onItemTap?.call(item, columnId),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(context.yoRadiusLg),
           child: Padding(
             padding: EdgeInsets.all(context.yoSpacingMd),
             child: _buildItemContent(context, item),
@@ -360,11 +359,11 @@ class _YoKanbanBoardState extends State<YoKanbanBoard> {
                   color: context.gray400,
                 ),
               ),
-              SizedBox(width: context.yoSpacingSm),
+              YoBox(width: context.yoSpacingSm),
             ],
             if (item.leading != null) ...[
               item.leading!,
-              SizedBox(width: context.yoSpacingSm),
+              YoBox(width: context.yoSpacingSm),
             ],
             Expanded(
               child: YoText.bodyMedium(item.title, fontWeight: FontWeight.w500),
@@ -377,7 +376,7 @@ class _YoKanbanBoardState extends State<YoKanbanBoard> {
                 ),
                 decoration: BoxDecoration(
                   color: _priorityColor(context, item.priority),
-                  borderRadius: BorderRadius.circular(4),
+                  borderRadius: BorderRadius.circular(context.yoRadiusSm),
                 ),
                 child: YoText.bodySmall(
                   'P${item.priority}',
@@ -389,7 +388,7 @@ class _YoKanbanBoardState extends State<YoKanbanBoard> {
 
         // Description
         if (item.description != null) ...[
-          SizedBox(height: context.yoSpacingXs),
+          YoBox(height: context.yoSpacingXs),
           YoText.bodySmall(
             item.description!,
             color: context.gray600,
@@ -400,7 +399,7 @@ class _YoKanbanBoardState extends State<YoKanbanBoard> {
 
         // Custom widgets
         if (item.customWidgets.isNotEmpty) ...[
-          SizedBox(height: context.yoSpacingSm),
+          YoBox(height: context.yoSpacingSm),
           ...item.customWidgets.map(
             (w) => Padding(
               padding: EdgeInsets.only(bottom: context.yoSpacingXs),
@@ -411,7 +410,7 @@ class _YoKanbanBoardState extends State<YoKanbanBoard> {
 
         // Tags
         if (item.tags.isNotEmpty) ...[
-          SizedBox(height: context.yoSpacingSm),
+          YoBox(height: context.yoSpacingSm),
           Wrap(
             spacing: 4,
             runSpacing: 4,
@@ -424,7 +423,7 @@ class _YoKanbanBoardState extends State<YoKanbanBoard> {
                     ),
                     decoration: BoxDecoration(
                       color: context.gray100,
-                      borderRadius: BorderRadius.circular(4),
+                      borderRadius: BorderRadius.circular(context.yoRadiusSm),
                     ),
                     child: YoText.bodySmall(t, color: context.gray600),
                   ),
@@ -435,11 +434,11 @@ class _YoKanbanBoardState extends State<YoKanbanBoard> {
 
         // Due date
         if (item.dueDate != null) ...[
-          SizedBox(height: context.yoSpacingSm),
+          YoBox(height: context.yoSpacingSm),
           Row(
             children: [
               Icon(Icons.access_time, size: 12, color: context.gray500),
-              const SizedBox(width: 4),
+              const YoSpace.width(4),
               YoText.bodySmall(
                 YoDateFormatter.formatDate(item.dueDate!),
                 color: context.gray600,
@@ -460,10 +459,9 @@ class _YoKanbanBoardState extends State<YoKanbanBoard> {
           color: isDragActive ? context.primaryColor : context.gray300,
           width: isDragActive ? 2 : 1,
         ),
-        borderRadius: BorderRadius.circular(8),
-        color: isDragActive
-            ? context.primaryColor.withAlpha(26)
-            : context.gray50,
+        borderRadius: BorderRadius.circular(context.yoRadiusMd),
+        color:
+            isDragActive ? context.primaryColor.withAlpha(26) : context.gray50,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -474,7 +472,7 @@ class _YoKanbanBoardState extends State<YoKanbanBoard> {
             size: 40,
             color: isDragActive ? context.primaryColor : context.gray300,
           ),
-          SizedBox(height: context.yoSpacingSm),
+          YoBox(height: context.yoSpacingSm),
           YoText.bodyMedium(
             isDragActive ? 'Drop here' : 'No items',
             color: isDragActive ? context.primaryColor : context.gray500,

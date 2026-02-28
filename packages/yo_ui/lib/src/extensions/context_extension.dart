@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../layout/yo_adaptive.dart';
+import '../layout/yo_spacing.dart';
 import '../themes/yo_text_theme.dart';
 
 /// Context extensions for theme-aware text styles and utilities
@@ -34,6 +35,17 @@ extension YoContextExtensions on BuildContext {
   double get yoSpacingMd => 16;
   double get yoSpacingLg => 24;
   double get yoSpacingXl => 32;
+
+  // === BORDER RADIUS ===
+  BorderRadius get yoBorderRadiusSm => YoSpacing.borderRadiusSm;
+  BorderRadius get yoBorderRadiusMd => YoSpacing.borderRadiusMd;
+  BorderRadius get yoBorderRadiusLg => YoSpacing.borderRadiusLg;
+  BorderRadius get yoBorderRadiusXl => YoSpacing.borderRadiusXl;
+
+  double get yoRadiusSm => YoSpacing.radiusSm;
+  double get yoRadiusMd => YoSpacing.radiusMd;
+  double get yoRadiusLg => YoSpacing.radiusLg;
+  double get yoRadiusXl => YoSpacing.radiusXl;
 
   // === SCREEN HELPERS ===
   // Uses YoAdaptive as single source of truth

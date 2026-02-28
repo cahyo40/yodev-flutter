@@ -79,7 +79,7 @@ class YoMonthPicker extends StatelessWidget {
               color: enabled ? context.primaryColor : context.gray400,
               size: 20,
             ),
-            const SizedBox(width: 12),
+            const YoSpace.width(12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,7 +91,7 @@ class YoMonthPicker extends StatelessWidget {
                         color: context.gray500,
                       ),
                     ),
-                    const SizedBox(height: 2),
+                    const YoSpace.height(2),
                   ],
                   YoText(
                     selectedRange != null

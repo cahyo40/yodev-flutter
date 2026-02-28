@@ -26,5 +26,6 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
+  golden_toolkit: ^0.15.0
 
 flutter:

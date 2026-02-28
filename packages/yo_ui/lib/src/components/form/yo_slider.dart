@@ -82,7 +82,7 @@ class YoSliderWithValue extends StatelessWidget {
                 divisions: divisions,
               ),
             ),
-            const SizedBox(width: 16),
+            const YoSpace.width(16),
             Container(
               padding: EdgeInsets.symmetric(
                 horizontal: context.yoSpacingSm,

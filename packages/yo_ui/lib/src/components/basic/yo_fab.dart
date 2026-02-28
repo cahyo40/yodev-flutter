@@ -145,7 +145,7 @@ class _YoFABState extends State<YoFAB> with SingleTickerProviderStateMixin {
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
               color: context.backgroundColor,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(context.yoRadiusMd),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withAlpha(26),
@@ -154,12 +154,11 @@ class _YoFABState extends State<YoFAB> with SingleTickerProviderStateMixin {
                 ),
               ],
             ),
-            child: Text(
+            child: YoText.bodySmall(
               action.label!,
-              style: context.yoBodySmall,
             ),
           ),
-          const SizedBox(width: 12),
+          const YoSpace.width(12),
         ],
         FloatingActionButton.small(
           onPressed: () {

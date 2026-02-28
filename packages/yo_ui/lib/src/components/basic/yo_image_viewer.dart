@@ -141,8 +141,7 @@ class _YoImageViewerState extends State<YoImageViewer> {
   Widget _buildZoomableImage(String imageUrl, int index) {
     return PhotoView(
       imageProvider: CachedNetworkImageProvider(imageUrl),
-      backgroundDecoration:
-          widget.backgroundDecoration ??
+      backgroundDecoration: widget.backgroundDecoration ??
           const BoxDecoration(color: Colors.black),
       minScale: widget.minScale,
       maxScale: widget.maxScale,
@@ -173,8 +172,8 @@ class _YoImageViewerState extends State<YoImageViewer> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(Icons.error_outline, color: Colors.white, size: 48),
-        SizedBox(height: 8),
-        Text('Failed to load image', style: TextStyle(color: Colors.white)),
+        YoSpace.height(8),
+        YoText('Failed to load image', style: TextStyle(color: Colors.white)),
       ],
     );
   }
@@ -192,7 +191,7 @@ class _YoImageViewerState extends State<YoImageViewer> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: widget.imageUrls.length > 1
-            ? Text(
+            ? YoText(
                 '${_currentIndex + 1} / ${widget.imageUrls.length}',
                 style: const TextStyle(color: Colors.white),
               )

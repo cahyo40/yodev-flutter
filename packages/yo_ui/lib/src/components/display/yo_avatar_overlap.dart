@@ -42,7 +42,7 @@ class YoAvatarOverlap extends StatelessWidget {
     final avatarSize = YoAvatar.sizeMap[size]!;
     final offsetAmount = avatarSize * overlap;
 
-    return SizedBox(
+    return YoBox(
       height: avatarSize,
       width: _calculateWidth(
         displayCount,
@@ -101,8 +101,7 @@ class YoAvatarOverlap extends StatelessWidget {
   }
 
   Widget _buildMoreAvatar(int count, BuildContext context) {
-    final widget =
-        moreBuilder ??
+    final widget = moreBuilder ??
         YoAvatar.text(
           text: '+$count',
           size: size,

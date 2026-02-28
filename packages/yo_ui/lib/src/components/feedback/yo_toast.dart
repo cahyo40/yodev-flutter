@@ -155,7 +155,7 @@ class _YoToastWidgetState extends State<_YoToastWidget>
                 ),
                 decoration: BoxDecoration(
                   color: _getBackgroundColor(context),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(context.yoRadiusLg),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withAlpha(26),
@@ -171,9 +171,9 @@ class _YoToastWidgetState extends State<_YoToastWidget>
                       color: Colors.white,
                       size: 24,
                     ),
-                    const SizedBox(width: 12),
+                    const YoSpace.width(12),
                     Expanded(
-                      child: Text(
+                      child: YoText(
                         widget.message,
                         style: context.yoBodyMedium.copyWith(
                           color: Colors.white,

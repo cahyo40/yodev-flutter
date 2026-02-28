@@ -184,7 +184,7 @@ class _YoSearchFieldState extends State<YoSearchField> {
           offset: const Offset(0, 60),
           child: Material(
             elevation: 4,
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(context.yoRadiusMd),
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxHeight: 200),
               child: ListView.builder(
@@ -194,9 +194,8 @@ class _YoSearchFieldState extends State<YoSearchField> {
                 itemBuilder: (context, index) {
                   return ListTile(
                     dense: true,
-                    title: Text(
+                    title: YoText.bodyMedium(
                       _filteredSuggestions[index],
-                      style: YoTextTheme.bodyMedium(context),
                     ),
                     onTap: () {
                       _controller.text = _filteredSuggestions[index];

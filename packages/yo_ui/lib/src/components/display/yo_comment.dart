@@ -108,7 +108,7 @@ class YoCommentWidget extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: context.gray50,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(context.yoRadiusLg),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,30 +120,26 @@ class YoCommentWidget extends StatelessWidget {
                 imageUrl: comment.userAvatar,
                 size: YoAvatarSize.sm,
               ),
-              const SizedBox(width: 8),
+              const YoSpace.width(8),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
-                        Text(
+                        YoText.bodyMedium(
                           comment.userName,
-                          style: context.yoBodyMedium.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
+                          fontWeight: FontWeight.w600,
                         ),
                         if (comment.userRole != null) ...[
-                          const SizedBox(width: 4),
+                          const YoSpace.width(4),
                           _buildRoleBadge(context),
                         ],
                       ],
                     ),
-                    Text(
+                    YoText.bodySmall(
                       _formatTime(comment.timestamp),
-                      style: context.yoBodySmall.copyWith(
-                        color: context.gray500,
-                      ),
+                      color: context.gray500,
                     ),
                   ],
                 ),
@@ -152,9 +148,9 @@ class YoCommentWidget extends StatelessWidget {
             ],
           ),
 
-          const SizedBox(height: 8),
-          Text(comment.text, style: context.yoBodyMedium),
-          const SizedBox(height: 8),
+          const YoSpace.height(8),
+          YoText.bodyMedium(comment.text),
+          const YoSpace.height(8),
 
           // Actions
           Row(
@@ -166,7 +162,7 @@ class YoCommentWidget extends StatelessWidget {
                 color: comment.isLiked ? context.errorColor : context.gray500,
                 onTap: () => onLike?.call(comment),
               ),
-              const SizedBox(width: 16),
+              const YoSpace.width(16),
               _buildAction(
                 context,
                 icon: Icons.reply,
@@ -175,9 +171,9 @@ class YoCommentWidget extends StatelessWidget {
               ),
               const Spacer(),
               if (comment.isEdited)
-                Text(
+                YoText.bodySmall(
                   'edited',
-                  style: context.yoBodySmall.copyWith(color: context.gray400),
+                  color: context.gray400,
                 ),
             ],
           ),
@@ -193,36 +189,32 @@ class YoCommentWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           YoAvatar.image(imageUrl: comment.userAvatar, size: YoAvatarSize.xs),
-          const SizedBox(width: 8),
+          const YoSpace.width(8),
           Expanded(
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: context.gray100,
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(context.yoRadiusLg),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
-                      Text(
+                      YoText.bodySmall(
                         comment.userName,
-                        style: context.yoBodySmall.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
+                        fontWeight: FontWeight.w600,
                       ),
-                      const SizedBox(width: 4),
-                      Text(
+                      const YoSpace.width(4),
+                      YoText.bodySmall(
                         _formatTime(comment.timestamp),
-                        style: context.yoBodySmall.copyWith(
-                          color: context.gray500,
-                        ),
+                        color: context.gray500,
                       ),
                     ],
                   ),
-                  const SizedBox(height: 4),
-                  Text(comment.text, style: context.yoBodySmall),
+                  const YoSpace.height(4),
+                  YoText.bodySmall(comment.text),
                 ],
               ),
             ),
@@ -237,11 +229,11 @@ class YoCommentWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
         color: context.primaryColor.withAlpha(26),
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(context.yoRadiusSm),
       ),
-      child: Text(
+      child: YoText.bodySmall(
         comment.userRole!,
-        style: context.yoBodySmall.copyWith(color: context.primaryColor),
+        color: context.primaryColor,
       ),
     );
   }
@@ -262,10 +254,10 @@ class YoCommentWidget extends StatelessWidget {
         child: Row(
           children: [
             Icon(icon, size: 16, color: effectiveColor),
-            const SizedBox(width: 4),
-            Text(
+            const YoSpace.width(4),
+            YoText.bodySmall(
               label,
-              style: context.yoBodySmall.copyWith(color: effectiveColor),
+              color: effectiveColor,
             ),
           ],
         ),
@@ -287,8 +279,8 @@ class YoCommentWidget extends StatelessWidget {
             child: Row(
               children: [
                 Icon(Icons.edit, size: 16, color: context.gray600),
-                const SizedBox(width: 8),
-                const Text('Edit'),
+                const YoSpace.width(8),
+                YoText.bodyMedium('Edit'),
               ],
             ),
           ),
@@ -298,8 +290,8 @@ class YoCommentWidget extends StatelessWidget {
             child: Row(
               children: [
                 Icon(Icons.delete, size: 16, color: context.errorColor),
-                const SizedBox(width: 8),
-                Text('Delete', style: TextStyle(color: context.errorColor)),
+                const YoSpace.width(8),
+                YoText.bodyMedium('Delete', color: context.errorColor),
               ],
             ),
           ),
@@ -370,15 +362,15 @@ class YoCommentList extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(Icons.chat_bubble_outline, size: 64, color: context.gray300),
-          const SizedBox(height: 16),
-          Text(
+          const YoSpace.height(16),
+          YoText.titleMedium(
             'No comments yet',
-            style: context.yoTitleMedium.copyWith(color: context.gray500),
+            color: context.gray500,
           ),
-          const SizedBox(height: 8),
-          Text(
+          const YoSpace.height(8),
+          YoText.bodyMedium(
             'Be the first to share your thoughts!',
-            style: context.yoBodyMedium.copyWith(color: context.gray400),
+            color: context.gray400,
           ),
         ],
       ),

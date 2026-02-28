@@ -71,7 +71,7 @@ class _YoCalendarState extends State<YoCalendar> {
     return Container(
       decoration: BoxDecoration(
         color: context.backgroundColor,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(context.yoRadiusLg),
         border: Border.all(color: context.gray200),
       ),
       child: Column(
@@ -120,7 +120,7 @@ class _YoCalendarState extends State<YoCalendar> {
         children: [
           if (showLabel)
             YoText.bodyMedium('Date:', fontWeight: FontWeight.w600),
-          SizedBox(width: context.yoSpacingSm),
+          YoBox(width: context.yoSpacingSm),
           Expanded(child: YoText.bodyMedium(_formatDate(day))),
         ],
       ),
@@ -138,12 +138,12 @@ class _YoCalendarState extends State<YoCalendar> {
       margin: EdgeInsets.symmetric(vertical: context.yoSpacingXs),
       child: InkWell(
         onTap: () => widget.onEventTap?.call(event),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(context.yoRadiusMd),
         child: Container(
           padding: EdgeInsets.all(context.yoSpacingMd),
           decoration: BoxDecoration(
             color: color.withAlpha(26),
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(context.yoRadiusMd),
             border: Border.all(color: color.withAlpha(77)),
           ),
           child: Row(
@@ -158,7 +158,7 @@ class _YoCalendarState extends State<YoCalendar> {
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
-              SizedBox(width: context.yoSpacingMd),
+              YoBox(width: context.yoSpacingMd),
 
               // Content
               Expanded(
@@ -170,7 +170,7 @@ class _YoCalendarState extends State<YoCalendar> {
                         _formatDate(event.startTime),
                         color: context.gray500,
                       ),
-                      SizedBox(height: context.yoSpacingXs / 2),
+                      YoBox(height: context.yoSpacingXs / 2),
                     ],
                     YoText.bodyMedium(
                       event.title,
@@ -179,7 +179,7 @@ class _YoCalendarState extends State<YoCalendar> {
                       overflow: TextOverflow.ellipsis,
                     ),
                     if (event.description != null) ...[
-                      SizedBox(height: context.yoSpacingXs / 2),
+                      YoBox(height: context.yoSpacingXs / 2),
                       YoText.bodySmall(
                         event.description!,
                         color: context.gray600,
@@ -187,7 +187,7 @@ class _YoCalendarState extends State<YoCalendar> {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ],
-                    SizedBox(height: context.yoSpacingXs),
+                    YoBox(height: context.yoSpacingXs),
                     Row(
                       children: [
                         Icon(
@@ -195,7 +195,7 @@ class _YoCalendarState extends State<YoCalendar> {
                           size: 12,
                           color: context.gray500,
                         ),
-                        const SizedBox(width: 4),
+                        const YoSpace.width(4),
                         YoText.bodySmall(
                           event.isAllDay
                               ? 'All day'
@@ -205,7 +205,7 @@ class _YoCalendarState extends State<YoCalendar> {
                       ],
                     ),
                     if (event.children.isNotEmpty) ...[
-                      SizedBox(height: context.yoSpacingSm),
+                      YoBox(height: context.yoSpacingSm),
                       Wrap(spacing: 8, runSpacing: 4, children: event.children),
                     ],
                   ],
@@ -241,7 +241,8 @@ class _YoCalendarState extends State<YoCalendar> {
     return Container(
       decoration: BoxDecoration(
         color: context.primaryColor,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+        borderRadius:
+            BorderRadius.vertical(top: Radius.circular(context.yoRadiusLg)),
       ),
       padding: EdgeInsets.all(context.yoSpacingMd),
       child: Column(
@@ -255,7 +256,7 @@ class _YoCalendarState extends State<YoCalendar> {
                   onPressed: _goToToday,
                   textColor: context.onPrimaryColor,
                 ),
-                SizedBox(width: context.yoSpacingMd),
+                YoBox(width: context.yoSpacingMd),
               ],
               if (widget.title != null)
                 Expanded(
@@ -267,17 +268,17 @@ class _YoCalendarState extends State<YoCalendar> {
                   ),
                 )
               else
-                const Expanded(child: SizedBox()),
+                const Expanded(child: YoBox()),
               if (widget.showViewSelector) _buildViewSelector(context),
               if (widget.headerTrailing != null) ...[
-                SizedBox(width: context.yoSpacingMd),
+                YoBox(width: context.yoSpacingMd),
                 widget.headerTrailing!,
               ],
             ],
           ),
 
           // Navigation row
-          SizedBox(height: context.yoSpacingMd),
+          YoBox(height: context.yoSpacingMd),
           Row(
             children: [
               IconButton(
@@ -324,11 +325,9 @@ class _YoCalendarState extends State<YoCalendar> {
               7,
               (i) => Expanded(
                 child: Center(
-                  child: Text(
+                  child: YoText.bodySmall(
                     _dayName(i + 1),
-                    style: context.yoBodySmall.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
@@ -367,17 +366,15 @@ class _YoCalendarState extends State<YoCalendar> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      YoText.bodySmall(
                         '${day.day}',
-                        style: context.yoBodySmall.copyWith(
-                          color: isToday
-                              ? context.onPrimaryColor
-                              : isCurrentMonth
-                                  ? context.textColor
-                                  : context.gray300,
-                          fontWeight:
-                              isToday ? FontWeight.bold : FontWeight.normal,
-                        ),
+                        color: isToday
+                            ? context.onPrimaryColor
+                            : isCurrentMonth
+                                ? context.textColor
+                                : context.gray300,
+                        fontWeight:
+                            isToday ? FontWeight.bold : FontWeight.normal,
                       ),
                       if (hasEvents && isCurrentMonth)
                         Container(
@@ -422,13 +419,13 @@ class _YoCalendarState extends State<YoCalendar> {
       padding: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
         border: Border.all(color: context.onPrimaryColor.withAlpha(77)),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(context.yoRadiusMd),
       ),
       child: DropdownButton<YoCalendarView>(
         value: _currentView,
         onChanged: _changeView,
         dropdownColor: context.primaryColor,
-        underline: const SizedBox(),
+        underline: const YoBox(),
         icon: Icon(Icons.arrow_drop_down, color: context.onPrimaryColor),
         style: TextStyle(color: context.onPrimaryColor, fontSize: 14),
         items: YoCalendarView.values.map((v) {
@@ -437,7 +434,7 @@ class _YoCalendarState extends State<YoCalendar> {
             YoCalendarView.weekly => 'Week',
             YoCalendarView.monthly => 'Month',
           };
-          return DropdownMenuItem(value: v, child: Text(label));
+          return DropdownMenuItem(value: v, child: YoText.bodyMedium(label));
         }).toList(),
       ),
     );
@@ -476,24 +473,20 @@ class _YoCalendarState extends State<YoCalendar> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
+                        YoText.bodySmall(
                           _dayName(day.weekday),
-                          style: context.yoBodySmall.copyWith(
-                            color: isToday
-                                ? context.onPrimaryColor
-                                : context.gray500,
-                            fontWeight: FontWeight.w600,
-                          ),
+                          color: isToday
+                              ? context.onPrimaryColor
+                              : context.gray500,
+                          fontWeight: FontWeight.w600,
                         ),
-                        Text(
+                        YoText.bodyMedium(
                           '${day.day}',
-                          style: context.yoBodyMedium.copyWith(
-                            color: isToday
-                                ? context.onPrimaryColor
-                                : context.textColor,
-                            fontWeight:
-                                isToday ? FontWeight.bold : FontWeight.normal,
-                          ),
+                          color: isToday
+                              ? context.onPrimaryColor
+                              : context.textColor,
+                          fontWeight:
+                              isToday ? FontWeight.bold : FontWeight.normal,
                         ),
                       ],
                     ),

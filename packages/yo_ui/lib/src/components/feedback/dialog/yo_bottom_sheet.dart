@@ -87,11 +87,10 @@ class YoBottomSheet extends StatelessWidget {
     YoBottomSheetItem<T> item,
   ) {
     return ListTile(
-      leading: item.icon != null
-          ? Icon(item.icon, color: item.iconColor)
-          : null,
-      title: Text(item.title),
-      subtitle: item.subtitle != null ? Text(item.subtitle!) : null,
+      leading:
+          item.icon != null ? Icon(item.icon, color: item.iconColor) : null,
+      title: YoText(item.title),
+      subtitle: item.subtitle != null ? YoText(item.subtitle!) : null,
       trailing: item.trailing,
       enabled: item.enabled,
       onTap: () {
@@ -117,7 +116,7 @@ class YoBottomSheet extends StatelessWidget {
         children: [
           // Drag handle
           if (showDragHandle) ...[
-            const SizedBox(height: 8),
+            const YoSpace.height(8),
             Container(
               width: 40,
               height: 4,
@@ -126,7 +125,7 @@ class YoBottomSheet extends StatelessWidget {
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
-            const SizedBox(height: 8),
+            const YoSpace.height(8),
           ],
 
           // Content container
@@ -134,8 +133,9 @@ class YoBottomSheet extends StatelessWidget {
             constraints: BoxConstraints(maxHeight: maxSheetHeight),
             decoration: BoxDecoration(
               color: context.backgroundColor,
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(20),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(context.yoRadiusXl),
+                topRight: Radius.circular(context.yoRadiusXl),
               ),
               boxShadow: YoBoxShadow.elevated(context),
             ),
@@ -150,9 +150,8 @@ class YoBottomSheet extends StatelessWidget {
                     child: Row(
                       children: [
                         Expanded(
-                          child: Text(
+                          child: YoText.titleLarge(
                             title!,
-                            style: context.yoTitleLarge,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),

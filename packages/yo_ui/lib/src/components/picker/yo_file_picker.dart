@@ -192,7 +192,7 @@ class YoFileListTile extends StatelessWidget {
         decoration: BoxDecoration(
           color:
               YoFileHelper.getFileColor(file.extension, context).withAlpha(30),
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(context.yoRadiusMd),
         ),
         child: Icon(
           YoFileHelper.getFileIcon(file.extension),
@@ -200,12 +200,12 @@ class YoFileListTile extends StatelessWidget {
           size: 20,
         ),
       ),
-      title: Text(
+      title: YoText.bodyMedium(
         file.name,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
-      subtitle: Text(file.formattedSize),
+      subtitle: YoText.bodySmall(file.formattedSize),
       trailing: showRemove && onRemove != null
           ? IconButton(
               onPressed: onRemove,
@@ -433,7 +433,7 @@ class YoFilePickerButton extends StatelessWidget {
               color: context.gray600,
             ),
           ),
-          const SizedBox(height: 8),
+          const YoSpace.height(8),
         ],
         GestureDetector(
           onTap: () => _pickFile(context),
@@ -458,7 +458,7 @@ class YoFilePickerButton extends StatelessWidget {
                               context,
                             ).withAlpha(30)
                           : context.gray100,
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(context.yoRadiusMd),
                     ),
                     child: Icon(
                       selectedFile != null
@@ -473,7 +473,7 @@ class YoFilePickerButton extends StatelessWidget {
                           : context.gray400,
                     ),
                   ),
-                if (showPreview) const SizedBox(width: 16),
+                if (showPreview) const YoSpace.width(16),
                 // Text
                 Expanded(
                   child: Column(
@@ -493,7 +493,7 @@ class YoFilePickerButton extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                       if (selectedFile != null) ...[
-                        const SizedBox(height: 4),
+                        const YoSpace.height(4),
                         YoText(
                           selectedFile!.formattedSize,
                           style: context.yoBodySmall.copyWith(
@@ -647,7 +647,7 @@ class _YoFileDropZoneState extends State<YoFileDropZone> {
               size: 48,
               color: _isDragging ? context.primaryColor : context.gray400,
             ),
-            const SizedBox(height: 12),
+            const YoSpace.height(12),
             YoText(
               widget.title,
               style: context.yoBodyMedium.copyWith(
@@ -655,7 +655,7 @@ class _YoFileDropZoneState extends State<YoFileDropZone> {
                 color: _isDragging ? context.primaryColor : context.textColor,
               ),
             ),
-            const SizedBox(height: 4),
+            const YoSpace.height(4),
             YoText(
               widget.subtitle,
               style: context.yoBodySmall.copyWith(

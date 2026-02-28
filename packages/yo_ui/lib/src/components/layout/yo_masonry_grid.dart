@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yo_ui/yo_ui.dart';
 
 /// Masonry grid layout (Pinterest-style)
 class YoMasonryGrid extends StatelessWidget {
@@ -34,7 +35,7 @@ class YoMasonryGrid extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               for (int colIndex = 0; colIndex < columns; colIndex++) ...[
-                if (colIndex > 0) SizedBox(width: spacing),
+                if (colIndex > 0) YoSpace.width(spacing),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +45,7 @@ class YoMasonryGrid extends StatelessWidget {
                           i++) ...[
                         columnChildren[colIndex][i],
                         if (i < columnChildren[colIndex].length - 1)
-                          SizedBox(height: runSpacing),
+                          YoSpace.height(runSpacing),
                       ],
                     ],
                   ),

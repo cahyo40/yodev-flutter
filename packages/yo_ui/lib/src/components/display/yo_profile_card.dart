@@ -90,10 +90,10 @@ class YoProfileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(context.yoRadiusXl)),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(context.yoRadiusXl),
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -102,19 +102,17 @@ class YoProfileCard extends StatelessWidget {
               Row(
                 children: [
                   _buildAvatar(context, size: 60),
-                  const SizedBox(width: 16),
+                  const YoSpace.width(16),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         _buildName(context),
                         if (subtitle != null) ...[
-                          const SizedBox(height: 2),
-                          Text(
+                          const YoSpace.height(2),
+                          YoText.bodySmall(
                             subtitle!,
-                            style: context.yoBodySmall.copyWith(
-                              color: context.gray500,
-                            ),
+                            color: context.gray500,
                           ),
                         ],
                       ],
@@ -126,10 +124,10 @@ class YoProfileCard extends StatelessWidget {
 
               // Bio
               if (bio != null) ...[
-                const SizedBox(height: 12),
-                Text(
+                const YoSpace.height(12),
+                YoText.bodyMedium(
                   bio!,
-                  style: context.yoBodyMedium.copyWith(color: context.gray600),
+                  color: context.gray600,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -137,7 +135,7 @@ class YoProfileCard extends StatelessWidget {
 
               // Stats
               if (stats.isNotEmpty) ...[
-                const SizedBox(height: 16),
+                const YoSpace.height(16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: stats.map((s) => _buildStat(context, s)).toList(),
@@ -146,7 +144,7 @@ class YoProfileCard extends StatelessWidget {
 
               // Actions
               if (onFollow != null || onMessage != null) ...[
-                const SizedBox(height: 16),
+                const YoSpace.height(16),
                 Row(
                   children: [
                     if (onFollow != null)
@@ -162,7 +160,7 @@ class YoProfileCard extends StatelessWidget {
                               ),
                       ),
                     if (onFollow != null && onMessage != null)
-                      const SizedBox(width: 12),
+                      const YoSpace.width(12),
                     if (onMessage != null)
                       Expanded(
                         child: YoButton.outline(
@@ -197,15 +195,15 @@ class YoProfileCard extends StatelessWidget {
     return Row(
       children: [
         Flexible(
-          child: Text(
+          child: YoText.titleSmall(
             name,
-            style: context.yoTitleSmall.copyWith(fontWeight: FontWeight.bold),
+            fontWeight: FontWeight.bold,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
         ),
         if (isVerified) ...[
-          const SizedBox(width: 4),
+          const YoSpace.width(4),
           Icon(Icons.verified, size: 16, color: context.primaryColor),
         ],
       ],
@@ -215,14 +213,14 @@ class YoProfileCard extends StatelessWidget {
   Widget _buildStat(BuildContext context, YoProfileStat stat) {
     return Column(
       children: [
-        Text(
+        YoText.titleSmall(
           stat.value,
-          style: context.yoTitleSmall.copyWith(fontWeight: FontWeight.bold),
+          fontWeight: FontWeight.bold,
         ),
-        const SizedBox(height: 2),
-        Text(
+        const YoSpace.height(2),
+        YoText.bodySmall(
           stat.label,
-          style: context.yoBodySmall.copyWith(color: context.gray500),
+          color: context.gray500,
         ),
       ],
     );
@@ -255,27 +253,25 @@ class _YoProfileCardCompact extends YoProfileCard {
   Widget build(BuildContext context) {
     return Card(
       elevation: 1,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(context.yoRadiusLg)),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(context.yoRadiusLg),
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: Row(
             children: [
               _buildAvatar(context),
-              const SizedBox(width: 12),
+              const YoSpace.width(12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _buildName(context),
                     if (subtitle != null)
-                      Text(
+                      YoText.bodySmall(
                         subtitle!,
-                        style: context.yoBodySmall.copyWith(
-                          color: context.gray500,
-                        ),
+                        color: context.gray500,
                       ),
                   ],
                 ),
@@ -326,7 +322,7 @@ class _YoProfileCardCover extends YoProfileCard {
     return Card(
       clipBehavior: Clip.antiAlias,
       elevation: 3,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(context.yoRadiusXl)),
       child: InkWell(
         onTap: onTap,
         child: Column(
@@ -343,7 +339,7 @@ class _YoProfileCardCover extends YoProfileCard {
                       ? Image.network(
                           coverUrl!,
                           fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) => const SizedBox(),
+                          errorBuilder: (_, __, ___) => const YoBox(),
                         )
                       : null,
                 ),
@@ -376,37 +372,32 @@ class _YoProfileCardCover extends YoProfileCard {
                 children: [
                   _buildName(context),
                   if (subtitle != null) ...[
-                    const SizedBox(height: 2),
-                    Text(
+                    const YoSpace.height(2),
+                    YoText.bodySmall(
                       subtitle!,
-                      style: context.yoBodySmall.copyWith(
-                        color: context.gray500,
-                      ),
+                      color: context.gray500,
                     ),
                   ],
                   if (bio != null) ...[
-                    const SizedBox(height: 8),
-                    Text(
+                    const YoSpace.height(8),
+                    YoText.bodyMedium(
                       bio!,
-                      style: context.yoBodyMedium.copyWith(
-                        color: context.gray600,
-                      ),
-                      textAlign: TextAlign.center,
+                      color: context.gray600,
+                      align: TextAlign.center,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ],
                   if (stats.isNotEmpty) ...[
-                    const SizedBox(height: 16),
+                    const YoSpace.height(16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: stats
-                          .map((s) => _buildStat(context, s))
-                          .toList(),
+                      children:
+                          stats.map((s) => _buildStat(context, s)).toList(),
                     ),
                   ],
                   if (onFollow != null || onMessage != null) ...[
-                    const SizedBox(height: 16),
+                    const YoSpace.height(16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -421,7 +412,7 @@ class _YoProfileCardCover extends YoProfileCard {
                                   onPressed: onFollow,
                                 ),
                         if (onFollow != null && onMessage != null)
-                          const SizedBox(width: 12),
+                          const YoSpace.width(12),
                         if (onMessage != null)
                           YoButton.outline(
                             text: 'Message',
@@ -444,14 +435,14 @@ class _YoProfileCardCover extends YoProfileCard {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
+        YoText.titleMedium(
           name,
-          style: context.yoTitleMedium.copyWith(fontWeight: FontWeight.bold),
+          fontWeight: FontWeight.bold,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
         if (isVerified) ...[
-          const SizedBox(width: 4),
+          const YoSpace.width(4),
           Icon(Icons.verified, size: 18, color: context.primaryColor),
         ],
       ],

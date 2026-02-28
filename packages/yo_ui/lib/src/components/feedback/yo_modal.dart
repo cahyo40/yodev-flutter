@@ -59,9 +59,9 @@ class _YoModalSheet extends StatelessWidget {
       height: modalHeight,
       decoration: BoxDecoration(
         color: backgroundColor ?? context.backgroundColor,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(context.yoRadiusXl),
+          topRight: Radius.circular(context.yoRadiusXl),
         ),
       ),
       child: Column(
@@ -82,7 +82,7 @@ class _YoModalSheet extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
-                    child: Text(
+                    child: YoText(
                       title!,
                       style: context.yoHeadlineSmall,
                     ),

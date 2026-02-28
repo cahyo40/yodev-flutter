@@ -122,7 +122,7 @@ class YoGridItem extends StatelessWidget {
     BorderRadius? borderRadius,
   })  : backgroundColor = context.backgroundColor,
         padding = padding ?? EdgeInsets.all(context.yoSpacingMd),
-        borderRadius = borderRadius ?? BorderRadius.circular(12),
+        borderRadius = borderRadius ?? BorderRadius.circular(context.yoRadiusLg),
         border = null,
         shadow = [
           BoxShadow(

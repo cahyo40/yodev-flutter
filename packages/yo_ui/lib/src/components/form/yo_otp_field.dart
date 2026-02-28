@@ -56,7 +56,7 @@ class _YoOtpFieldState extends State<YoOtpField> {
           padding: EdgeInsets.only(
             right: index < widget.length - 1 ? widget.spacing : 0,
           ),
-          child: SizedBox(
+          child: YoBox(
             width: widget.fieldWidth,
             height: widget.fieldHeight,
             child: KeyboardListener(
@@ -84,26 +84,26 @@ class _YoOtpFieldState extends State<YoOtpField> {
                   fillColor: widget.fillColor ?? context.gray50,
                   contentPadding: EdgeInsets.zero,
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(context.yoRadiusLg),
                     borderSide: BorderSide(
                       color: widget.borderColor ?? context.gray300,
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(context.yoRadiusLg),
                     borderSide: BorderSide(
                       color: widget.borderColor ?? context.gray300,
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(context.yoRadiusLg),
                     borderSide: BorderSide(
                       color: widget.focusedBorderColor ?? context.primaryColor,
                       width: 2,
                     ),
                   ),
                   disabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(context.yoRadiusLg),
                     borderSide: BorderSide(
                       color: context.gray200,
                     ),

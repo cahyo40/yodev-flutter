@@ -130,14 +130,14 @@ class _LoadingContent extends StatelessWidget {
       children: [
         YoLoading(size: 36, type: loadingType),
         if (message != null) ...[
-          const SizedBox(height: 16),
-          Text(
+          const YoSpace.height(16),
+          YoText(
             message!,
             style: TextStyle(
               color: showBackground ? context.gray600 : Colors.white,
               fontSize: 14,
             ),
-            textAlign: TextAlign.center,
+            align: TextAlign.center,
           ),
         ],
       ],
@@ -149,7 +149,7 @@ class _LoadingContent extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: context.backgroundColor,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(context.yoRadiusLg),
         boxShadow: YoBoxShadow.elevated(context),
       ),
       child: content,

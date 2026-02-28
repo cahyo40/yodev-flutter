@@ -75,30 +75,30 @@ class YoDrawerItem {
 
   /// Create a divider
   const YoDrawerItem.divider()
-    : icon = null,
-      title = '',
-      subtitle = null,
-      trailing = null,
-      onTap = null,
-      isSelected = false,
-      isDivider = true,
-      isHeader = false,
-      selectedColor = null,
-      iconColor = null,
-      textColor = null;
+      : icon = null,
+        title = '',
+        subtitle = null,
+        trailing = null,
+        onTap = null,
+        isSelected = false,
+        isDivider = true,
+        isHeader = false,
+        selectedColor = null,
+        iconColor = null,
+        textColor = null;
 
   /// Create a section header
   const YoDrawerItem.header(this.title)
-    : icon = null,
-      subtitle = null,
-      trailing = null,
-      onTap = null,
-      isSelected = false,
-      isDivider = false,
-      isHeader = true,
-      selectedColor = null,
-      iconColor = null,
-      textColor = null;
+      : icon = null,
+        subtitle = null,
+        trailing = null,
+        onTap = null,
+        isSelected = false,
+        isDivider = false,
+        isHeader = true,
+        selectedColor = null,
+        iconColor = null,
+        textColor = null;
 
   Widget _build(BuildContext context) {
     if (isDivider) {
@@ -108,7 +108,7 @@ class YoDrawerItem {
     if (isHeader) {
       return Padding(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-        child: Text(
+        child: YoText(
           title.toUpperCase(),
           style: context.yoBodySmall.copyWith(
             color: context.gray500,
@@ -129,7 +129,7 @@ class YoDrawerItem {
               size: 22,
             )
           : null,
-      title: Text(
+      title: YoText(
         title,
         style: context.yoBodyMedium.copyWith(
           color: textColor ?? (isSelected ? color : context.textColor),
@@ -137,7 +137,7 @@ class YoDrawerItem {
         ),
       ),
       subtitle: subtitle != null
-          ? Text(
+          ? YoText(
               subtitle!,
               style: context.yoBodySmall.copyWith(color: context.gray500),
             )
@@ -196,7 +196,7 @@ class YoDrawerHeader extends StatelessWidget {
                         icon: Icons.person,
                         size: YoAvatarSize.lg,
                       )),
-            const SizedBox(width: 12),
+            const YoSpace.width(12),
 
             // Info
             Expanded(
@@ -205,7 +205,7 @@ class YoDrawerHeader extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (title != null)
-                    Text(
+                    YoText(
                       title!,
                       style: context.yoTitleSmall.copyWith(
                         color: context.onPrimaryColor,
@@ -215,8 +215,8 @@ class YoDrawerHeader extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                   if (subtitle != null) ...[
-                    const SizedBox(height: 2),
-                    Text(
+                    const YoSpace.height(2),
+                    YoText(
                       subtitle!,
                       style: context.yoBodySmall.copyWith(
                         color: context.onPrimaryColor.withAlpha(204),
@@ -274,13 +274,13 @@ class YoDrawerFooter extends StatelessWidget {
           children: [
             if (text != null)
               Expanded(
-                child: Text(
+                child: YoText(
                   text!,
                   style: context.yoBodySmall.copyWith(color: context.gray500),
                 ),
               ),
             if (version != null)
-              Text(
+              YoText(
                 'v$version',
                 style: context.yoBodySmall.copyWith(color: context.gray400),
               ),

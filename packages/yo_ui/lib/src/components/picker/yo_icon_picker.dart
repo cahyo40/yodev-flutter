@@ -202,7 +202,7 @@ class YoIconPickerButton extends StatelessWidget {
                 color: selectedIcon != null
                     ? context.primaryColor.withAlpha(30)
                     : context.gray100,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(context.yoRadiusMd),
                 border: Border.all(
                   color: selectedIcon != null
                       ? context.primaryColor
@@ -217,7 +217,7 @@ class YoIconPickerButton extends StatelessWidget {
                 size: 24,
               ),
             ),
-            const SizedBox(width: 12),
+            const YoSpace.width(12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -228,7 +228,7 @@ class YoIconPickerButton extends StatelessWidget {
                       style:
                           context.yoLabelSmall.copyWith(color: context.gray500),
                     ),
-                    const SizedBox(height: 2),
+                    const YoSpace.height(2),
                   ],
                   YoText(
                     selectedIcon != null
@@ -1343,7 +1343,7 @@ class _YoIconPickerBottomSheetState extends State<_YoIconPickerBottomSheet> {
                       TextButton(
                         onPressed: () =>
                             Navigator.of(context).pop(_selectedIcon),
-                        child: const Text('Select'),
+                        child: YoText.bodyMedium('Select'),
                       ),
                     IconButton(
                       onPressed: () => Navigator.of(context).pop(),
@@ -1399,7 +1399,7 @@ class _YoIconPickerDialogState extends State<_YoIconPickerDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(context.yoRadiusXl)),
       child: Container(
         width: MediaQuery.of(context).size.width * 0.9,
         height: MediaQuery.of(context).size.height * 0.6,
@@ -1421,7 +1421,7 @@ class _YoIconPickerDialogState extends State<_YoIconPickerDialog> {
                 ),
               ],
             ),
-            const SizedBox(height: 8),
+            const YoSpace.height(8),
             // Picker
             Expanded(
               child: YoIconPicker(
@@ -1434,21 +1434,21 @@ class _YoIconPickerDialogState extends State<_YoIconPickerDialog> {
                 crossAxisCount: 5,
               ),
             ),
-            const SizedBox(height: 16),
+            const YoSpace.height(16),
             // Actions
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  child: const Text('Cancel'),
+                  child: YoText.bodyMedium('Cancel'),
                 ),
-                const SizedBox(width: 8),
+                const YoSpace.width(8),
                 ElevatedButton(
                   onPressed: _selectedIcon != null
                       ? () => Navigator.of(context).pop(_selectedIcon)
                       : null,
-                  child: const Text('Select'),
+                  child: YoText.bodyMedium('Select'),
                 ),
               ],
             ),
@@ -1476,7 +1476,7 @@ class _YoIconPickerState extends State<YoIconPicker> {
       height: widget.height,
       decoration: BoxDecoration(
         color: widget.backgroundColor ?? context.backgroundColor,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(context.yoRadiusLg),
         border: Border.all(color: context.gray200),
       ),
       child: Column(
@@ -1511,7 +1511,7 @@ class _YoIconPickerState extends State<YoIconPicker> {
               ),
             ),
           if (widget.showCategories && _searchController.text.isEmpty)
-            SizedBox(
+            YoBox(
               height: 40,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
@@ -1524,7 +1524,7 @@ class _YoIconPickerState extends State<YoIconPicker> {
                     padding: const EdgeInsets.only(right: 8),
                     child: FilterChip(
                       selected: isSelected,
-                      label: Text(category.label),
+                      label: YoText.bodyMedium(category.label),
                       avatar: Icon(category.icon, size: 16),
                       onSelected: (selected) {
                         if (selected) {
@@ -1550,7 +1550,7 @@ class _YoIconPickerState extends State<YoIconPicker> {
                 },
               ),
             ),
-          const SizedBox(height: 8),
+          const YoSpace.height(8),
           Expanded(
             child: _filteredIcons.isEmpty
                 ? Center(
@@ -1559,7 +1559,7 @@ class _YoIconPickerState extends State<YoIconPicker> {
                       children: [
                         Icon(Icons.search_off,
                             size: 48, color: context.gray300),
-                        const SizedBox(height: 8),
+                        const YoSpace.height(8),
                         YoText(
                           'No icons found',
                           style: context.yoBodyMedium
@@ -1583,7 +1583,7 @@ class _YoIconPickerState extends State<YoIconPicker> {
                         message: iconData.name,
                         child: InkWell(
                           onTap: () => widget.onIconSelected(iconData.icon),
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(context.yoRadiusMd),
                           child: Container(
                             decoration: BoxDecoration(
                               color: isSelected
@@ -1591,7 +1591,7 @@ class _YoIconPickerState extends State<YoIconPicker> {
                                           context.primaryColor)
                                       .withAlpha(30)
                                   : context.gray50,
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(context.yoRadiusMd),
                               border: Border.all(
                                 color: isSelected
                                     ? widget.selectedColor ??

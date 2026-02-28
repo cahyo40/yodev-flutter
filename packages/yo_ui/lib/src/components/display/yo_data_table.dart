@@ -104,7 +104,7 @@ class _YoDataTableState extends State<YoDataTable> {
       child: Row(
         children: [
           if (widget.selectable)
-            SizedBox(
+            YoBox(
               width: 56,
               child: Checkbox(
                 value: _selectedIndices.length == widget.rows.length &&
@@ -128,17 +128,15 @@ class _YoDataTableState extends State<YoDataTable> {
                       : MainAxisAlignment.start,
                   children: [
                     Flexible(
-                      child: Text(
+                      child: YoText.bodyMedium(
                         column.label,
-                        style: context.yoBodyMedium.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
-                        textAlign: column.textAlign,
+                        fontWeight: FontWeight.w600,
+                        align: column.textAlign,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     if (column.sortable) ...[
-                      const SizedBox(width: 4),
+                      const YoSpace.width(4),
                       Icon(
                         _sortColumnIndex == index
                             ? (_sortAscending
@@ -183,7 +181,7 @@ class _YoDataTableState extends State<YoDataTable> {
           child: Row(
             children: [
               if (widget.selectable)
-                SizedBox(
+                YoBox(
                   width: 56,
                   child: Checkbox(
                     value: isSelected,
@@ -199,10 +197,9 @@ class _YoDataTableState extends State<YoDataTable> {
                   width: column.width ?? 150,
                   padding: widget.cellPadding ??
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: Text(
+                  child: YoText.bodyMedium(
                     cellData.toString(),
-                    style: context.yoBodyMedium,
-                    textAlign: column.textAlign,
+                    align: column.textAlign,
                     overflow: TextOverflow.ellipsis,
                   ),
                 );

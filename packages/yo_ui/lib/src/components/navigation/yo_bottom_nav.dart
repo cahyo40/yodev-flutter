@@ -44,9 +44,9 @@ class YoBottomNavBar extends StatefulWidget {
     this.animationDuration = const Duration(milliseconds: 200),
     this.animationCurve = Curves.easeInOut,
   }) : assert(
-         items.length >= 2 && items.length <= 5,
-         'Items must be between 2 and 5',
-       );
+          items.length >= 2 && items.length <= 5,
+          'Items must be between 2 and 5',
+        );
 
   @override
   State<YoBottomNavBar> createState() => _YoBottomNavBarState();
@@ -153,7 +153,7 @@ class _YoBottomNavBarState extends State<YoBottomNavBar>
                   child: _buildIcon(context, item, isActive, color),
                 ),
                 if (widget.showLabels) ...[
-                  const SizedBox(height: 4),
+                  const YoSpace.height(4),
                   AnimatedDefaultTextStyle(
                     duration: widget.animationDuration,
                     style: TextStyle(
@@ -161,7 +161,7 @@ class _YoBottomNavBarState extends State<YoBottomNavBar>
                       fontSize: isActive ? 12 : 11,
                       fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
                     ),
-                    child: Text(
+                    child: YoText(
                       item.label,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -182,9 +182,8 @@ class _YoBottomNavBarState extends State<YoBottomNavBar>
     bool isActive,
     Color color,
   ) {
-    final iconData = isActive && item.activeIcon != null
-        ? item.activeIcon!
-        : item.icon;
+    final iconData =
+        isActive && item.activeIcon != null ? item.activeIcon! : item.icon;
 
     Widget iconWidget = Icon(iconData, color: color, size: 24);
 
@@ -204,14 +203,14 @@ class _YoBottomNavBarState extends State<YoBottomNavBar>
                 borderRadius: BorderRadius.circular(10),
               ),
               constraints: const BoxConstraints(minWidth: 16),
-              child: Text(
+              child: YoText(
                 item.badge!,
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 10,
                   fontWeight: FontWeight.bold,
                 ),
-                textAlign: TextAlign.center,
+                align: TextAlign.center,
               ),
             ),
           ),

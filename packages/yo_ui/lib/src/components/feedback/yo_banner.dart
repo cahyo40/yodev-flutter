@@ -37,7 +37,7 @@ class _YoBannerState extends State<YoBanner> {
 
   @override
   Widget build(BuildContext context) {
-    if (!_isVisible) return const SizedBox.shrink();
+    if (!_isVisible) return const YoBox();
 
     return Container(
       color: _getBackgroundColor(context),
@@ -50,9 +50,9 @@ class _YoBannerState extends State<YoBanner> {
             color: _getTextColor(context),
             size: 20,
           ),
-          const SizedBox(width: 12),
+          const YoSpace.width(12),
           Expanded(
-            child: Text(
+            child: YoText(
               widget.message,
               style: context.yoBodyMedium.copyWith(
                 color: _getTextColor(context),
@@ -60,11 +60,11 @@ class _YoBannerState extends State<YoBanner> {
             ),
           ),
           if (widget.action != null) ...[
-            const SizedBox(width: 8),
+            const YoSpace.width(8),
             widget.action!,
           ],
           if (widget.dismissible) ...[
-            const SizedBox(width: 8),
+            const YoSpace.width(8),
             IconButton(
               icon: Icon(
                 Icons.close,

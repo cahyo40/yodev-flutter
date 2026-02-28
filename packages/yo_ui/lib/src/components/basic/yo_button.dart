@@ -223,13 +223,16 @@ class YoButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    assert(text.isNotEmpty,
+        'YoButton wajib memiliki text. Untuk icon-only, gunakan YoButtonIcon.');
+
     final style = _getButtonStyle(context);
     final padding = _getPadding();
     final txtStyle = _getTextStyle(context);
     final radius = _getBorderRadius();
 
     Widget child = isLoading
-        ? SizedBox(
+        ? YoBox(
             width: 20,
             height: 20,
             child: CircularProgressIndicator(
@@ -263,7 +266,7 @@ class YoButton extends StatelessWidget {
     );
 
     if (expanded) {
-      return SizedBox(width: double.infinity, child: button);
+      return YoBox(width: double.infinity, child: button);
     }
 
     return button;
@@ -271,17 +274,17 @@ class YoButton extends StatelessWidget {
 
   List<Widget> _buildContent(TextStyle textStyle) {
     final textWidget = Flexible(
-      child: Text(
+      child: YoText(
         text,
         style: textStyle,
-        textAlign: TextAlign.center,
+        align: TextAlign.center,
         overflow: TextOverflow.ellipsis,
       ),
     );
 
     if (icon == null) return [textWidget];
 
-    final gap = SizedBox(width: _getIconSpacing());
+    final gap = YoSpace.width(_getIconSpacing());
     final iconWidget = IconTheme(
       data: IconThemeData(size: _getIconSize(), color: textStyle.color),
       child: icon!,
@@ -322,7 +325,7 @@ class YoButton extends StatelessWidget {
     );
 
     if (expanded) {
-      return SizedBox(width: double.infinity, child: button);
+      return YoBox(width: double.infinity, child: button);
     }
     return button;
   }

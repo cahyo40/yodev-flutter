@@ -39,14 +39,14 @@ class YoErrorState extends StatelessWidget {
                 color: YoColors.error(context),
               ),
             ),
-            const SizedBox(height: 24),
+            const YoSpace.height(24),
             YoText.titleLarge(
               title,
               align: TextAlign.center,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
-            const SizedBox(height: 8),
+            const YoSpace.height(8),
             YoText.bodyMedium(
               description,
               align: TextAlign.center,
@@ -55,12 +55,12 @@ class YoErrorState extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
             if (error != null) ...[
-              const SizedBox(height: 16),
+              const YoSpace.height(16),
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: YoColors.gray100(context),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(context.yoRadiusMd),
                 ),
                 child: YoText.bodySmall(
                   error.toString(),
@@ -70,7 +70,7 @@ class YoErrorState extends StatelessWidget {
                 ),
               ),
             ],
-            const SizedBox(height: 24),
+            const YoSpace.height(24),
             YoButton.primary(
               text: actionText,
               onPressed: onRetry,

@@ -103,7 +103,7 @@ class YoDestinationCard extends StatelessWidget {
     return Card(
       clipBehavior: Clip.antiAlias,
       elevation: 3,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(context.yoRadiusXl)),
       child: InkWell(
         onTap: onTap,
         child: Column(
@@ -129,21 +129,19 @@ class YoDestinationCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  YoText.titleSmall(
                     title,
-                    style: context.yoTitleSmall.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    fontWeight: FontWeight.bold,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 4),
+                  const YoSpace.height(4),
                   _buildLocation(context),
                   if (tags.isNotEmpty) ...[
-                    const SizedBox(height: 8),
+                    const YoSpace.height(8),
                     _buildTags(context),
                   ],
-                  const SizedBox(height: 10),
+                  const YoSpace.height(10),
                   Row(
                     children: [
                       if (rating != null)
@@ -220,10 +218,10 @@ class YoDestinationCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             const Icon(Icons.schedule, size: 14, color: Colors.white),
-            const SizedBox(width: 4),
-            Text(
+            const YoSpace.width(4),
+            YoText.bodySmall(
               duration!,
-              style: context.yoBodySmall.copyWith(color: Colors.white),
+              color: Colors.white,
             ),
           ],
         ),
@@ -235,11 +233,11 @@ class YoDestinationCard extends StatelessWidget {
     return Row(
       children: [
         Icon(Icons.location_on, size: 14, color: context.gray500),
-        const SizedBox(width: 4),
+        const YoSpace.width(4),
         Expanded(
-          child: Text(
+          child: YoText.bodySmall(
             location,
-            style: context.yoBodySmall.copyWith(color: context.gray500),
+            color: context.gray500,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -259,14 +257,12 @@ class YoDestinationCard extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
                 color: context.primaryColor.withAlpha(26),
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(context.yoRadiusLg),
               ),
-              child: Text(
+              child: YoText.bodySmall(
                 tag,
-                style: context.yoBodySmall.copyWith(
-                  color: context.primaryColor,
-                  fontWeight: FontWeight.w500,
-                ),
+                color: context.primaryColor,
+                fontWeight: FontWeight.w500,
               ),
             ),
           )
@@ -278,16 +274,16 @@ class YoDestinationCard extends StatelessWidget {
     return Row(
       children: [
         const Icon(Icons.star, size: 16, color: Colors.amber),
-        const SizedBox(width: 4),
-        Text(
+        const YoSpace.width(4),
+        YoText.bodyMedium(
           rating!.toStringAsFixed(1),
-          style: context.yoBodyMedium.copyWith(fontWeight: FontWeight.w600),
+          fontWeight: FontWeight.w600,
         ),
         if (reviewCount != null) ...[
-          const SizedBox(width: 4),
-          Text(
+          const YoSpace.width(4),
+          YoText.bodySmall(
             '($reviewCount reviews)',
-            style: context.yoBodySmall.copyWith(color: context.gray500),
+            color: context.gray500,
           ),
         ],
       ],
@@ -298,17 +294,15 @@ class YoDestinationCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Text(
+        YoText.titleSmall(
           '$currencySymbol${price!.toStringAsFixed(0)}',
-          style: context.yoTitleSmall.copyWith(
-            fontWeight: FontWeight.bold,
-            color: context.primaryColor,
-          ),
+          fontWeight: FontWeight.bold,
+          color: context.primaryColor,
         ),
         if (priceLabel != null)
-          Text(
+          YoText.bodySmall(
             priceLabel!,
-            style: context.yoBodySmall.copyWith(color: context.gray500),
+            color: context.gray500,
           ),
       ],
     );
@@ -392,26 +386,22 @@ class _YoDestinationCardFeatured extends YoDestinationCard {
                                   color: Colors.white.withAlpha(51),
                                   borderRadius: BorderRadius.circular(20),
                                 ),
-                                child: Text(
+                                child: YoText.bodySmall(
                                   t,
-                                  style: context.yoBodySmall.copyWith(
-                                    color: Colors.white,
-                                  ),
+                                  color: Colors.white,
                                 ),
                               ),
                             )
                             .toList(),
                       ),
-                      const SizedBox(height: 8),
+                      const YoSpace.height(8),
                     ],
-                    Text(
+                    YoText.titleMedium(
                       title,
-                      style: context.yoTitleMedium.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
                     ),
-                    const SizedBox(height: 4),
+                    const YoSpace.height(4),
                     Row(
                       children: [
                         const Icon(
@@ -419,34 +409,28 @@ class _YoDestinationCardFeatured extends YoDestinationCard {
                           size: 14,
                           color: Colors.white70,
                         ),
-                        const SizedBox(width: 4),
-                        Text(
+                        const YoSpace.width(4),
+                        YoText.bodySmall(
                           location,
-                          style: context.yoBodySmall.copyWith(
-                            color: Colors.white70,
-                          ),
+                          color: Colors.white70,
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10),
+                    const YoSpace.height(10),
                     Row(
                       children: [
                         if (rating != null) ...[
                           const Icon(Icons.star, size: 16, color: Colors.amber),
-                          const SizedBox(width: 4),
-                          Text(
+                          const YoSpace.width(4),
+                          YoText.bodyMedium(
                             rating!.toStringAsFixed(1),
-                            style: context.yoBodyMedium.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                            ),
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
                           ),
                           if (reviewCount != null)
-                            Text(
+                            YoText.bodySmall(
                               ' ($reviewCount)',
-                              style: context.yoBodySmall.copyWith(
-                                color: Colors.white70,
-                              ),
+                              color: Colors.white70,
                             ),
                         ],
                         const Spacer(),
@@ -460,12 +444,10 @@ class _YoDestinationCardFeatured extends YoDestinationCard {
                               color: context.primaryColor,
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: Text(
+                            child: YoText.bodyMedium(
                               '$currencySymbol${price!.toStringAsFixed(0)} ${priceLabel ?? ''}',
-                              style: context.yoBodyMedium.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                       ],
@@ -515,12 +497,10 @@ class _YoDestinationCardFeatured extends YoDestinationCard {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const Icon(Icons.schedule, size: 14, color: Colors.white),
-                      const SizedBox(width: 4),
-                      Text(
+                      const YoSpace.width(4),
+                      YoText.bodySmall(
                         duration!,
-                        style: context.yoBodySmall.copyWith(
-                          color: Colors.white,
-                        ),
+                        color: Colors.white,
                       ),
                     ],
                   ),
@@ -554,15 +534,15 @@ class _YoDestinationCardCompact extends YoDestinationCard {
     return Card(
       clipBehavior: Clip.antiAlias,
       elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(context.yoRadiusLg)),
       child: InkWell(
         onTap: onTap,
-        child: SizedBox(
+        child: YoBox(
           height: 100,
           child: Row(
             children: [
               // Image
-              SizedBox(
+              YoBox(
                 width: 100,
                 child: Stack(
                   fit: StackFit.expand,
@@ -579,14 +559,12 @@ class _YoDestinationCardCompact extends YoDestinationCard {
                           ),
                           decoration: BoxDecoration(
                             color: Colors.black.withAlpha(153),
-                            borderRadius: BorderRadius.circular(4),
+                            borderRadius: BorderRadius.circular(context.yoRadiusSm),
                           ),
-                          child: Text(
+                          child: YoText.bodySmall(
                             duration!,
-                            style: context.yoBodySmall.copyWith(
-                              color: Colors.white,
-                              fontSize: 10,
-                            ),
+                            color: Colors.white,
+                            fontSize: 10,
                           ),
                         ),
                       ),
@@ -604,11 +582,9 @@ class _YoDestinationCardCompact extends YoDestinationCard {
                       Row(
                         children: [
                           Expanded(
-                            child: Text(
+                            child: YoText.bodyMedium(
                               title,
-                              style: context.yoBodyMedium.copyWith(
-                                fontWeight: FontWeight.w600,
-                              ),
+                              fontWeight: FontWeight.w600,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -628,7 +604,7 @@ class _YoDestinationCardCompact extends YoDestinationCard {
                             ),
                         ],
                       ),
-                      const SizedBox(height: 2),
+                      const YoSpace.height(2),
                       Row(
                         children: [
                           Icon(
@@ -636,14 +612,12 @@ class _YoDestinationCardCompact extends YoDestinationCard {
                             size: 12,
                             color: context.gray500,
                           ),
-                          const SizedBox(width: 2),
+                          const YoSpace.width(2),
                           Expanded(
-                            child: Text(
+                            child: YoText.bodySmall(
                               location,
-                              style: context.yoBodySmall.copyWith(
-                                color: context.gray500,
-                                fontSize: 11,
-                              ),
+                              color: context.gray500,
+                              fontSize: 11,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -659,22 +633,18 @@ class _YoDestinationCardCompact extends YoDestinationCard {
                               size: 14,
                               color: Colors.amber,
                             ),
-                            const SizedBox(width: 2),
-                            Text(
+                            const YoSpace.width(2),
+                            YoText.bodySmall(
                               rating!.toStringAsFixed(1),
-                              style: context.yoBodySmall.copyWith(
-                                fontWeight: FontWeight.w600,
-                              ),
+                              fontWeight: FontWeight.w600,
                             ),
                           ],
                           const Spacer(),
                           if (price != null)
-                            Text(
+                            YoText.bodyMedium(
                               '$currencySymbol${price!.toStringAsFixed(0)}',
-                              style: context.yoBodyMedium.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: context.primaryColor,
-                              ),
+                              fontWeight: FontWeight.bold,
+                              color: context.primaryColor,
                             ),
                         ],
                       ),

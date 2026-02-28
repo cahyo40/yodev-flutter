@@ -44,8 +44,8 @@ class YoBadge extends StatelessWidget {
     this.showDot = false,
     this.dotColor,
     this.onTap,
-  }) : variant = YoBadgeVariant.primary,
-       backgroundColor = null;
+  })  : variant = YoBadgeVariant.primary,
+        backgroundColor = null;
 
   const YoBadge.secondary({
     super.key,
@@ -57,8 +57,8 @@ class YoBadge extends StatelessWidget {
     this.showDot = false,
     this.dotColor,
     this.onTap,
-  }) : variant = YoBadgeVariant.secondary,
-       backgroundColor = null;
+  })  : variant = YoBadgeVariant.secondary,
+        backgroundColor = null;
 
   const YoBadge.success({
     super.key,
@@ -70,8 +70,8 @@ class YoBadge extends StatelessWidget {
     this.showDot = false,
     this.dotColor,
     this.onTap,
-  }) : variant = YoBadgeVariant.success,
-       backgroundColor = null;
+  })  : variant = YoBadgeVariant.success,
+        backgroundColor = null;
 
   const YoBadge.warning({
     super.key,
@@ -83,8 +83,8 @@ class YoBadge extends StatelessWidget {
     this.showDot = false,
     this.dotColor,
     this.onTap,
-  }) : variant = YoBadgeVariant.warning,
-       backgroundColor = null;
+  })  : variant = YoBadgeVariant.warning,
+        backgroundColor = null;
 
   const YoBadge.error({
     super.key,
@@ -96,8 +96,8 @@ class YoBadge extends StatelessWidget {
     this.showDot = false,
     this.dotColor,
     this.onTap,
-  }) : variant = YoBadgeVariant.error,
-       backgroundColor = null;
+  })  : variant = YoBadgeVariant.error,
+        backgroundColor = null;
 
   const YoBadge.outline({
     super.key,
@@ -109,8 +109,8 @@ class YoBadge extends StatelessWidget {
     this.showDot = false,
     this.dotColor,
     this.onTap,
-  }) : variant = YoBadgeVariant.outline,
-       backgroundColor = null;
+  })  : variant = YoBadgeVariant.outline,
+        backgroundColor = null;
 
   // Dot-only badge (untuk notification dots)
   const YoBadge.dot({
@@ -119,12 +119,12 @@ class YoBadge extends StatelessWidget {
     this.dotColor,
     this.size = YoBadgeSize.small,
     this.onTap,
-  }) : variant = YoBadgeVariant.primary,
-       icon = null,
-       iconPosition = IconPosition.left,
-       backgroundColor = null,
-       textColor = null,
-       showDot = true;
+  })  : variant = YoBadgeVariant.primary,
+        icon = null,
+        iconPosition = IconPosition.left,
+        backgroundColor = null,
+        textColor = null,
+        showDot = true;
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +137,7 @@ class YoBadge extends StatelessWidget {
     final textStyle = _getTextStyle(
       context,
     ).copyWith(color: effectiveTextColor);
-    final borderRadius = _getBorderRadius();
+    final borderRadius = _getBorderRadius(context);
 
     Widget content = Container(
       padding: padding,
@@ -182,7 +182,7 @@ class YoBadge extends StatelessWidget {
           decoration: BoxDecoration(color: dotColor, shape: BoxShape.circle),
         ),
       );
-      children.add(SizedBox(width: _getIconSpacing()));
+      children.add(YoSpace.width(_getIconSpacing()));
     }
 
     // Add icon if provided
@@ -193,7 +193,7 @@ class YoBadge extends StatelessWidget {
           child: icon!,
         ),
       );
-      children.add(SizedBox(width: _getIconSpacing()));
+      children.add(YoSpace.width(_getIconSpacing()));
     }
 
     // Add text
@@ -210,7 +210,7 @@ class YoBadge extends StatelessWidget {
 
     // Add icon if on right side
     if (icon != null && iconPosition == IconPosition.right) {
-      children.add(SizedBox(width: _getIconSpacing()));
+      children.add(YoSpace.width(_getIconSpacing()));
       children.add(
         IconTheme(
           data: IconThemeData(size: _getIconSize(), color: textStyle.color),
@@ -317,14 +317,14 @@ class YoBadge extends StatelessWidget {
     }
   }
 
-  BorderRadius _getBorderRadius() {
+  BorderRadius _getBorderRadius(BuildContext context) {
     switch (size) {
       case YoBadgeSize.small:
         return BorderRadius.circular(6);
       case YoBadgeSize.medium:
-        return BorderRadius.circular(8);
+        return BorderRadius.circular(context.yoRadiusMd);
       case YoBadgeSize.large:
-        return BorderRadius.circular(12);
+        return BorderRadius.circular(context.yoRadiusLg);
     }
   }
 

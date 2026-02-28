@@ -30,7 +30,7 @@ class YoSkeletonGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (!enabled) {
-      return const SizedBox.shrink();
+      return const YoBox();
     }
 
     return GridView.builder(

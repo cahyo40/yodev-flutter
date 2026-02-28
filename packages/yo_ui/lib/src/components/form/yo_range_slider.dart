@@ -44,17 +44,13 @@ class _YoRangeSliderState extends State<YoRangeSlider> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              YoText.bodySmall(
                 widget.labels?.start ?? _values.start.toStringAsFixed(0),
-                style: context.yoBodySmall.copyWith(
-                  color: context.gray600,
-                ),
+                color: context.gray600,
               ),
-              Text(
+              YoText.bodySmall(
                 widget.labels?.end ?? _values.end.toStringAsFixed(0),
-                style: context.yoBodySmall.copyWith(
-                  color: context.gray600,
-                ),
+                color: context.gray600,
               ),
             ],
           ),

@@ -118,7 +118,7 @@ class _YoExpansionPanelListState extends State<YoExpansionPanelList> {
                             widget.contentPadding ?? const EdgeInsets.all(16),
                         child: item.body,
                       )
-                    : const SizedBox.shrink(),
+                    : const YoBox(),
               ),
               if (index < widget.children.length - 1)
                 Divider(
@@ -176,13 +176,13 @@ class _YoExpansionPanelState extends State<YoExpansionPanel> {
         color: _isExpanded
             ? (widget.expandedBackgroundColor ?? context.gray50)
             : (widget.backgroundColor ?? Colors.transparent),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(context.yoRadiusLg),
       ),
       child: Column(
         children: [
           InkWell(
             onTap: _toggle,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(context.yoRadiusLg),
             child: Container(
               padding: widget.contentPadding ??
                   const EdgeInsets.symmetric(
@@ -213,7 +213,7 @@ class _YoExpansionPanelState extends State<YoExpansionPanel> {
                     padding: widget.contentPadding ?? const EdgeInsets.all(16),
                     child: widget.body,
                   )
-                : const SizedBox.shrink(),
+                : const YoBox(),
           ),
         ],
       ),

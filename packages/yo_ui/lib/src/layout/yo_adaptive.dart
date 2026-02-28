@@ -238,6 +238,7 @@ extension YoAdaptiveContext on BuildContext {
   BorderRadius get adaptiveRadiusSm => YoAdaptive.borderRadiusSm(this);
   BorderRadius get adaptiveRadiusMd => YoAdaptive.borderRadiusMd(this);
   BorderRadius get adaptiveRadiusLg => YoAdaptive.borderRadiusLg(this);
+  BorderRadius get adaptiveRadiusXl => YoAdaptive.borderRadiusXl(this);
 
   // Font Size
   double get adaptiveFontDisplay => YoAdaptive.fontDisplay(this);

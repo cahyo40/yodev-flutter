@@ -92,14 +92,14 @@ class _YoStepperState extends State<YoStepper> {
                       children: [
                         _buildStepCircle(
                             stepIndex, isActive, isCompleted, step.state),
-                        const SizedBox(height: 8),
-                        Text(
+                        const YoSpace.height(8),
+                        YoText(
                           step.title,
                           style: context.yoBodySmall.copyWith(
                             fontWeight:
                                 isActive ? FontWeight.w600 : FontWeight.normal,
                           ),
-                          textAlign: TextAlign.center,
+                          align: TextAlign.center,
                         ),
                       ],
                     ),
@@ -120,9 +120,9 @@ class _YoStepperState extends State<YoStepper> {
             },
           ),
         ),
-        const SizedBox(height: 24),
+        const YoSpace.height(24),
         widget.steps[widget.currentStep].content,
-        const SizedBox(height: 16),
+        const YoSpace.height(16),
         Row(
           children: [
             if (widget.onStepContinue != null)
@@ -137,7 +137,7 @@ class _YoStepperState extends State<YoStepper> {
                     ),
               ),
             if (widget.onStepCancel != null) ...[
-              const SizedBox(width: 8),
+              const YoSpace.width(8),
               Expanded(
                 child: widget.cancelButton ??
                     YoButton(
@@ -178,7 +178,7 @@ class _YoStepperState extends State<YoStepper> {
     } else if (isActive) {
       backgroundColor = activeColor;
       contentColor = Colors.white;
-      content = Text(
+      content = YoText(
         '${index + 1}',
         style: TextStyle(
           color: contentColor,
@@ -188,7 +188,7 @@ class _YoStepperState extends State<YoStepper> {
     } else {
       backgroundColor = inactiveColor;
       contentColor = Colors.white;
-      content = Text(
+      content = YoText(
         '${index + 1}',
         style: TextStyle(color: contentColor),
       );
@@ -235,12 +235,12 @@ class _YoStepperState extends State<YoStepper> {
                           ),
                       ],
                     ),
-                    const SizedBox(width: 12),
+                    const YoSpace.width(12),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          YoText(
                             step.title,
                             style: context.yoBodyLarge.copyWith(
                               fontWeight: isActive
@@ -249,7 +249,7 @@ class _YoStepperState extends State<YoStepper> {
                             ),
                           ),
                           if (step.subtitle != null)
-                            Text(
+                            YoText(
                               step.subtitle!,
                               style: context.yoBodySmall.copyWith(
                                 color: context.gray500,
@@ -262,14 +262,14 @@ class _YoStepperState extends State<YoStepper> {
                 ),
               ),
               if (isActive) ...[
-                const SizedBox(height: 16),
+                const YoSpace.height(16),
                 Padding(
                   padding: const EdgeInsets.only(left: 44),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       step.content,
-                      const SizedBox(height: 16),
+                      const YoSpace.height(16),
                       Row(
                         children: [
                           if (widget.onStepContinue != null)
@@ -282,7 +282,7 @@ class _YoStepperState extends State<YoStepper> {
                                   onPressed: widget.onStepContinue,
                                 ),
                           if (widget.onStepCancel != null) ...[
-                            const SizedBox(width: 8),
+                            const YoSpace.width(8),
                             widget.cancelButton ??
                                 YoButton(
                                   text: 'Cancel',
@@ -295,7 +295,7 @@ class _YoStepperState extends State<YoStepper> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 16),
+                const YoSpace.height(16),
               ],
             ],
           );

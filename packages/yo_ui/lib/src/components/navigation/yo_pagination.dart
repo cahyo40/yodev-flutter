@@ -56,7 +56,7 @@ class YoPagination extends StatelessWidget {
   }) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(context.yoRadiusMd),
       child: Container(
         width: buttonSize,
         height: buttonSize,
@@ -66,7 +66,7 @@ class YoPagination extends StatelessWidget {
             color: isActive ? activeColor : inactiveColor,
             width: 1,
           ),
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(context.yoRadiusMd),
         ),
         child: Center(
           child: icon != null
@@ -75,7 +75,7 @@ class YoPagination extends StatelessWidget {
                   size: 20,
                   color: isActive ? context.onPrimaryColor : context.gray600,
                 )
-              : Text(
+              : YoText(
                   text!,
                   style: TextStyle(
                     color: isActive ? context.onPrimaryColor : context.gray600,
@@ -150,11 +150,11 @@ class YoPagination extends StatelessWidget {
   }
 
   Widget _buildEllipsis(BuildContext context) {
-    return SizedBox(
+    return YoBox(
       width: buttonSize,
       height: buttonSize,
       child: Center(
-        child: Text(
+        child: YoText(
           '...',
           style: TextStyle(
             color: context.gray500,

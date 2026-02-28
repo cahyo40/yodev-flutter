@@ -94,17 +94,17 @@ class YoLineChart extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (title != null) ...[
-          Text(
+          YoText.titleSmall(
             title!,
-            style: context.yoTitleSmall.copyWith(fontWeight: FontWeight.w600),
+            fontWeight: FontWeight.w600,
           ),
-          const SizedBox(height: 12),
+          const YoSpace.height(12),
         ],
         if (legends != null && legends!.isNotEmpty) ...[
           _buildLegends(context, colors),
-          const SizedBox(height: 12),
+          const YoSpace.height(12),
         ],
-        SizedBox(
+        YoBox(
           height: height,
           child: Padding(
             padding: padding ?? EdgeInsets.zero,
@@ -169,8 +169,8 @@ class YoLineChart extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(width: 12, height: 3, color: color),
-            const SizedBox(width: 6),
-            Text(entry.value, style: context.yoBodySmall),
+            const YoSpace.width(6),
+            YoText.bodySmall(entry.value),
           ],
         );
       }).toList(),
@@ -185,9 +185,9 @@ class YoLineChart extends StatelessWidget {
           reservedSize: 24,
           getTitlesWidget: (value, meta) => Padding(
             padding: const EdgeInsets.only(top: 8),
-            child: Text(
+            child: YoText.bodySmall(
               formatX?.call(value) ?? value.toInt().toString(),
-              style: context.yoBodySmall.copyWith(color: context.gray500),
+              color: context.gray500,
             ),
           ),
         ),
@@ -196,9 +196,9 @@ class YoLineChart extends StatelessWidget {
         sideTitles: SideTitles(
           showTitles: true,
           reservedSize: 40,
-          getTitlesWidget: (value, meta) => Text(
+          getTitlesWidget: (value, meta) => YoText.bodySmall(
             formatY?.call(value) ?? value.toInt().toString(),
-            style: context.yoBodySmall.copyWith(color: context.gray500),
+            color: context.gray500,
           ),
         ),
       ),
@@ -247,13 +247,13 @@ class YoBarChart extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (title != null) ...[
-          Text(
+          YoText.titleSmall(
             title!,
-            style: context.yoTitleSmall.copyWith(fontWeight: FontWeight.w600),
+            fontWeight: FontWeight.w600,
           ),
-          const SizedBox(height: 12),
+          const YoSpace.height(12),
         ],
-        SizedBox(
+        YoBox(
           height: height,
           child: BarChart(
             BarChartData(
@@ -317,12 +317,12 @@ class YoBarChart extends StatelessWidget {
           reservedSize: 32,
           getTitlesWidget: (value, meta) {
             final index = value.toInt();
-            if (index < 0 || index >= data.length) return const SizedBox();
+            if (index < 0 || index >= data.length) return const YoBox();
             return Padding(
               padding: const EdgeInsets.only(top: 8),
-              child: Text(
+              child: YoText.bodySmall(
                 data[index].label ?? '',
-                style: context.yoBodySmall.copyWith(color: context.gray500),
+                color: context.gray500,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -334,9 +334,9 @@ class YoBarChart extends StatelessWidget {
         sideTitles: SideTitles(
           showTitles: true,
           reservedSize: 40,
-          getTitlesWidget: (value, meta) => Text(
+          getTitlesWidget: (value, meta) => YoText.bodySmall(
             formatY?.call(value) ?? value.toInt().toString(),
-            style: context.yoBodySmall.copyWith(color: context.gray500),
+            color: context.gray500,
           ),
         ),
       ),
@@ -418,17 +418,17 @@ class YoPieChart extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (title != null) ...[
-          Text(
+          YoText.titleSmall(
             title!,
-            style: context.yoTitleSmall.copyWith(fontWeight: FontWeight.w600),
+            fontWeight: FontWeight.w600,
           ),
-          const SizedBox(height: 12),
+          const YoSpace.height(12),
         ],
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Chart
-            SizedBox(
+            YoBox(
               width: size,
               height: size,
               child: Stack(
@@ -464,12 +464,10 @@ class YoPieChart extends StatelessWidget {
                     ),
                   ),
                   if (donut && centerText != null)
-                    Text(
+                    YoText.titleSmall(
                       centerText!,
-                      style: context.yoTitleSmall.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
+                      fontWeight: FontWeight.bold,
+                      align: TextAlign.center,
                     ),
                 ],
               ),
@@ -477,7 +475,7 @@ class YoPieChart extends StatelessWidget {
 
             // Legend
             if (showLegend) ...[
-              const SizedBox(width: 16),
+              const YoSpace.width(16),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -498,15 +496,13 @@ class YoPieChart extends StatelessWidget {
                               borderRadius: BorderRadius.circular(2),
                             ),
                           ),
-                          const SizedBox(width: 8),
+                          const YoSpace.width(8),
                           Expanded(
-                            child: Text(d.label, style: context.yoBodySmall),
+                            child: YoText.bodySmall(d.label),
                           ),
-                          Text(
+                          YoText.bodySmall(
                             '${percentage.toStringAsFixed(1)}%',
-                            style: context.yoBodySmall.copyWith(
-                              color: context.gray500,
-                            ),
+                            color: context.gray500,
                           ),
                         ],
                       ),
@@ -550,7 +546,7 @@ class YoSparkLine extends StatelessWidget {
         .map((e) => FlSpot(e.key.toDouble(), e.value))
         .toList();
 
-    return SizedBox(
+    return YoBox(
       width: width,
       height: height,
       child: LineChart(

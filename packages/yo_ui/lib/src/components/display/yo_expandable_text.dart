@@ -64,24 +64,28 @@ class _YoExpandableTextState extends State<YoExpandableText> {
 
   Widget _buildTextContent(TextStyle? textStyle, TextStyle? linkStyle) {
     if (!_needsExpansion && !_isExpanded) {
-      return Text(widget.text, style: textStyle, textAlign: widget.textAlign);
+      return YoText(
+        widget.text,
+        style: textStyle,
+        align: widget.textAlign,
+      );
     }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        YoText(
           widget.text,
           style: textStyle,
-          textAlign: widget.textAlign,
+          align: widget.textAlign,
           maxLines: _isExpanded ? null : widget.maxLines,
           overflow: _isExpanded ? null : TextOverflow.ellipsis,
         ),
         if (_needsExpansion || _isExpanded) ...[
-          const SizedBox(height: 4),
+          const YoSpace.height(4),
           GestureDetector(
             onTap: _toggleExpansion,
-            child: Text(
+            child: YoText(
               _isExpanded ? widget.collapseText : widget.expandText,
               style: linkStyle,
             ),

@@ -364,7 +364,7 @@ class YoImagePickerButton extends StatelessWidget {
               color: context.gray600,
             ),
           ),
-          const SizedBox(height: 8),
+          const YoSpace.height(8),
         ],
         GestureDetector(
           onTap: () => _pickImage(context),
@@ -396,7 +396,7 @@ class YoImagePickerButton extends StatelessWidget {
                       ? Icon(placeholderIcon, size: 32, color: context.gray400)
                       : null,
                 ),
-                const SizedBox(width: 16),
+                const YoSpace.width(16),
                 // Text
                 Expanded(
                   child: Column(
@@ -413,7 +413,7 @@ class YoImagePickerButton extends StatelessWidget {
                               : FontWeight.normal,
                         ),
                       ),
-                      const SizedBox(height: 4),
+                      const YoSpace.height(4),
                       YoText(
                         imagePath != null
                             ? 'Tap to change'
@@ -561,20 +561,20 @@ class _YoImageSourceDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(title),
+      title: YoText.titleMedium(title),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           ListTile(
             leading: Icon(Icons.camera_alt, color: context.primaryColor),
-            title: const Text('Camera'),
-            subtitle: const Text('Take a photo'),
+            title: YoText.bodyMedium('Camera'),
+            subtitle: YoText.bodySmall('Take a photo'),
             onTap: () => Navigator.pop(context, YoImageSource.camera),
           ),
           ListTile(
             leading: Icon(Icons.photo_library, color: context.primaryColor),
-            title: const Text('Gallery'),
-            subtitle: const Text('Choose from gallery'),
+            title: YoText.bodyMedium('Gallery'),
+            subtitle: YoText.bodySmall('Choose from gallery'),
             onTap: () => Navigator.pop(context, YoImageSource.gallery),
           ),
         ],
@@ -582,7 +582,7 @@ class _YoImageSourceDialog extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('Cancel'),
+          child: YoText.bodyMedium('Cancel'),
         ),
       ],
     );
@@ -634,7 +634,7 @@ class _YoImageSourcePicker extends StatelessWidget {
                 style:
                     context.yoTitleMedium.copyWith(fontWeight: FontWeight.w600),
               ),
-              const SizedBox(height: 24),
+              const YoSpace.height(24),
               // Options
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -654,16 +654,16 @@ class _YoImageSourcePicker extends StatelessWidget {
                 ],
               ),
               if (showCancel) ...[
-                const SizedBox(height: 24),
-                SizedBox(
+                const YoSpace.height(24),
+                YoBox(
                   width: double.infinity,
                   child: TextButton(
                     onPressed: () => Navigator.pop(context),
-                    child: Text(cancelLabel),
+                    child: YoText.bodyMedium(cancelLabel),
                   ),
                 ),
               ],
-              const SizedBox(height: 8),
+              const YoSpace.height(8),
             ],
           ),
         ),
@@ -679,18 +679,18 @@ class _YoImageSourcePicker extends StatelessWidget {
   }) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(context.yoRadiusXl),
       child: Container(
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
           color: context.primaryColor.withAlpha(20),
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(context.yoRadiusXl),
           border: Border.all(color: context.primaryColor.withAlpha(40)),
         ),
         child: Column(
           children: [
             Icon(icon, size: 48, color: context.primaryColor),
-            const SizedBox(height: 8),
+            const YoSpace.height(8),
             YoText(
               label,
               style: context.yoBodyMedium.copyWith(

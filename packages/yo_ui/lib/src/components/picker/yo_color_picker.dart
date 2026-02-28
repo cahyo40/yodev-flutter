@@ -203,7 +203,7 @@ class YoColorPickerButton extends StatelessWidget {
               height: 40,
               decoration: BoxDecoration(
                 color: selectedColor ?? context.gray200,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(context.yoRadiusMd),
                 border: Border.all(color: context.gray300),
                 boxShadow: selectedColor != null
                     ? [
@@ -223,7 +223,7 @@ class YoColorPickerButton extends StatelessWidget {
                     )
                   : null,
             ),
-            const SizedBox(width: 12),
+            const YoSpace.width(12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -235,7 +235,7 @@ class YoColorPickerButton extends StatelessWidget {
                         color: context.gray500,
                       ),
                     ),
-                    const SizedBox(height: 2),
+                    const YoSpace.height(2),
                   ],
                   YoText(
                     selectedColor != null
@@ -543,7 +543,7 @@ class _YoColorPickerBottomSheetState extends State<_YoColorPickerBottomSheet> {
                       TextButton(
                         onPressed: () =>
                             Navigator.of(context).pop(_selectedColor),
-                        child: const Text('Select'),
+                        child: YoText.bodyMedium('Select'),
                       ),
                     IconButton(
                       onPressed: () => Navigator.of(context).pop(),
@@ -602,7 +602,7 @@ class _YoColorPickerDialogState extends State<_YoColorPickerDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(context.yoRadiusXl)),
       child: Container(
         width: MediaQuery.of(context).size.width * 0.9,
         height: MediaQuery.of(context).size.height * 0.7,
@@ -624,7 +624,7 @@ class _YoColorPickerDialogState extends State<_YoColorPickerDialog> {
                 ),
               ],
             ),
-            const SizedBox(height: 8),
+            const YoSpace.height(8),
             // Picker
             Expanded(
               child: YoColorPicker(
@@ -638,21 +638,21 @@ class _YoColorPickerDialogState extends State<_YoColorPickerDialog> {
                 crossAxisCount: 5,
               ),
             ),
-            const SizedBox(height: 16),
+            const YoSpace.height(16),
             // Actions
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  child: const Text('Cancel'),
+                  child: YoText.bodyMedium('Cancel'),
                 ),
-                const SizedBox(width: 8),
+                const YoSpace.width(8),
                 ElevatedButton(
                   onPressed: _selectedColor != null
                       ? () => Navigator.of(context).pop(_selectedColor)
                       : null,
-                  child: const Text('Select'),
+                  child: YoText.bodyMedium('Select'),
                 ),
               ],
             ),
@@ -685,7 +685,7 @@ class _YoColorPickerState extends State<YoColorPicker> {
       height: widget.height,
       decoration: BoxDecoration(
         color: widget.backgroundColor ?? context.backgroundColor,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(context.yoRadiusLg),
         border: Border.all(color: context.gray200),
       ),
       child: SingleChildScrollView(
@@ -716,7 +716,7 @@ class _YoColorPickerState extends State<YoColorPicker> {
                         height: 56,
                         decoration: BoxDecoration(
                           color: _currentColor,
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(context.yoRadiusLg),
                           border: Border.all(color: context.gray300),
                           boxShadow: [
                             BoxShadow(
@@ -727,7 +727,7 @@ class _YoColorPickerState extends State<YoColorPicker> {
                           ],
                         ),
                       ),
-                      const SizedBox(width: 12),
+                      const YoSpace.width(12),
                     ],
                     if (widget.showHexInput)
                       Expanded(
@@ -741,7 +741,7 @@ class _YoColorPickerState extends State<YoColorPicker> {
                               horizontal: 12, vertical: 12),
                           prefixIcon: Padding(
                             padding: const EdgeInsets.only(left: 12),
-                            child: Text(
+                            child: YoText(
                               '#',
                               style: TextStyle(
                                 fontSize: 16,
@@ -859,7 +859,7 @@ class _YoColorPickerState extends State<YoColorPicker> {
                           context.yoLabelSmall.copyWith(color: context.gray500),
                     ),
                   ),
-                  SizedBox(
+                  YoBox(
                     height: 36,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
@@ -872,7 +872,7 @@ class _YoColorPickerState extends State<YoColorPicker> {
                           padding: const EdgeInsets.only(right: 8),
                           child: FilterChip(
                             selected: isSelected,
-                            label: Text(palette.label),
+                            label: YoText.bodyMedium(palette.label),
                             avatar: Icon(palette.icon, size: 16),
                             onSelected: (selected) {
                               if (selected) {
@@ -895,7 +895,7 @@ class _YoColorPickerState extends State<YoColorPicker> {
                       },
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  const YoSpace.height(8),
                 ],
               ),
 
@@ -923,11 +923,11 @@ class _YoColorPickerState extends State<YoColorPicker> {
                           _updateHSVFromColor(colorData.color);
                           _setColor(colorData.color);
                         },
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(context.yoRadiusMd),
                         child: Container(
                           decoration: BoxDecoration(
                             color: colorData.color,
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(context.yoRadiusMd),
                             border: Border.all(
                               color: isSelected
                                   ? context.textColor
@@ -1008,12 +1008,12 @@ class _YoColorPickerState extends State<YoColorPicker> {
               ),
             ],
           ),
-          const SizedBox(height: 4),
+          const YoSpace.height(4),
           Container(
             height: 24,
             decoration: BoxDecoration(
               gradient: gradient,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(context.yoRadiusLg),
               border: Border.all(color: context.gray200),
             ),
             child: SliderTheme(

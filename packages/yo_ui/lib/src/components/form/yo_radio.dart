@@ -40,7 +40,7 @@ class YoRadio<T> extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             radio,
-            const SizedBox(width: 8),
+            const YoSpace.width(8),
             YoText.bodyMedium(
               label!,
               color: enabled ? context.textColor : context.gray400,

@@ -219,7 +219,8 @@ class _YoMonthRangePickerDialogState extends State<_YoMonthRangePickerDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(context.yoRadiusXl)),
       backgroundColor: context.backgroundColor,
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 320),
@@ -232,8 +233,8 @@ class _YoMonthRangePickerDialogState extends State<_YoMonthRangePickerDialog> {
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: context.primaryColor,
-                borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(16)),
+                borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(context.yoRadiusXl)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -246,7 +247,7 @@ class _YoMonthRangePickerDialogState extends State<_YoMonthRangePickerDialog> {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  const YoSpace.height(4),
                   YoText(
                     '${_monthNames[_selectedMonth - 1]} $_selectedYear',
                     style: TextStyle(
@@ -288,7 +289,7 @@ class _YoMonthRangePickerDialogState extends State<_YoMonthRangePickerDialog> {
                           horizontal: 16, vertical: 8),
                       decoration: BoxDecoration(
                         color: context.backgroundColor,
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(context.yoRadiusMd),
                       ),
                       child: YoText(
                         _selectedYear.toString(),
@@ -330,7 +331,7 @@ class _YoMonthRangePickerDialogState extends State<_YoMonthRangePickerDialog> {
                   return Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(context.yoRadiusMd),
                       onTap: isEnabled
                           ? () => setState(() => _selectedMonth = month)
                           : null,
@@ -339,7 +340,8 @@ class _YoMonthRangePickerDialogState extends State<_YoMonthRangePickerDialog> {
                           color: isSelected
                               ? context.primaryColor
                               : Colors.transparent,
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius:
+                              BorderRadius.circular(context.yoRadiusMd),
                           border: isSelected
                               ? null
                               : Border.all(
@@ -376,12 +378,12 @@ class _YoMonthRangePickerDialogState extends State<_YoMonthRangePickerDialog> {
                 children: [
                   TextButton(
                     onPressed: () => Navigator.of(context).pop(),
-                    child: Text(
+                    child: YoText(
                       widget.cancelText,
                       style: TextStyle(color: context.gray600),
                     ),
                   ),
-                  const SizedBox(width: 8),
+                  const YoSpace.width(8),
                   ElevatedButton(
                     onPressed: () {
                       final range =
@@ -392,10 +394,10 @@ class _YoMonthRangePickerDialogState extends State<_YoMonthRangePickerDialog> {
                       backgroundColor: context.primaryColor,
                       foregroundColor: context.onPrimaryColor,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(context.yoRadiusMd),
                       ),
                     ),
-                    child: Text(widget.confirmText),
+                    child: YoText(widget.confirmText),
                   ),
                 ],
               ),

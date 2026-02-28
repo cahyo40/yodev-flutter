@@ -43,7 +43,7 @@ class _YoChipInputState extends State<YoChipInput> {
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
             border: Border.all(color: context.gray300),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(context.yoRadiusLg),
           ),
           child: Wrap(
             spacing: 8,
@@ -51,8 +51,8 @@ class _YoChipInputState extends State<YoChipInput> {
             children: [
               ..._chips.asMap().entries.map((entry) {
                 return Chip(
-                  label: Text(entry.value),
-                  labelStyle: TextStyle(
+                  label: YoText.bodyMedium(
+                    entry.value,
                     color: widget.chipTextColor ?? Colors.white,
                   ),
                   backgroundColor: widget.chipColor ?? context.primaryColor,
@@ -66,7 +66,7 @@ class _YoChipInputState extends State<YoChipInput> {
                 );
               }),
               if (widget.maxChips == null || _chips.length < widget.maxChips!)
-                SizedBox(
+                YoBox(
                   width: 150,
                   child: TextField(
                     controller: _controller,
@@ -85,12 +85,12 @@ class _YoChipInputState extends State<YoChipInput> {
           ),
         ),
         if (_filteredSuggestions.isNotEmpty) ...[
-          const SizedBox(height: 8),
+          const YoSpace.height(8),
           Container(
             constraints: const BoxConstraints(maxHeight: 150),
             decoration: BoxDecoration(
               border: Border.all(color: context.gray300),
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(context.yoRadiusMd),
             ),
             child: ListView.builder(
               shrinkWrap: true,
@@ -98,7 +98,7 @@ class _YoChipInputState extends State<YoChipInput> {
               itemBuilder: (context, index) {
                 return ListTile(
                   dense: true,
-                  title: Text(_filteredSuggestions[index]),
+                  title: YoText.bodyMedium(_filteredSuggestions[index]),
                   onTap: () {
                     _addChip(_filteredSuggestions[index]);
                     _focusNode.requestFocus();

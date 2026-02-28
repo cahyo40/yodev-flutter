@@ -49,10 +49,10 @@ class YoChip extends StatelessWidget {
     this.onDeleted,
     this.selected = false,
     this.borderRadius,
-  }) : backgroundColor = null,
-       textColor = null,
-       borderColor = null,
-       _preset = _ChipPreset.primary;
+  })  : backgroundColor = null,
+        textColor = null,
+        borderColor = null,
+        _preset = _ChipPreset.primary;
 
   /// Success chip
   const YoChip.success({
@@ -66,10 +66,10 @@ class YoChip extends StatelessWidget {
     this.onDeleted,
     this.selected = false,
     this.borderRadius,
-  }) : backgroundColor = null,
-       textColor = null,
-       borderColor = null,
-       _preset = _ChipPreset.success;
+  })  : backgroundColor = null,
+        textColor = null,
+        borderColor = null,
+        _preset = _ChipPreset.success;
 
   /// Error chip
   const YoChip.error({
@@ -83,10 +83,10 @@ class YoChip extends StatelessWidget {
     this.onDeleted,
     this.selected = false,
     this.borderRadius,
-  }) : backgroundColor = null,
-       textColor = null,
-       borderColor = null,
-       _preset = _ChipPreset.error;
+  })  : backgroundColor = null,
+        textColor = null,
+        borderColor = null,
+        _preset = _ChipPreset.error;
 
   /// Warning chip
   const YoChip.warning({
@@ -100,10 +100,10 @@ class YoChip extends StatelessWidget {
     this.onDeleted,
     this.selected = false,
     this.borderRadius,
-  }) : backgroundColor = null,
-       textColor = null,
-       borderColor = null,
-       _preset = _ChipPreset.warning;
+  })  : backgroundColor = null,
+        textColor = null,
+        borderColor = null,
+        _preset = _ChipPreset.warning;
 
   /// Info chip
   const YoChip.info({
@@ -117,10 +117,10 @@ class YoChip extends StatelessWidget {
     this.onDeleted,
     this.selected = false,
     this.borderRadius,
-  }) : backgroundColor = null,
-       textColor = null,
-       borderColor = null,
-       _preset = _ChipPreset.info;
+  })  : backgroundColor = null,
+        textColor = null,
+        borderColor = null,
+        _preset = _ChipPreset.info;
 
   @override
   Widget build(BuildContext context) {
@@ -131,11 +131,11 @@ class YoChip extends StatelessWidget {
     Widget content = Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (leading != null) ...[leading!, const SizedBox(width: 4)],
-        Text(label, style: _getTextStyle(context).copyWith(color: colors.text)),
-        if (trailing != null) ...[const SizedBox(width: 4), trailing!],
+        if (leading != null) ...[leading!, const YoSpace.width(4)],
+        _buildLabel(colors.text),
+        if (trailing != null) ...[const YoSpace.width(4), trailing!],
         if (onDeleted != null) ...[
-          const SizedBox(width: 4),
+          const YoSpace.width(4),
           GestureDetector(
             onTap: onDeleted,
             child: Icon(Icons.close, size: _getIconSize(), color: colors.text),
@@ -284,14 +284,14 @@ class YoChip extends StatelessWidget {
     }
   }
 
-  TextStyle _getTextStyle(BuildContext context) {
+  Widget _buildLabel(Color color) {
     switch (size) {
       case YoChipSize.small:
-        return context.yoLabelSmall;
+        return YoText.labelSmall(label, color: color);
       case YoChipSize.medium:
-        return context.yoLabelMedium;
+        return YoText.labelMedium(label, color: color);
       case YoChipSize.large:
-        return context.yoLabelLarge;
+        return YoText.labelLarge(label, color: color);
     }
   }
 }

@@ -43,7 +43,7 @@ class _YoCarouselState extends State<YoCarousel> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
+        YoBox(
           height: widget.height,
           child: PageView.builder(
             controller: _pageController,
@@ -56,7 +56,7 @@ class _YoCarouselState extends State<YoCarousel> {
                     widget.padding ?? const EdgeInsets.symmetric(horizontal: 8),
                 child: ClipRRect(
                   borderRadius:
-                      widget.borderRadius ?? BorderRadius.circular(12),
+                      widget.borderRadius ?? BorderRadius.circular(context.yoRadiusLg),
                   child: widget.items[itemIndex],
                 ),
               );
@@ -64,7 +64,7 @@ class _YoCarouselState extends State<YoCarousel> {
           ),
         ),
         if (widget.showIndicators) ...[
-          const SizedBox(height: 12),
+          const YoSpace.height(12),
           _buildIndicators(context),
         ],
       ],

@@ -142,7 +142,7 @@ class YoProductCard extends StatelessWidget {
     return Card(
       clipBehavior: Clip.antiAlias,
       elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(context.yoRadiusLg)),
       child: InkWell(
         onTap: onTap,
         child: Column(
@@ -170,44 +170,38 @@ class YoProductCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  YoText.bodyMedium(
                     title,
-                    style: context.yoBodyMedium.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+                    fontWeight: FontWeight.w600,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   if (subtitle != null) ...[
-                    const SizedBox(height: 2),
-                    Text(
+                    const YoSpace.height(2),
+                    YoText.bodySmall(
                       subtitle!,
-                      style: context.yoBodySmall.copyWith(
-                        color: context.gray500,
-                      ),
+                      color: context.gray500,
                     ),
                   ],
-                  const SizedBox(height: 8),
+                  const YoSpace.height(8),
                   _buildPriceRow(context),
                   if (rating != null) ...[
-                    const SizedBox(height: 6),
+                    const YoSpace.height(6),
                     _buildRating(context),
                   ],
                   if (showStock && stock != null) ...[
-                    const SizedBox(height: 6),
+                    const YoSpace.height(6),
                     _buildStockIndicator(context),
                   ],
                   if (onAddToCart != null) ...[
-                    const SizedBox(height: 8),
-                    SizedBox(
-                      width: double.infinity,
+                    const YoSpace.height(8),
+                    YoBox.expandWidth(
                       child: YoButton.primary(
                         text: stock != null && stock! <= 0
                             ? 'Out of Stock'
                             : 'Add to Cart',
-                        onPressed: stock != null && stock! <= 0
-                            ? null
-                            : onAddToCart,
+                        onPressed:
+                            stock != null && stock! <= 0 ? null : onAddToCart,
                         size: YoButtonSize.small,
                       ),
                     ),
@@ -250,14 +244,12 @@ class YoProductCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         decoration: BoxDecoration(
           color: badgeColor ?? context.errorColor,
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(context.yoRadiusSm),
         ),
-        child: Text(
+        child: YoText.bodySmall(
           badge!,
-          style: context.yoBodySmall.copyWith(
-            color: Colors.white,
-            fontWeight: FontWeight.w600,
-          ),
+          color: Colors.white,
+          fontWeight: FontWeight.w600,
         ),
       ),
     );
@@ -308,8 +300,8 @@ class YoProductCard extends StatelessWidget {
                 child: Row(
                   children: [
                     Icon(Icons.edit, size: 18, color: context.gray600),
-                    const SizedBox(width: 8),
-                    const Text('Edit'),
+                    const YoSpace.width(8),
+                    YoText.bodyMedium('Edit'),
                   ],
                 ),
               ),
@@ -319,8 +311,8 @@ class YoProductCard extends StatelessWidget {
                 child: Row(
                   children: [
                     Icon(Icons.delete, size: 18, color: context.errorColor),
-                    const SizedBox(width: 8),
-                    Text('Delete', style: TextStyle(color: context.errorColor)),
+                    const YoSpace.width(8),
+                    YoText.bodyMedium('Delete', color: context.errorColor),
                   ],
                 ),
               ),
@@ -339,14 +331,12 @@ class YoProductCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
               color: context.errorColor,
-              borderRadius: BorderRadius.circular(4),
+              borderRadius: BorderRadius.circular(context.yoRadiusSm),
             ),
-            child: Text(
+            child: YoText.bodySmall(
               'OUT OF STOCK',
-              style: context.yoBodySmall.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),
@@ -362,35 +352,31 @@ class YoProductCard extends StatelessWidget {
 
     return Row(
       children: [
-        Text(
+        YoText.bodyLarge(
           '$currencySymbol${price.toStringAsFixed(2)}',
-          style: context.yoBodyLarge.copyWith(
-            fontWeight: FontWeight.bold,
-            color: context.primaryColor,
-          ),
+          fontWeight: FontWeight.bold,
+          color: context.primaryColor,
         ),
         if (hasDiscount) ...[
-          const SizedBox(width: 6),
-          Text(
+          const YoSpace.width(6),
+          YoText(
             '$currencySymbol${originalPrice!.toStringAsFixed(2)}',
             style: context.yoBodySmall.copyWith(
               color: context.gray400,
               decoration: TextDecoration.lineThrough,
             ),
           ),
-          const SizedBox(width: 4),
+          const YoSpace.width(4),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
             decoration: BoxDecoration(
               color: context.errorColor.withAlpha(26),
-              borderRadius: BorderRadius.circular(4),
+              borderRadius: BorderRadius.circular(context.yoRadiusSm),
             ),
-            child: Text(
+            child: YoText.bodySmall(
               '-$discountPercent%',
-              style: context.yoBodySmall.copyWith(
-                color: context.errorColor,
-                fontWeight: FontWeight.w600,
-              ),
+              color: context.errorColor,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ],
@@ -402,16 +388,16 @@ class YoProductCard extends StatelessWidget {
     return Row(
       children: [
         const Icon(Icons.star, size: 14, color: Colors.amber),
-        const SizedBox(width: 4),
-        Text(
+        const YoSpace.width(4),
+        YoText.bodySmall(
           rating!.toStringAsFixed(1),
-          style: context.yoBodySmall.copyWith(fontWeight: FontWeight.w600),
+          fontWeight: FontWeight.w600,
         ),
         if (reviewCount != null) ...[
-          const SizedBox(width: 4),
-          Text(
+          const YoSpace.width(4),
+          YoText.bodySmall(
             '($reviewCount)',
-            style: context.yoBodySmall.copyWith(color: context.gray500),
+            color: context.gray500,
           ),
         ],
       ],
@@ -422,8 +408,8 @@ class YoProductCard extends StatelessWidget {
     final stockColor = stock! <= 0
         ? context.errorColor
         : stock! <= 10
-        ? context.warningColor
-        : context.successColor;
+            ? context.warningColor
+            : context.successColor;
 
     final stockText = stock! <= 0 ? 'Out of stock' : '$stock in stock';
 
@@ -434,13 +420,11 @@ class YoProductCard extends StatelessWidget {
           height: 8,
           decoration: BoxDecoration(color: stockColor, shape: BoxShape.circle),
         ),
-        const SizedBox(width: 6),
-        Text(
+        const YoSpace.width(6),
+        YoText.bodySmall(
           stockText,
-          style: context.yoBodySmall.copyWith(
-            color: stockColor,
-            fontWeight: FontWeight.w500,
-          ),
+          color: stockColor,
+          fontWeight: FontWeight.w500,
         ),
       ],
     );
@@ -478,15 +462,15 @@ class _YoProductCardList extends YoProductCard {
     return Card(
       clipBehavior: Clip.antiAlias,
       elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(context.yoRadiusLg)),
       child: InkWell(
         onTap: onTap,
-        child: SizedBox(
+        child: YoBox(
           height: 140,
           child: Row(
             children: [
               // Image section
-              SizedBox(
+              YoBox(
                 width: 140,
                 child: Stack(
                   fit: StackFit.expand,
@@ -509,27 +493,23 @@ class _YoProductCardList extends YoProductCard {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            YoText.bodyMedium(
                               title,
-                              style: context.yoBodyMedium.copyWith(
-                                fontWeight: FontWeight.w600,
-                              ),
+                              fontWeight: FontWeight.w600,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
                             if (subtitle != null) ...[
-                              const SizedBox(height: 2),
-                              Text(
+                              const YoSpace.height(2),
+                              YoText.bodySmall(
                                 subtitle!,
-                                style: context.yoBodySmall.copyWith(
-                                  color: context.gray500,
-                                ),
+                                color: context.gray500,
                               ),
                             ],
-                            const SizedBox(height: 4),
+                            const YoSpace.height(4),
                             if (rating != null) _buildRating(context),
                             if (showStock && stock != null) ...[
-                              const SizedBox(height: 4),
+                              const YoSpace.height(4),
                               _buildStockIndicator(context),
                             ],
                           ],
@@ -634,13 +614,13 @@ class _YoProductCardPOS extends YoProductCard {
       clipBehavior: Clip.antiAlias,
       elevation: 1,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(context.yoRadiusMd),
         side: BorderSide(
           color: isOutOfStock
               ? context.errorColor.withAlpha(128)
               : isLowStock
-              ? context.warningColor.withAlpha(128)
-              : context.gray200,
+                  ? context.warningColor.withAlpha(128)
+                  : context.gray200,
         ),
       ),
       child: InkWell(
@@ -663,7 +643,7 @@ class _YoProductCardPOS extends YoProductCard {
                         right: 4,
                         child: Material(
                           color: Colors.white.withAlpha(204),
-                          borderRadius: BorderRadius.circular(4),
+                          borderRadius: BorderRadius.circular(context.yoRadiusSm),
                           child: PopupMenuButton<String>(
                             icon: Icon(
                               Icons.more_horiz,
@@ -678,24 +658,22 @@ class _YoProductCardPOS extends YoProductCard {
                             },
                             itemBuilder: (_) => [
                               if (onEdit != null)
-                                const PopupMenuItem(
+                                PopupMenuItem(
                                   value: 'edit',
                                   height: 36,
-                                  child: Text(
+                                  child: YoText.bodyMedium(
                                     'Edit',
-                                    style: TextStyle(fontSize: 13),
+                                    fontSize: 13,
                                   ),
                                 ),
                               if (onDelete != null)
                                 PopupMenuItem(
                                   value: 'delete',
                                   height: 36,
-                                  child: Text(
+                                  child: YoText.bodyMedium(
                                     'Delete',
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      color: context.errorColor,
-                                    ),
+                                    fontSize: 13,
+                                    color: context.errorColor,
                                   ),
                                 ),
                             ],
@@ -712,24 +690,20 @@ class _YoProductCardPOS extends YoProductCard {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    YoText.bodySmall(
                       title,
-                      style: context.yoBodySmall.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                      fontWeight: FontWeight.w600,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 4),
-                    Text(
+                    const YoSpace.height(4),
+                    YoText.bodyMedium(
                       '$currencySymbol${price.toStringAsFixed(2)}',
-                      style: context.yoBodyMedium.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: context.primaryColor,
-                      ),
+                      fontWeight: FontWeight.bold,
+                      color: context.primaryColor,
                     ),
                     if (stock != null) ...[
-                      const SizedBox(height: 4),
+                      const YoSpace.height(4),
                       Row(
                         children: [
                           Container(
@@ -739,23 +713,21 @@ class _YoProductCardPOS extends YoProductCard {
                               color: isOutOfStock
                                   ? context.errorColor
                                   : isLowStock
-                                  ? context.warningColor
-                                  : context.successColor,
+                                      ? context.warningColor
+                                      : context.successColor,
                               shape: BoxShape.circle,
                             ),
                           ),
-                          const SizedBox(width: 4),
+                          const YoSpace.width(4),
                           Expanded(
-                            child: Text(
+                            child: YoText.bodySmall(
                               isOutOfStock ? 'Out' : '$stock pcs',
-                              style: context.yoBodySmall.copyWith(
-                                color: isOutOfStock
-                                    ? context.errorColor
-                                    : isLowStock
-                                    ? context.warningColor
-                                    : context.gray500,
-                                fontSize: 11,
-                              ),
+                              color: isOutOfStock
+                                  ? context.errorColor
+                                  : isLowStock
+                                      ? context.warningColor
+                                      : context.gray500,
+                              fontSize: 11,
                             ),
                           ),
                         ],

@@ -72,7 +72,7 @@ class _YoInlineDatePickerState extends State<YoInlineDatePicker> {
       height: widget.itemExtent * 3,
       decoration: BoxDecoration(
         color: context.backgroundColor,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(context.yoRadiusLg),
         border: Border.all(color: context.gray200),
       ),
       child: ListWheelScrollView(
@@ -103,7 +103,7 @@ class _YoInlineDatePickerState extends State<YoInlineDatePicker> {
                   ),
                 ),
                 if (isSelected) ...[
-                  const SizedBox(height: 4),
+                  const YoSpace.height(4),
                   Container(
                     width: 4,
                     height: 4,

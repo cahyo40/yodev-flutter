@@ -9,18 +9,24 @@ class YoSpacing {
   static const double xl = 32;
   static const double xxl = 48;
 
+  // Border radius values
+  static const double radiusSm = 4;
+  static const double radiusMd = 8;
+  static const double radiusLg = 12;
+  static const double radiusXl = 16;
+
   // Border radius
   static const BorderRadius borderRadiusSm = BorderRadius.all(
-    Radius.circular(4),
+    Radius.circular(radiusSm),
   );
   static const BorderRadius borderRadiusMd = BorderRadius.all(
-    Radius.circular(8),
+    Radius.circular(radiusMd),
   );
   static const BorderRadius borderRadiusLg = BorderRadius.all(
-    Radius.circular(12),
+    Radius.circular(radiusLg),
   );
   static const BorderRadius borderRadiusXl = BorderRadius.all(
-    Radius.circular(16),
+    Radius.circular(radiusXl),
   );
 
   // Container max widths

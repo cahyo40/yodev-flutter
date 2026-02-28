@@ -44,7 +44,7 @@ class YoBreadcrumb extends StatelessWidget {
 
             return InkWell(
               onTap: item.onTap,
-              borderRadius: BorderRadius.circular(4),
+              borderRadius: BorderRadius.circular(context.yoRadiusSm),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
                 child: Row(
@@ -52,9 +52,9 @@ class YoBreadcrumb extends StatelessWidget {
                   children: [
                     if (item.icon != null) ...[
                       Icon(item.icon, size: 16, color: context.gray600),
-                      const SizedBox(width: 4),
+                      const YoSpace.width(4),
                     ],
-                    Text(
+                    YoText(
                       item.label,
                       style: isLast
                           ? (activeTextStyle ??

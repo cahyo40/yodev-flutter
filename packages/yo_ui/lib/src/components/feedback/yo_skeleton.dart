@@ -17,7 +17,7 @@ class YoSkeleton extends StatefulWidget {
     super.key,
     this.width,
     this.height = 20,
-    this.borderRadius = const BorderRadius.all(Radius.circular(4)),
+    this.borderRadius = YoSpacing.borderRadiusSm,
     this.type = YoSkeletonType.shimmer,
     this.baseColor,
     this.highlightColor,
@@ -32,9 +32,9 @@ class YoSkeleton extends StatefulWidget {
     this.baseColor,
     this.highlightColor,
     this.enabled = true,
-  }) : width = size,
-       height = size,
-       borderRadius = const BorderRadius.all(Radius.circular(100));
+  })  : width = size,
+        height = size,
+        borderRadius = const BorderRadius.all(Radius.circular(100));
 
   /// Line skeleton (text line)
   const YoSkeleton.line({
@@ -45,7 +45,7 @@ class YoSkeleton extends StatefulWidget {
     this.baseColor,
     this.highlightColor,
     this.enabled = true,
-  }) : borderRadius = const BorderRadius.all(Radius.circular(4));
+  }) : borderRadius = YoSpacing.borderRadiusSm;
 
   /// Rounded skeleton (button, card)
   const YoSkeleton.rounded({
@@ -56,7 +56,7 @@ class YoSkeleton extends StatefulWidget {
     this.baseColor,
     this.highlightColor,
     this.enabled = true,
-  }) : borderRadius = const BorderRadius.all(Radius.circular(8));
+  }) : borderRadius = YoSpacing.borderRadiusMd;
 
   /// Square skeleton (thumbnail)
   const YoSkeleton.square({
@@ -66,9 +66,9 @@ class YoSkeleton extends StatefulWidget {
     this.baseColor,
     this.highlightColor,
     this.enabled = true,
-  }) : width = size,
-       height = size,
-       borderRadius = BorderRadius.zero;
+  })  : width = size,
+        height = size,
+        borderRadius = BorderRadius.zero;
 
   /// Paragraph skeleton (multiple lines)
   static Widget paragraph({
@@ -84,9 +84,8 @@ class YoSkeleton extends StatefulWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: List.generate(lines, (index) {
         // Last line is shorter
-        final lineWidth = index == lines - 1
-            ? (width ?? double.infinity) * 0.7
-            : width;
+        final lineWidth =
+            index == lines - 1 ? (width ?? double.infinity) * 0.7 : width;
         return Padding(
           padding: EdgeInsets.only(bottom: index < lines - 1 ? spacing : 0),
           child: YoSkeleton.line(
@@ -146,7 +145,7 @@ class _YoSkeletonState extends State<YoSkeleton>
   @override
   Widget build(BuildContext context) {
     if (!widget.enabled) {
-      return const SizedBox.shrink();
+      return const YoBox();
     }
 
     final baseColor = widget.baseColor ?? context.gray200;

@@ -37,7 +37,7 @@ class YoSwitch extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             switchWidget,
-            const SizedBox(width: 8),
+            const YoSpace.width(8),
             YoText.bodyMedium(
               label!,
               color: enabled ? context.textColor : context.gray400,

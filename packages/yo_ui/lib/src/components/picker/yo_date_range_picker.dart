@@ -127,7 +127,7 @@ class YoDateRangePicker extends StatelessWidget {
               color: enabled ? context.primaryColor : context.gray400,
               size: 20,
             ),
-            const SizedBox(width: 12),
+            const YoSpace.width(12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -139,7 +139,7 @@ class YoDateRangePicker extends StatelessWidget {
                         color: context.gray500,
                       ),
                     ),
-                    const SizedBox(height: 2),
+                    const YoSpace.height(2),
                   ],
                   YoText(
                     _getDisplayText(),
@@ -174,7 +174,7 @@ class YoDateRangePicker extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: 8),
+          const YoSpace.height(8),
         ],
         Row(
           children: [
@@ -230,7 +230,7 @@ class YoDateRangePicker extends StatelessWidget {
               color: enabled ? context.primaryColor : context.gray400,
               size: 18,
             ),
-            const SizedBox(width: 8),
+            const YoSpace.width(8),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -242,7 +242,7 @@ class YoDateRangePicker extends StatelessWidget {
                       fontSize: 10,
                     ),
                   ),
-                  const SizedBox(height: 2),
+                  const YoSpace.height(2),
                   YoText(
                     date != null
                         ? YoDateFormatter.formatDate(date, format: 'dd MMM yy')

@@ -30,14 +30,14 @@ class YoSkeletonCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (!enabled) {
-      return const SizedBox.shrink();
+      return const YoBox();
     }
 
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(context.yoRadiusLg),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withAlpha(26),
@@ -59,7 +59,7 @@ class YoSkeletonCard extends StatelessWidget {
               highlightColor: highlightColor,
               enabled: enabled,
             ),
-            const SizedBox(height: 16),
+            const YoSpace.height(16),
           ],
 
           // Title
@@ -72,7 +72,7 @@ class YoSkeletonCard extends StatelessWidget {
               highlightColor: highlightColor,
               enabled: enabled,
             ),
-            const SizedBox(height: 8),
+            const YoSpace.height(8),
           ],
 
           // Description lines
@@ -103,7 +103,7 @@ class YoSkeletonCard extends StatelessWidget {
 
   List<Widget> _buildActions(BuildContext context) {
     return [
-      const SizedBox(height: 16),
+      const YoSpace.height(16),
       Row(
         children: [
           Expanded(
@@ -115,7 +115,7 @@ class YoSkeletonCard extends StatelessWidget {
               enabled: enabled,
             ),
           ),
-          const SizedBox(width: 12),
+          const YoSpace.width(12),
           YoSkeleton.rounded(
             width: 36,
             height: 36,

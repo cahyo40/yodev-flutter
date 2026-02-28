@@ -45,7 +45,7 @@ class YoLoading extends StatelessWidget {
 
     switch (type) {
       case YoLoadingType.spinner:
-        return SizedBox(
+        return YoBox(
           width: size,
           height: size,
           child: CircularProgressIndicator(
@@ -109,7 +109,7 @@ class _DotsLoadingState extends State<_DotsLoading>
   Widget build(BuildContext context) {
     final dotSize = widget.size / 4;
 
-    return SizedBox(
+    return YoBox(
       width: widget.size * 1.5,
       height: widget.size,
       child: Row(
@@ -183,7 +183,7 @@ class _PulseLoadingState extends State<_PulseLoading>
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return YoBox(
       width: widget.size,
       height: widget.size,
       child: AnimatedBuilder(
@@ -258,7 +258,7 @@ class _FadeLoadingState extends State<_FadeLoading>
     const dotCount = 8;
     final dotSize = widget.size / 5;
 
-    return SizedBox(
+    return YoBox(
       width: widget.size,
       height: widget.size,
       child: AnimatedBuilder(

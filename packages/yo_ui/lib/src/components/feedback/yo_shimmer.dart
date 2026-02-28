@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yo_ui/yo_ui.dart';
 
 /// Shimmer direction enum
 enum ShimmerDirection {
@@ -46,7 +47,7 @@ class YoShimmer extends StatefulWidget {
         width: width,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: borderRadius ?? BorderRadius.circular(12),
+          borderRadius: borderRadius ?? YoSpacing.borderRadiusLg,
         ),
       ),
     );
@@ -68,7 +69,7 @@ class YoShimmer extends StatefulWidget {
         width: width,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: borderRadius ?? BorderRadius.circular(12),
+          borderRadius: borderRadius ?? YoSpacing.borderRadiusLg,
         ),
       ),
     );
@@ -92,7 +93,7 @@ class YoShimmer extends StatefulWidget {
               shape: BoxShape.circle,
             ),
           ),
-          const SizedBox(width: 12),
+          const YoSpace.width(12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,16 +103,16 @@ class YoShimmer extends StatefulWidget {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: YoSpacing.borderRadiusSm,
                   ),
                 ),
-                const SizedBox(height: 8),
+                const YoSpace.height(8),
                 Container(
                   height: 14,
                   width: 150,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: YoSpacing.borderRadiusSm,
                   ),
                 ),
               ],

@@ -67,9 +67,8 @@ class YoChatBubble extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisAlignment: isSent
-            ? MainAxisAlignment.end
-            : MainAxisAlignment.start,
+        mainAxisAlignment:
+            isSent ? MainAxisAlignment.end : MainAxisAlignment.start,
         children: [
           // Left avatar (received messages)
           if (!isSent && showAvatar && message.senderAvatar != null)
@@ -84,19 +83,16 @@ class YoChatBubble extends StatelessWidget {
           // Message content
           Flexible(
             child: Column(
-              crossAxisAlignment: isSent
-                  ? CrossAxisAlignment.end
-                  : CrossAxisAlignment.start,
+              crossAxisAlignment:
+                  isSent ? CrossAxisAlignment.end : CrossAxisAlignment.start,
               children: [
                 // Sender name (group chat)
                 if (!isSent && message.senderName != null)
                   Padding(
                     padding: const EdgeInsets.only(left: 8, bottom: 2),
-                    child: Text(
+                    child: YoText.bodySmall(
                       message.senderName!,
-                      style: context.yoBodySmall.copyWith(
-                        color: context.gray500,
-                      ),
+                      color: context.gray500,
                     ),
                   ),
 
@@ -114,8 +110,8 @@ class YoChatBubble extends StatelessWidget {
                           ? (sentColor ?? context.primaryColor)
                           : (receivedColor ?? context.gray100),
                       borderRadius: BorderRadius.only(
-                        topLeft: const Radius.circular(16),
-                        topRight: const Radius.circular(16),
+                        topLeft: Radius.circular(context.yoRadiusXl),
+                        topRight: Radius.circular(context.yoRadiusXl),
                         bottomLeft: Radius.circular(isSent ? 16 : 4),
                         bottomRight: Radius.circular(isSent ? 4 : 16),
                       ),
@@ -132,14 +128,12 @@ class YoChatBubble extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         if (showTimestamp)
-                          Text(
+                          YoText.bodySmall(
                             _formatTime(message.timestamp),
-                            style: context.yoBodySmall.copyWith(
-                              color: context.gray400,
-                            ),
+                            color: context.gray400,
                           ),
                         if (showStatus && isSent) ...[
-                          const SizedBox(width: 4),
+                          const YoSpace.width(4),
                           _buildStatusIcon(context),
                         ],
                       ],
@@ -164,15 +158,14 @@ class YoChatBubble extends StatelessWidget {
   }
 
   Widget _buildContent(BuildContext context) {
-    final textColor = message.isSentByMe
-        ? context.onPrimaryColor
-        : context.textColor;
+    final textColor =
+        message.isSentByMe ? context.onPrimaryColor : context.textColor;
 
     switch (message.type) {
       case YoMessageType.text:
-        return Text(
+        return YoText.bodyMedium(
           message.text,
-          style: context.yoBodyMedium.copyWith(color: textColor),
+          color: textColor,
         );
 
       case YoMessageType.image:
@@ -180,7 +173,7 @@ class YoChatBubble extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(context.yoRadiusMd),
               child: Image.network(
                 message.attachmentUrl!,
                 width: 200,
@@ -195,10 +188,10 @@ class YoChatBubble extends StatelessWidget {
               ),
             ),
             if (message.text.isNotEmpty) ...[
-              const SizedBox(height: 8),
-              Text(
+              const YoSpace.height(8),
+              YoText.bodyMedium(
                 message.text,
-                style: context.yoBodyMedium.copyWith(color: textColor),
+                color: textColor,
               ),
             ],
           ],
@@ -214,23 +207,21 @@ class YoChatBubble extends StatelessWidget {
                   ? context.onPrimaryColor
                   : context.primaryColor,
             ),
-            const SizedBox(width: 8),
+            const YoSpace.width(8),
             Flexible(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  YoText.bodyMedium(
                     message.attachmentName ?? 'File',
-                    style: context.yoBodyMedium.copyWith(color: textColor),
+                    color: textColor,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                   if (message.text.isNotEmpty)
-                    Text(
+                    YoText.bodySmall(
                       message.text,
-                      style: context.yoBodySmall.copyWith(
-                        color: textColor.withAlpha(178),
-                      ),
+                      color: textColor.withAlpha(178),
                     ),
                 ],
               ),
@@ -239,9 +230,9 @@ class YoChatBubble extends StatelessWidget {
         );
 
       default:
-        return Text(
+        return YoText.bodyMedium(
           message.text,
-          style: context.yoBodyMedium.copyWith(color: textColor),
+          color: textColor,
         );
     }
   }
@@ -254,12 +245,12 @@ class YoChatBubble extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(
             color: context.gray100,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(context.yoRadiusLg),
           ),
-          child: Text(
+          child: YoText.bodySmall(
             message.text,
-            style: context.yoBodySmall.copyWith(color: context.gray600),
-            textAlign: TextAlign.center,
+            color: context.gray600,
+            align: TextAlign.center,
           ),
         ),
       ),

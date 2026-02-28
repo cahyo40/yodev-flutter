@@ -100,9 +100,9 @@ class YoTabItem {
             children: [
               if (icon != null) ...[
                 Icon(icon, size: 18),
-                const SizedBox(width: 4),
+                const YoSpace.width(4),
               ],
-              Text(text),
+              YoText(text),
             ],
           ),
           if (badge != null) ...[
@@ -116,7 +116,7 @@ class YoTabItem {
                   shape: BoxShape.circle,
                 ),
                 constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
-                child: Text(
+                child: YoText(
                   badge!,
                   style: TextStyle(
                     color: context.onPrimaryColor,
@@ -124,7 +124,7 @@ class YoTabItem {
                     fontWeight: FontWeight.bold,
                     height: 1,
                   ),
-                  textAlign: TextAlign.center,
+                  align: TextAlign.center,
                 ),
               ),
             ),
@@ -151,7 +151,7 @@ class _TabBarIndicatorPainter extends BoxPainter {
   final Decoration decoration;
 
   _TabBarIndicatorPainter(this.decoration, VoidCallback? onChanged)
-    : super(onChanged);
+      : super(onChanged);
 
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {

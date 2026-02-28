@@ -157,7 +157,7 @@ class _YoTextFormFieldState extends State<YoTextFormField>
         if (widget.labelText != null && widget.showLabelAlways) ...[
           Row(
             children: [
-              Text(
+              YoText(
                 widget.labelText!,
                 style: widget.labelStyle ??
                     YoTextTheme.labelLarge(context).copyWith(
@@ -165,12 +165,12 @@ class _YoTextFormFieldState extends State<YoTextFormField>
                     ),
               ),
               if (widget.isRequired) ...[
-                const SizedBox(width: 4),
-                Text('*', style: TextStyle(color: errorBorderColor)),
+                const YoSpace.width(4),
+                YoText('*', color: errorBorderColor),
               ],
             ],
           ),
-          const SizedBox(height: 8),
+          const YoSpace.height(8),
         ],
         TextFormField(
           controller: _controller,
@@ -213,33 +213,29 @@ class _YoTextFormFieldState extends State<YoTextFormField>
         ),
         if (widget.showHelperText &&
             (widget.helperText != null || _errorText != null)) ...[
-          const SizedBox(height: 4),
+          const YoSpace.height(4),
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 200),
             child: _errorText != null
-                ? Text(
+                ? YoText.bodySmall(
                     _errorText!,
-                    style: YoTextTheme.bodySmall(context)
-                        .copyWith(color: errorBorderColor),
+                    color: errorBorderColor,
                   )
                 : widget.helperText != null
-                    ? Text(
+                    ? YoText.bodySmall(
                         widget.helperText!,
-                        style: YoTextTheme.bodySmall(context)
-                            .copyWith(color: context.gray500),
+                        color: context.gray500,
                       )
-                    : const SizedBox.shrink(),
+                    : const YoBox(),
           ),
         ],
         if (widget.showCharacterCounter && widget.maxLength != null) ...[
-          const SizedBox(height: 4),
-          Text(
+          const YoSpace.height(4),
+          YoText.bodySmall(
             '${_controller.text.length}/${widget.maxLength}',
-            style: YoTextTheme.bodySmall(context).copyWith(
-              color: _controller.text.length == widget.maxLength
-                  ? errorBorderColor
-                  : context.gray500,
-            ),
+            color: _controller.text.length == widget.maxLength
+                ? errorBorderColor
+                : context.gray500,
           ),
         ],
       ],

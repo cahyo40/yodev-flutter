@@ -163,7 +163,7 @@ class YoDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: context.backgroundColor,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(context.yoRadiusXl)),
       insetPadding: const EdgeInsets.symmetric(horizontal: 24),
       child: ConstrainedBox(
         constraints: BoxConstraints(maxWidth: maxWidth ?? 400),
@@ -191,31 +191,30 @@ class YoDialog extends StatelessWidget {
                 ),
 
               // Icon
-              if (icon != null) ...[icon!, const SizedBox(height: 16)],
+              if (icon != null) ...[icon!, const YoSpace.height(16)],
 
               // Title
-              Text(
+              YoText.titleLarge(
                 title,
-                style: context.yoTitleLarge,
-                textAlign: centerTitle ? TextAlign.center : TextAlign.start,
+                align: centerTitle ? TextAlign.center : TextAlign.start,
               ),
 
               // Message
               if (message != null) ...[
-                const SizedBox(height: 12),
-                Text(
+                const YoSpace.height(12),
+                YoText.bodyMedium(
                   message!,
-                  style: context.yoBodyMedium.copyWith(color: context.gray600),
-                  textAlign: centerTitle ? TextAlign.center : TextAlign.start,
+                  color: context.gray600,
+                  align: centerTitle ? TextAlign.center : TextAlign.start,
                 ),
               ],
 
               // Custom content
-              if (content != null) ...[const SizedBox(height: 16), content!],
+              if (content != null) ...[const YoSpace.height(16), content!],
 
               // Actions
               if (actions != null && actions!.isNotEmpty) ...[
-                const SizedBox(height: 24),
+                const YoSpace.height(24),
                 _buildActions(),
               ],
             ],
@@ -227,7 +226,7 @@ class YoDialog extends StatelessWidget {
 
   Widget _buildActions() {
     if (actions!.length == 1) {
-      return SizedBox(width: double.infinity, child: actions!.first);
+      return YoBox(width: double.infinity, child: actions!.first);
     }
 
     return Row(

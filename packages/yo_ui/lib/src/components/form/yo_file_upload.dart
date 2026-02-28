@@ -56,7 +56,7 @@ class _YoFileUploadState extends State<YoFileUpload> {
                 width: 2,
                 style: BorderStyle.solid,
               ),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(context.yoRadiusLg),
             ),
             child: Center(
               child: Column(
@@ -67,20 +67,16 @@ class _YoFileUploadState extends State<YoFileUpload> {
                     size: 48,
                     color: context.gray400,
                   ),
-                  const SizedBox(height: 12),
-                  Text(
+                  const YoSpace.height(12),
+                  YoText.bodyMedium(
                     widget.title ?? 'Click to upload files',
-                    style: context.yoBodyMedium.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+                    fontWeight: FontWeight.w600,
                   ),
                   if (widget.subtitle != null) ...[
-                    const SizedBox(height: 4),
-                    Text(
+                    const YoSpace.height(4),
+                    YoText.bodySmall(
                       widget.subtitle!,
-                      style: context.yoBodySmall.copyWith(
-                        color: context.gray500,
-                      ),
+                      color: context.gray500,
                     ),
                   ],
                 ],
@@ -89,7 +85,7 @@ class _YoFileUploadState extends State<YoFileUpload> {
           ),
         ),
         if (_selectedFiles.isNotEmpty) ...[
-          const SizedBox(height: 16),
+          const YoSpace.height(16),
           ..._selectedFiles.asMap().entries.map((entry) {
             final index = entry.key;
             final file = entry.value;

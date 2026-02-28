@@ -94,9 +94,8 @@ class YoDropDown<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final hasError = errorText != null && errorText!.isNotEmpty;
-    final effectiveBorderColor = hasError
-        ? context.errorColor
-        : borderColor ?? context.gray300;
+    final effectiveBorderColor =
+        hasError ? context.errorColor : borderColor ?? context.gray300;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,28 +105,23 @@ class YoDropDown<T> extends StatelessWidget {
         if (labelText != null) ...[
           Row(
             children: [
-              Text(
+              YoText.bodyMedium(
                 labelText!,
-                style: context.yoBodyMedium.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
+                fontWeight: FontWeight.w500,
               ),
               if (isRequired)
-                Text(
+                YoText.bodyMedium(
                   ' *',
-                  style: context.yoBodyMedium.copyWith(
-                    color: context.errorColor,
-                  ),
+                  color: context.errorColor,
                 ),
             ],
           ),
-          const SizedBox(height: 6),
+          const YoSpace.height(6),
         ],
 
         // Dropdown
         Container(
-          padding:
-              padding ??
+          padding: padding ??
               const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
           decoration: BoxDecoration(
             color: enabled
@@ -143,30 +137,26 @@ class YoDropDown<T> extends StatelessWidget {
             children: [
               if (prefixIcon != null) ...[
                 prefixIcon!,
-                const SizedBox(width: 8),
+                const YoSpace.width(8),
               ],
               Expanded(
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<T>(
                     value: value,
                     onChanged: enabled ? onChanged : null,
-                    items: items
-                        .map((item) => item._toMenuItem(context))
-                        .toList(),
+                    items:
+                        items.map((item) => item._toMenuItem(context)).toList(),
                     isExpanded: true,
                     isDense: isDense,
-                    icon:
-                        suffixIcon ??
+                    icon: suffixIcon ??
                         Icon(
                           Icons.arrow_drop_down,
                           color: enabled ? context.gray500 : context.gray300,
                         ),
                     hint: hintText != null
-                        ? Text(
+                        ? YoText.bodyMedium(
                             hintText!,
-                            style: context.yoBodyMedium.copyWith(
-                              color: context.gray400,
-                            ),
+                            color: context.gray400,
                           )
                         : null,
                     dropdownColor: context.backgroundColor,
@@ -182,12 +172,10 @@ class YoDropDown<T> extends StatelessWidget {
 
         // Helper/Error text
         if (errorText != null || helperText != null) ...[
-          const SizedBox(height: 4),
-          Text(
+          const YoSpace.height(4),
+          YoText.bodySmall(
             errorText ?? helperText!,
-            style: context.yoBodySmall.copyWith(
-              color: hasError ? context.errorColor : context.gray500,
-            ),
+            color: hasError ? context.errorColor : context.gray500,
           ),
         ],
       ],
@@ -222,22 +210,18 @@ class _YoDropDownFilled<T> extends YoDropDown<T> {
         if (labelText != null) ...[
           Row(
             children: [
-              Text(
+              YoText.bodyMedium(
                 labelText!,
-                style: context.yoBodyMedium.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
+                fontWeight: FontWeight.w500,
               ),
               if (isRequired)
-                Text(
+                YoText.bodyMedium(
                   ' *',
-                  style: context.yoBodyMedium.copyWith(
-                    color: context.errorColor,
-                  ),
+                  color: context.errorColor,
                 ),
             ],
           ),
-          const SizedBox(height: 6),
+          const YoSpace.height(6),
         ],
 
         // Dropdown with filled style
@@ -245,7 +229,7 @@ class _YoDropDownFilled<T> extends YoDropDown<T> {
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
           decoration: BoxDecoration(
             color: enabled ? context.gray100 : context.gray200,
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: YoSpacing.borderRadiusMd,
             border: hasError
                 ? Border.all(color: context.errorColor, width: 1.5)
                 : null,
@@ -254,27 +238,24 @@ class _YoDropDownFilled<T> extends YoDropDown<T> {
             children: [
               if (prefixIcon != null) ...[
                 prefixIcon!,
-                const SizedBox(width: 8),
+                const YoSpace.width(8),
               ],
               Expanded(
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<T>(
                     value: value,
                     onChanged: enabled ? onChanged : null,
-                    items: items
-                        .map((item) => item._toMenuItem(context))
-                        .toList(),
+                    items:
+                        items.map((item) => item._toMenuItem(context)).toList(),
                     isExpanded: true,
                     icon: Icon(
                       Icons.arrow_drop_down,
                       color: enabled ? context.gray500 : context.gray300,
                     ),
                     hint: hintText != null
-                        ? Text(
+                        ? YoText.bodyMedium(
                             hintText!,
-                            style: context.yoBodyMedium.copyWith(
-                              color: context.gray400,
-                            ),
+                            color: context.gray400,
                           )
                         : null,
                     dropdownColor: context.backgroundColor,
@@ -288,12 +269,11 @@ class _YoDropDownFilled<T> extends YoDropDown<T> {
           ),
         ),
 
-        // Error text
         if (errorText != null) ...[
-          const SizedBox(height: 4),
-          Text(
+          const YoSpace.height(4),
+          YoText.bodySmall(
             errorText!,
-            style: context.yoBodySmall.copyWith(color: context.errorColor),
+            color: context.errorColor,
           ),
         ],
       ],
@@ -325,9 +305,9 @@ class YoDropDownItem<T> {
         opacity: enabled ? 1.0 : 0.5,
         child: Row(
           children: [
-            if (leading != null) ...[leading!, const SizedBox(width: 8)],
-            Expanded(child: Text(label, style: context.yoBodyMedium)),
-            if (trailing != null) ...[const SizedBox(width: 8), trailing!],
+            if (leading != null) ...[leading!, const YoSpace.width(8)],
+            Expanded(child: YoText.bodyMedium(label)),
+            if (trailing != null) ...[const YoSpace.width(8), trailing!],
           ],
         ),
       ),

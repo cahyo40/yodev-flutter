@@ -50,7 +50,7 @@ class YoSkeletonListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (!enabled) {
-      return const SizedBox.shrink();
+      return const YoBox();
     }
 
     return Padding(
@@ -67,7 +67,7 @@ class YoSkeletonListTile extends StatelessWidget {
               highlightColor: highlightColor,
               enabled: enabled,
             ),
-            const SizedBox(width: 16),
+            const YoSpace.width(16),
           ],
 
           // Title and subtitle
@@ -84,7 +84,7 @@ class YoSkeletonListTile extends StatelessWidget {
                   enabled: enabled,
                 ),
                 if (hasSubtitle) ...[
-                  const SizedBox(height: 8),
+                  const YoSpace.height(8),
                   YoSkeleton.line(
                     width: _getSubtitleWidth(context),
                     height: 12,
@@ -100,7 +100,7 @@ class YoSkeletonListTile extends StatelessWidget {
 
           // Trailing widget
           if (hasTrailing) ...[
-            const SizedBox(width: 16),
+            const YoSpace.width(16),
             YoSkeleton.rounded(
               width: 60,
               height: 24,

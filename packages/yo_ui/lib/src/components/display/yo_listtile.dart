@@ -102,7 +102,7 @@ class YoListTile extends StatelessWidget {
       visualDensity: visualDensity,
       shape:
           shape ??
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(context.yoRadiusMd)),
       style: style,
       iconColor: iconColor,
       textColor: textColor,

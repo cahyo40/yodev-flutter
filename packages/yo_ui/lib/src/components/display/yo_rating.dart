@@ -63,18 +63,16 @@ class _YoRatingState extends State<YoRating> {
       children: [
         if (widget.showLabel && widget.labelText != null) ...[
           YoText.bodyMedium(widget.labelText!, color: context.gray600),
-          SizedBox(height: widget.spacing),
+          YoSpace.height(widget.spacing),
         ],
-
         Row(
           mainAxisSize: MainAxisSize.min,
           children: List.generate(widget.maxRating, (index) {
             return _buildRatingIcon(index + 1);
           }),
         ),
-
         if (widget.showLabel) ...[
-          SizedBox(height: widget.spacing),
+          YoSpace.height(widget.spacing),
           _buildRatingText(context),
         ],
       ],
@@ -86,16 +84,14 @@ class _YoRatingState extends State<YoRating> {
     final isActive = _hoverRating > 0
         ? position <= _hoverRating
         : position <= _currentRating;
-    final isHalf =
-        widget.allowHalfRating &&
+    final isHalf = widget.allowHalfRating &&
         ((_hoverRating > 0 ? _hoverRating : _currentRating) + 0.5) == position;
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: widget.spacing / 2),
       child: GestureDetector(
-        onTap: widget.readOnly
-            ? null
-            : () => _handleRating(position.toDouble()),
+        onTap:
+            widget.readOnly ? null : () => _handleRating(position.toDouble()),
         onTapDown: widget.readOnly
             ? null
             : (_) => _setHoverRating(position.toDouble()),
@@ -107,9 +103,8 @@ class _YoRatingState extends State<YoRating> {
               : (_) => _setHoverRating(position.toDouble()),
           onExit: widget.readOnly ? null : (_) => _clearHoverRating(),
           child: AnimatedContainer(
-            duration: widget.animate
-                ? Duration(milliseconds: 200)
-                : Duration.zero,
+            duration:
+                widget.animate ? Duration(milliseconds: 200) : Duration.zero,
             transform: Matrix4.diagonal3Values(
               _getScaleFactor(position),
               _getScaleFactor(position),
@@ -346,7 +341,7 @@ class YoRatingSummary extends StatelessWidget {
               rating.toStringAsFixed(1),
               fontWeight: FontWeight.bold,
             ),
-            SizedBox(width: context.yoSpacingSm),
+            YoSpace.width(context.yoSpacingSm),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -363,9 +358,8 @@ class YoRatingSummary extends StatelessWidget {
             ),
           ],
         ),
-
         if (showBreakdown && ratingsDistribution != null) ...[
-          SizedBox(height: context.yoSpacingMd),
+          YoSpace.height(context.yoSpacingMd),
           _buildRatingsBreakdown(context),
         ],
       ],
@@ -384,13 +378,13 @@ class YoRatingSummary extends StatelessWidget {
           child: Row(
             children: [
               YoText.bodySmall('$ratingLevel', color: context.gray600),
-              SizedBox(width: context.yoSpacingSm),
+              YoSpace.width(context.yoSpacingSm),
               Expanded(
                 child: Container(
                   height: 8,
                   decoration: BoxDecoration(
                     color: context.gray200,
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: YoSpacing.borderRadiusSm,
                   ),
                   child: FractionallySizedBox(
                     alignment: Alignment.centerLeft,
@@ -398,13 +392,13 @@ class YoRatingSummary extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                         color: context.primaryColor,
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: YoSpacing.borderRadiusSm,
                       ),
                     ),
                   ),
                 ),
               ),
-              SizedBox(width: context.yoSpacingSm),
+              YoSpace.width(context.yoSpacingSm),
               YoText.monoSmall('$count', color: context.gray500),
             ],
           ),

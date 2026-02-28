@@ -143,7 +143,7 @@ class _YoSidebarState extends State<YoSidebar>
               // Toggle Button
               if (widget.showToggleButton) ...[
                 _buildToggleButton(context, inactiveClr),
-                const SizedBox(height: 8),
+                const YoSpace.height(8),
               ],
 
               // Items
@@ -203,21 +203,20 @@ class _YoSidebarState extends State<YoSidebar>
     required Color inactiveColor,
   }) {
     final color = isActive ? activeColor : inactiveColor;
-    final iconData = isActive && item.activeIcon != null
-        ? item.activeIcon!
-        : item.icon;
+    final iconData =
+        isActive && item.activeIcon != null ? item.activeIcon! : item.icon;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       child: Material(
         color: Colors.transparent,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(context.yoRadiusMd),
         child: InkWell(
           onTap: () {
             item.onTap?.call();
             widget.onItemTap?.call(index);
           },
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(context.yoRadiusMd),
           child: AnimatedContainer(
             duration: widget.animationDuration,
             padding: EdgeInsets.symmetric(
@@ -226,7 +225,7 @@ class _YoSidebarState extends State<YoSidebar>
             ),
             decoration: BoxDecoration(
               color: isActive ? activeColor.withAlpha(26) : Colors.transparent,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(context.yoRadiusMd),
             ),
             child: Row(
               mainAxisAlignment: _isExpanded
@@ -235,18 +234,17 @@ class _YoSidebarState extends State<YoSidebar>
               children: [
                 _buildIcon(context, iconData, color, item),
                 if (_isExpanded) ...[
-                  const SizedBox(width: 12),
+                  const YoSpace.width(12),
                   Expanded(
                     child: AnimatedOpacity(
                       opacity: _isExpanded ? 1.0 : 0.0,
                       duration: widget.animationDuration,
-                      child: Text(
+                      child: YoText(
                         item.label,
                         style: TextStyle(
                           color: color,
-                          fontWeight: isActive
-                              ? FontWeight.w600
-                              : FontWeight.w400,
+                          fontWeight:
+                              isActive ? FontWeight.w600 : FontWeight.w400,
                           fontSize: 14,
                         ),
                         maxLines: 1,
@@ -265,7 +263,7 @@ class _YoSidebarState extends State<YoSidebar>
                         color: item.badgeColor ?? context.errorColor,
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Text(
+                      child: YoText(
                         item.badge!,
                         style: const TextStyle(
                           color: Colors.white,

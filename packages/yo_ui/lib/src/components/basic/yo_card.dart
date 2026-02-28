@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../layout/yo_spacing.dart';
+
 /// Card variant types
 enum YoCardVariant { filled, elevated, outlined }
 
@@ -21,7 +23,7 @@ class YoCard extends StatelessWidget {
     this.padding = const EdgeInsets.all(16),
     this.backgroundColor,
     this.elevation = 0,
-    this.borderRadius = const BorderRadius.all(Radius.circular(12)),
+    this.borderRadius = YoSpacing.borderRadiusLg,
     this.onTap,
     this.shadows,
     this.interactive = true,
@@ -34,13 +36,13 @@ class YoCard extends StatelessWidget {
     required this.child,
     this.padding = const EdgeInsets.all(16),
     this.elevation = 0,
-    this.borderRadius = const BorderRadius.all(Radius.circular(12)),
+    this.borderRadius = YoSpacing.borderRadiusLg,
     this.onTap,
     this.interactive = true,
-  }) : backgroundColor = null,
-       shadows = null,
-       border = null,
-       _variant = YoCardVariant.filled;
+  })  : backgroundColor = null,
+        shadows = null,
+        border = null,
+        _variant = YoCardVariant.filled;
 
   /// Kartu "elevated" – punya bayangan + surface tema
   const YoCard.elevated({
@@ -48,27 +50,27 @@ class YoCard extends StatelessWidget {
     required this.child,
     this.padding = const EdgeInsets.all(16),
     this.elevation = 2,
-    this.borderRadius = const BorderRadius.all(Radius.circular(12)),
+    this.borderRadius = YoSpacing.borderRadiusLg,
     this.onTap,
     this.interactive = true,
-  }) : backgroundColor = null,
-       shadows = null,
-       border = null,
-       _variant = YoCardVariant.elevated;
+  })  : backgroundColor = null,
+        shadows = null,
+        border = null,
+        _variant = YoCardVariant.elevated;
 
   /// Kartu "outlined" – dengan border
   const YoCard.outlined({
     super.key,
     required this.child,
     this.padding = const EdgeInsets.all(16),
-    this.borderRadius = const BorderRadius.all(Radius.circular(12)),
+    this.borderRadius = YoSpacing.borderRadiusLg,
     this.onTap,
     this.interactive = true,
-  }) : backgroundColor = null,
-       elevation = 0,
-       shadows = null,
-       border = null,
-       _variant = YoCardVariant.outlined;
+  })  : backgroundColor = null,
+        elevation = 0,
+        shadows = null,
+        border = null,
+        _variant = YoCardVariant.outlined;
 
   @override
   Widget build(BuildContext context) {

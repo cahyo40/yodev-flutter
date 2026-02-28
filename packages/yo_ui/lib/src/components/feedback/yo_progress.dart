@@ -138,7 +138,7 @@ class YoProgress extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         if (label != null) ...[
-          Text(label!, style: labelStyle),
+          YoText(label!, style: labelStyle),
           const YoSpace.heightXs(),
         ],
         LinearProgressIndicator(
@@ -161,7 +161,7 @@ class YoProgress extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(
+          YoBox(
             width: _getCircularSize(size),
             height: _getCircularSize(size),
             child: CircularProgressIndicator(
@@ -173,7 +173,7 @@ class YoProgress extends StatelessWidget {
           ),
           if (label != null) ...[
             const YoSpace.heightXs(),
-            Text(label!, style: labelStyle),
+            YoText(label!, style: labelStyle),
           ],
         ],
       ),
@@ -193,7 +193,7 @@ class YoProgress extends StatelessWidget {
           Stack(
             alignment: Alignment.center,
             children: [
-              SizedBox(
+              YoBox(
                 width: _getCircularSize(size),
                 height: _getCircularSize(size),
                 child: CircularProgressIndicator(
@@ -203,7 +203,7 @@ class YoProgress extends StatelessWidget {
                   strokeWidth: strokeWidth,
                 ),
               ),
-              Text(
+              YoText(
                 '${((value ?? 0) * 100).toInt()}%',
                 style: labelStyle.copyWith(
                   fontWeight: FontWeight.bold,
@@ -218,7 +218,7 @@ class YoProgress extends StatelessWidget {
           ),
           if (label != null) ...[
             const YoSpace.heightXs(),
-            Text(label!, style: labelStyle),
+            YoText(label!, style: labelStyle),
           ],
         ],
       ),

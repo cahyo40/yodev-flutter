@@ -120,7 +120,7 @@ class YoSnackBar {
       backgroundColor: colors.$1,
       behavior: floating ? SnackBarBehavior.floating : SnackBarBehavior.fixed,
       shape: floating
-          ? RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))
+          ? RoundedRectangleBorder(borderRadius: BorderRadius.circular(context.yoRadiusMd))
           : null,
       margin: floating ? const EdgeInsets.all(16) : null,
       duration: duration,
@@ -128,18 +128,17 @@ class YoSnackBar {
         children: [
           if (showIcon) ...[
             Icon(_getIcon(type), color: colors.$2, size: 20),
-            const SizedBox(width: 12),
+            const YoSpace.width(12),
           ],
           Expanded(
-            child: Text(
+            child: YoText(
               message,
               style: TextStyle(color: colors.$2, fontSize: 14),
             ),
           ),
         ],
       ),
-      action:
-          customAction ??
+      action: customAction ??
           (actionText != null && onAction != null
               ? SnackBarAction(
                   label: actionText,

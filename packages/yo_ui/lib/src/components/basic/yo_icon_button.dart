@@ -124,7 +124,7 @@ class YoButtonIcon extends StatelessWidget {
                   ? BoxShape.circle
                   : BoxShape.rectangle,
               borderRadius: shape == YoIconButtonShape.rounded
-                  ? BorderRadius.circular(8)
+                  ? BorderRadius.circular(context.yoRadiusMd)
                   : null,
               boxShadow: YoBoxShadow.button(context),
             )
@@ -139,7 +139,7 @@ class YoButtonIcon extends StatelessWidget {
                 ),
                 child: isLoading
                     ? Center(
-                        child: SizedBox(
+                        child: YoBox(
                           width: _getLoaderSize(),
                           height: _getLoaderSize(),
                           child: CircularProgressIndicator(
@@ -155,7 +155,7 @@ class YoButtonIcon extends StatelessWidget {
               onPressed: isLoading ? null : onPressed,
               style: _getButtonStyle(context),
               child: isLoading
-                  ? SizedBox(
+                  ? YoBox(
                       width: _getLoaderSize(),
                       height: _getLoaderSize(),
                       child: CircularProgressIndicator(
@@ -193,7 +193,7 @@ class YoButtonIcon extends StatelessWidget {
           disabledForegroundColor: colorScheme.onSurface.withAlpha(97),
           elevation: 0,
           shadowColor: Colors.transparent,
-          shape: _getShape(),
+          shape: _getShape(context),
           padding: EdgeInsets.zero,
           minimumSize: Size.zero,
         ).copyWith(
@@ -224,7 +224,7 @@ class YoButtonIcon extends StatelessWidget {
           disabledForegroundColor: colorScheme.onSurface.withAlpha(97),
           elevation: 0,
           shadowColor: Colors.transparent,
-          shape: _getShape(),
+          shape: _getShape(context),
           padding: EdgeInsets.zero,
           minimumSize: Size.zero,
         ).copyWith(
@@ -261,7 +261,7 @@ class YoButtonIcon extends StatelessWidget {
           ),
           elevation: 0,
           shadowColor: Colors.transparent,
-          shape: _getShape(),
+          shape: _getShape(context),
           padding: EdgeInsets.zero,
           minimumSize: Size.zero,
         ).copyWith(
@@ -289,7 +289,7 @@ class YoButtonIcon extends StatelessWidget {
           disabledForegroundColor: colorScheme.onSurface.withAlpha(97),
           elevation: 0,
           shadowColor: Colors.transparent,
-          shape: _getShape(),
+          shape: _getShape(context),
           padding: EdgeInsets.zero,
           minimumSize: Size.zero,
         ).copyWith(
@@ -318,7 +318,7 @@ class YoButtonIcon extends StatelessWidget {
           disabledForegroundColor: colorScheme.onSurface.withAlpha(97),
           elevation: 0,
           shadowColor: Colors.transparent,
-          shape: _getShape(),
+          shape: _getShape(context),
           padding: EdgeInsets.zero,
           minimumSize: Size.zero,
         ).copyWith(
@@ -348,12 +348,13 @@ class YoButtonIcon extends StatelessWidget {
     }
   }
 
-  OutlinedBorder _getShape() {
+  OutlinedBorder _getShape(BuildContext context) {
     switch (shape) {
       case YoIconButtonShape.circle:
         return const CircleBorder();
       case YoIconButtonShape.rounded:
-        return RoundedRectangleBorder(borderRadius: BorderRadius.circular(8));
+        return RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(context.yoRadiusMd));
     }
   }
 

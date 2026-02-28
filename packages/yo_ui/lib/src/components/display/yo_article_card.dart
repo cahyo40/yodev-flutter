@@ -99,7 +99,7 @@ class YoArticleCard extends StatelessWidget {
     return Card(
       clipBehavior: Clip.antiAlias,
       elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(context.yoRadiusLg)),
       child: InkWell(
         onTap: onTap,
         child: Column(
@@ -126,28 +126,24 @@ class YoArticleCard extends StatelessWidget {
                 children: [
                   if (imageUrl == null && category != null) ...[
                     _buildCategoryChip(context),
-                    const SizedBox(height: 8),
+                    const YoSpace.height(8),
                   ],
-                  Text(
+                  YoText.titleSmall(
                     title,
-                    style: context.yoTitleSmall.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    fontWeight: FontWeight.bold,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   if (excerpt != null) ...[
-                    const SizedBox(height: 6),
-                    Text(
+                    const YoSpace.height(6),
+                    YoText.bodySmall(
                       excerpt!,
-                      style: context.yoBodySmall.copyWith(
-                        color: context.gray600,
-                      ),
+                      color: context.gray600,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ],
-                  const SizedBox(height: 12),
+                  const YoSpace.height(12),
                   _buildFooter(context),
                 ],
               ),
@@ -180,12 +176,10 @@ class YoArticleCard extends StatelessWidget {
         color: context.primaryColor,
         borderRadius: BorderRadius.circular(20),
       ),
-      child: Text(
+      child: YoText.bodySmall(
         category!,
-        style: context.yoBodySmall.copyWith(
-          color: Colors.white,
-          fontWeight: FontWeight.w500,
-        ),
+        color: Colors.white,
+        fontWeight: FontWeight.w500,
       ),
     );
   }
@@ -197,41 +191,33 @@ class YoArticleCard extends StatelessWidget {
         if (authorName != null) ...[
           if (authorAvatar != null) ...[
             YoAvatar.image(imageUrl: authorAvatar!, size: YoAvatarSize.xs),
-            const SizedBox(width: 6),
+            const YoSpace.width(6),
           ],
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                YoText.bodySmall(
                   authorName!,
-                  style: context.yoBodySmall.copyWith(
-                    fontWeight: FontWeight.w500,
-                  ),
+                  fontWeight: FontWeight.w500,
                 ),
                 Row(
                   children: [
                     if (publishedAt != null)
-                      Text(
+                      YoText.bodySmall(
                         _formatDate(publishedAt!),
-                        style: context.yoBodySmall.copyWith(
-                          color: context.gray500,
-                          fontSize: 11,
-                        ),
+                        color: context.gray500,
+                        fontSize: 11,
                       ),
                     if (readTime != null) ...[
-                      Text(
+                      YoText.bodySmall(
                         ' • ',
-                        style: context.yoBodySmall.copyWith(
-                          color: context.gray400,
-                        ),
+                        color: context.gray400,
                       ),
-                      Text(
+                      YoText.bodySmall(
                         '$readTime min read',
-                        style: context.yoBodySmall.copyWith(
-                          color: context.gray500,
-                          fontSize: 11,
-                        ),
+                        color: context.gray500,
+                        fontSize: 11,
                       ),
                     ],
                   ],
@@ -241,17 +227,17 @@ class YoArticleCard extends StatelessWidget {
           ),
         ] else ...[
           if (publishedAt != null)
-            Text(
+            YoText.bodySmall(
               _formatDate(publishedAt!),
-              style: context.yoBodySmall.copyWith(color: context.gray500),
+              color: context.gray500,
             ),
           if (readTime != null) ...[
-            const SizedBox(width: 8),
+            const YoSpace.width(8),
             Icon(Icons.access_time, size: 12, color: context.gray500),
-            const SizedBox(width: 2),
-            Text(
+            const YoSpace.width(2),
+            YoText.bodySmall(
               '$readTime min',
-              style: context.yoBodySmall.copyWith(color: context.gray500),
+              color: context.gray500,
             ),
           ],
           const Spacer(),
@@ -312,16 +298,16 @@ class _YoArticleCardHorizontal extends YoArticleCard {
     return Card(
       clipBehavior: Clip.antiAlias,
       elevation: 1,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(context.yoRadiusLg)),
       child: InkWell(
         onTap: onTap,
-        child: SizedBox(
+        child: YoBox(
           height: 120,
           child: Row(
             children: [
               // Image
               if (imageUrl != null)
-                SizedBox(width: 120, child: _buildImage(context)),
+                YoBox(width: 120, child: _buildImage(context)),
 
               // Content
               Expanded(
@@ -331,20 +317,16 @@ class _YoArticleCardHorizontal extends YoArticleCard {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       if (category != null)
-                        Text(
+                        YoText.bodySmall(
                           category!,
-                          style: context.yoBodySmall.copyWith(
-                            color: context.primaryColor,
-                            fontWeight: FontWeight.w500,
-                          ),
+                          color: context.primaryColor,
+                          fontWeight: FontWeight.w500,
                         ),
-                      const SizedBox(height: 2),
+                      const YoSpace.height(2),
                       Expanded(
-                        child: Text(
+                        child: YoText.bodyMedium(
                           title,
-                          style: context.yoBodyMedium.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
+                          fontWeight: FontWeight.w600,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -352,26 +334,20 @@ class _YoArticleCardHorizontal extends YoArticleCard {
                       Row(
                         children: [
                           if (publishedAt != null)
-                            Text(
+                            YoText.bodySmall(
                               _formatDate(publishedAt!),
-                              style: context.yoBodySmall.copyWith(
-                                color: context.gray500,
-                                fontSize: 11,
-                              ),
+                              color: context.gray500,
+                              fontSize: 11,
                             ),
                           if (readTime != null) ...[
-                            Text(
+                            YoText.bodySmall(
                               ' • ',
-                              style: context.yoBodySmall.copyWith(
-                                color: context.gray400,
-                              ),
+                              color: context.gray400,
                             ),
-                            Text(
+                            YoText.bodySmall(
                               '$readTime min',
-                              style: context.yoBodySmall.copyWith(
-                                color: context.gray500,
-                                fontSize: 11,
-                              ),
+                              color: context.gray500,
+                              fontSize: 11,
                             ),
                           ],
                           const Spacer(),
@@ -425,7 +401,7 @@ class _YoArticleCardFeatured extends YoArticleCard {
     return Card(
       clipBehavior: Clip.antiAlias,
       elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(context.yoRadiusXl)),
       child: InkWell(
         onTap: onTap,
         child: Stack(
@@ -475,35 +451,29 @@ class _YoArticleCardFeatured extends YoArticleCard {
                           color: context.primaryColor,
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        child: Text(
+                        child: YoText.bodySmall(
                           category!,
-                          style: context.yoBodySmall.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
-                          ),
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                    Text(
+                    YoText.titleMedium(
                       title,
-                      style: context.yoTitleMedium.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                     if (excerpt != null) ...[
-                      const SizedBox(height: 6),
-                      Text(
+                      const YoSpace.height(6),
+                      YoText.bodySmall(
                         excerpt!,
-                        style: context.yoBodySmall.copyWith(
-                          color: Colors.white70,
-                        ),
+                        color: Colors.white70,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ],
-                    const SizedBox(height: 12),
+                    const YoSpace.height(12),
                     Row(
                       children: [
                         if (authorAvatar != null) ...[
@@ -511,37 +481,31 @@ class _YoArticleCardFeatured extends YoArticleCard {
                             imageUrl: authorAvatar!,
                             size: YoAvatarSize.xs,
                           ),
-                          const SizedBox(width: 8),
+                          const YoSpace.width(8),
                         ],
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               if (authorName != null)
-                                Text(
+                                YoText.bodySmall(
                                   authorName!,
-                                  style: context.yoBodySmall.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               Row(
                                 children: [
                                   if (publishedAt != null)
-                                    Text(
+                                    YoText.bodySmall(
                                       _formatDate(publishedAt!),
-                                      style: context.yoBodySmall.copyWith(
-                                        color: Colors.white70,
-                                        fontSize: 11,
-                                      ),
+                                      color: Colors.white70,
+                                      fontSize: 11,
                                     ),
                                   if (readTime != null)
-                                    Text(
+                                    YoText.bodySmall(
                                       ' • $readTime min read',
-                                      style: context.yoBodySmall.copyWith(
-                                        color: Colors.white70,
-                                        fontSize: 11,
-                                      ),
+                                      color: Colors.white70,
+                                      fontSize: 11,
                                     ),
                                 ],
                               ),

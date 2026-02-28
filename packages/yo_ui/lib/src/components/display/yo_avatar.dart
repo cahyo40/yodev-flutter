@@ -277,7 +277,7 @@ class YoAvatar extends StatelessWidget {
           loadingBuilder: (_, child, progress) {
             if (progress == null) return child;
             return Center(
-              child: SizedBox(
+              child: YoBox(
                 width: _effectiveIconSize,
                 height: _effectiveIconSize,
                 child: CircularProgressIndicator(
@@ -328,13 +328,11 @@ class YoAvatar extends StatelessWidget {
   Widget _buildFallback(BuildContext context) {
     if (text != null) {
       return Center(
-        child: Text(
+        child: YoText(
           _getInitials(text!),
-          style: TextStyle(
-            color: textColor ?? context.gray600,
-            fontSize: _effectiveTextSize,
-            fontWeight: FontWeight.w600,
-          ),
+          color: textColor ?? context.gray600,
+          fontSize: _effectiveTextSize,
+          fontWeight: FontWeight.w600,
         ),
       );
     }
@@ -353,9 +351,9 @@ class YoAvatar extends StatelessWidget {
       case YoAvatarVariant.circle:
         return BorderRadius.circular(avatarSize / 2);
       case YoAvatarVariant.rounded:
-        return BorderRadius.circular(borderRadius ?? 8);
+        return BorderRadius.circular(borderRadius ?? YoSpacing.radiusMd);
       case YoAvatarVariant.square:
-        return BorderRadius.circular(borderRadius ?? 4);
+        return BorderRadius.circular(borderRadius ?? YoSpacing.radiusSm);
     }
   }
 

@@ -37,10 +37,10 @@ class YoEmptyState extends StatelessWidget {
     this.onAction,
     this.secondaryActionText,
     this.onSecondaryAction,
-  }) : icon = const Icon(Icons.inbox_outlined),
-       type = YoEmptyStateType.noData,
-       error = null,
-       showErrorDetails = false;
+  })  : icon = const Icon(Icons.inbox_outlined),
+        type = YoEmptyStateType.noData,
+        error = null,
+        showErrorDetails = false;
 
   /// No connection state
   const YoEmptyState.noConnection({
@@ -51,10 +51,10 @@ class YoEmptyState extends StatelessWidget {
     this.onAction,
     this.secondaryActionText,
     this.onSecondaryAction,
-  }) : icon = const Icon(Icons.wifi_off_rounded),
-       type = YoEmptyStateType.noConnection,
-       error = null,
-       showErrorDetails = false;
+  })  : icon = const Icon(Icons.wifi_off_rounded),
+        type = YoEmptyStateType.noConnection,
+        error = null,
+        showErrorDetails = false;
 
   /// Error state (menggantikan YoErrorState)
   const YoEmptyState.error({
@@ -67,8 +67,8 @@ class YoEmptyState extends StatelessWidget {
     this.onSecondaryAction,
     this.error,
     this.showErrorDetails = false,
-  }) : icon = const Icon(Icons.error_outline_rounded),
-       type = YoEmptyStateType.error;
+  })  : icon = const Icon(Icons.error_outline_rounded),
+        type = YoEmptyStateType.error;
 
   /// Search not found
   const YoEmptyState.searchNotFound({
@@ -79,10 +79,10 @@ class YoEmptyState extends StatelessWidget {
     this.onAction,
     this.secondaryActionText,
     this.onSecondaryAction,
-  }) : icon = const Icon(Icons.search_off_rounded),
-       type = YoEmptyStateType.search,
-       error = null,
-       showErrorDetails = false;
+  })  : icon = const Icon(Icons.search_off_rounded),
+        type = YoEmptyStateType.search,
+        error = null,
+        showErrorDetails = false;
 
   /// Custom empty state dengan image
   factory YoEmptyState.custom({
@@ -116,41 +116,40 @@ class YoEmptyState extends StatelessWidget {
             // Icon with background for error type
             if (icon != null) ...[
               _buildIcon(context),
-              const SizedBox(height: 24),
+              const YoSpace.height(24),
             ],
 
             // Title
-            Text(
+            YoText.titleLarge(
               title,
-              style: context.yoTitleLarge,
-              textAlign: TextAlign.center,
+              align: TextAlign.center,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
 
-            const SizedBox(height: 8),
+            const YoSpace.height(8),
 
             // Description
-            Text(
+            YoText.bodyMedium(
               description,
-              style: context.yoBodyMedium.copyWith(color: context.gray600),
-              textAlign: TextAlign.center,
+              color: context.gray600,
+              align: TextAlign.center,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
             ),
 
             // Error details
             if (error != null && showErrorDetails) ...[
-              const SizedBox(height: 16),
+              const YoSpace.height(16),
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: context.gray100,
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(context.yoRadiusMd),
                 ),
-                child: Text(
+                child: YoText.bodySmall(
                   error.toString(),
-                  style: context.yoBodySmall.copyWith(color: context.gray600),
+                  color: context.gray600,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -159,12 +158,12 @@ class YoEmptyState extends StatelessWidget {
 
             // Actions
             if (actionText != null && onAction != null) ...[
-              const SizedBox(height: 24),
+              const YoSpace.height(24),
               YoButton.primary(text: actionText!, onPressed: onAction),
             ],
 
             if (secondaryActionText != null && onSecondaryAction != null) ...[
-              const SizedBox(height: 12),
+              const YoSpace.height(12),
               YoButton.ghost(
                 text: secondaryActionText!,
                 onPressed: onSecondaryAction,
